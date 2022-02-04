@@ -1,4 +1,5 @@
 <?php
+namespace App\Service;
 
 use \Mailjet\Resources;
 use \Mailjet\Client;
