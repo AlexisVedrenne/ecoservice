@@ -1,72 +1,11 @@
 <html>
     <head>
-        <link href="{{ asset('bulma/css/bulma.min.css') }}" type="text/css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
         <link href="{{ asset('css/styles.css') }}" type="text/css" rel="stylesheet">        
     </head>
-    <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
     <header>
-        <main>
-        <section class="is-primary hero is-small parralax">
-            <div class="container hero-body has-text-centered">
-                <div class="is-flex is-justify-content-center mt-3 mb-3">
-                    <img class="image" src="{{ asset('image/logoEcoService.svg') }}">
-                </div>
-                <p class="title">Notre démarche ecologique</p>
-                <p class="subtitle">
-                    Depuis sa création, Eco-Services a eu à cœur d’ancrer 
-                    son action dans son environnement, qu’il s’agisse de l’économie locale ou 
-                    de l’impact de ses activités industrielles. Vous retrouverez dans notre site 
-                    exclusivement des articles et des services en adéquation 
-                    avec nos valeurs éco-responsables.
-                </p>
-            </div>
-        </section>
-    </header>
-    <body>
-        <main class="container has-text-centered mt-5">
-            <div class="columns is-centred mt-3 mb-6">
-                <div class="column is-half">
-                    <div class="card">
-                        <div class="card-content">
-                            <p class="title">
-                                Particulier
-                            </p>
-                            <p class="subtitle">
-                                Vente de produit ecologique
-                            </p>
-                            <div class="card-image is-flex is-justify-content-center">
-                                <image class="image" src="{{ asset('image/homeRedirect/particulier.svg') }}">
-                            </div>
-                        </div>
-                        <footer class="card-footer">
-                            <p class="card-footer-item">
-                                <a class="button is-primary is-outlined is-fullwidth">Cliquiez ici !</a>
-                            </p>
-                        </footer>
-                    </div>
-                </div>
-                <div class="column is-half">
-                    <div class="card">
-                        <div class="card-content">
-                            <p class="title">
-                                Professionnel
-                            </p>
-                            <p class="subtitle">
-                                Location de service professionnel
-                            </p>
-                            <div class="card-image is-flex is-justify-content-center">
-                                <image class="image" src="{{ asset('image/homeRedirect/pro.svg') }}">
-                            </div>
-                        </div>
-                        <footer class="card-footer">
-                            <p class="card-footer-item">
-                                <a class="button is-primary is-outlined is-fullwidth">Cliquiez ici !</a>
-                            </p>
-                        </footer>
-                    </div>
-                </div>
-            </div>
-        </main>
+    
         {{ include('assets/footer.html.twig') }}
         <script src="{{ asset('js/homeRedirect/home.js') }}"></script>       
     </body>

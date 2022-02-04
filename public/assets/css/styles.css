@@ -1,24 +1,4 @@
-.parralax{
-    position:relative;
-}
-
-.hero.is-primary{
+.hero{
     background-color: #00461d;
-}
-
-.button.is-primary{
-    background-color: #00461d;
-}
-
-.button.is-primary.is-outlined{
-    background-color: transparent;
-    border-color: #00461d;
-    color: #00461d;
-}
-
-.button.is-primary.is-outlined:hover{
-    transition: 0.3s;
-    background-color: #00461d;
-    color: #ffffff;
-    border-color: #00461d;
+    width: 100%;
 }
