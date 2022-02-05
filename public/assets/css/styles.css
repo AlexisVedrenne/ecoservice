@@ -1,4 +1,48 @@
+.wrapper {
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 2px;
+  }
+  
+
 .hero{
     background-color: #00461d;
     width: 100%;
+    height: 75%;
+    color:rgb(224, 223, 223);
 }
+
+.p{
+    font-size: 120%;
+}
+
+.card-img{
+    width: 30%;
+    height: 30%;
+}
+
+.footer{
+    margin-top: 5%;
+    background-color: #e7e7e7;
+}
+
+.title{
+    font-size: 23px;
+    color:rgb(78, 78, 78);
+}
+
+.subtitle{
+    font-size: 17px;
+}
+
+.btn-outline-primary{
+    color: #00461d;
+    border-color: #00461d;
+}
+
+.btn-outline-primary:hover{
+    background-color: #00461d;
+    border-color: #015323;
+}
+
