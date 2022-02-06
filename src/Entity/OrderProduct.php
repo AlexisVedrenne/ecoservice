@@ -49,6 +49,8 @@ class OrderProduct
      */
     private $Particulier;
 
+
+
     public function __construct()
     {
         $this->Product = new ArrayCollection();

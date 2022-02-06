@@ -51,6 +51,8 @@ class Card
      */
     private $Particulier;
 
+
+
     public function __construct()
     {
         $this->payments = new ArrayCollection();
