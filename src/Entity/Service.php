@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ServiceRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,9 +23,14 @@ class Service
     private $Image;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=255)
      */
     private $Des;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $Reference;
 
     /**
      * @ORM\ManyToOne(targetEntity=CategoryService::class, inversedBy="services")
@@ -35,19 +38,14 @@ class Service
     private $CategoryService;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      */
-    private $Commentary;
+    private $Price;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Quote::class, mappedBy="Service")
+     * @ORM\Column(type="boolean")
      */
-    private $quotes;
-
-    public function __construct()
-    {
-        $this->quotes = new ArrayCollection();
-    }
+    private $State;
 
     public function getId(): ?int
     {
@@ -78,6 +76,18 @@ class Service
         return $this;
     }
 
+    public function getReference(): ?string
+    {
+        return $this->Reference;
+    }
+
+    public function setReference(string $Reference): self
+    {
+        $this->Reference = $Reference;
+
+        return $this;
+    }
+
     public function getCategoryService(): ?CategoryService
     {
         return $this->CategoryService;
@@ -90,41 +100,26 @@ class Service
         return $this;
     }
 
-    public function getCommentary(): ?string
+    public function getPrice(): ?string
     {
-        return $this->Commentary;
+        return $this->Price;
     }
 
-    public function setCommentary(string $Commentary): self
+    public function setPrice(string $Price): self
     {
-        $this->Commentary = $Commentary;
+        $this->Price = $Price;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Quote[]
-     */
-    public function getQuotes(): Collection
+    public function getState(): ?bool
     {
-        return $this->quotes;
+        return $this->State;
     }
 
-    public function addQuote(Quote $quote): self
+    public function setState(bool $State): self
     {
-        if (!$this->quotes->contains($quote)) {
-            $this->quotes[] = $quote;
-            $quote->addService($this);
-        }
-
-        return $this;
-    }
-
-    public function removeQuote(Quote $quote): self
-    {
-        if ($this->quotes->removeElement($quote)) {
-            $quote->removeService($this);
-        }
+        $this->State = $State;
 
         return $this;
     }

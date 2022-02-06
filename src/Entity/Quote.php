@@ -44,10 +44,7 @@ class Quote
      */
     private $NameCommercial;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Service::class, inversedBy="quotes")
-     */
-    private $Service;
+
 
     public function __construct()
     {
@@ -125,21 +122,5 @@ class Quote
     public function getService(): Collection
     {
         return $this->Service;
-    }
-
-    public function addService(Service $service): self
-    {
-        if (!$this->Service->contains($service)) {
-            $this->Service[] = $service;
-        }
-
-        return $this;
-    }
-
-    public function removeService(Service $service): self
-    {
-        $this->Service->removeElement($service);
-
-        return $this;
     }
 }

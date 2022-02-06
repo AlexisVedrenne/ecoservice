@@ -17,10 +17,7 @@ class Commentary
      */
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Particulier::class, inversedBy="commentaries")
-     */
-    private $Particulier;
+
 
     /**
      * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="commentaries")
@@ -32,22 +29,16 @@ class Commentary
      */
     private $Comment;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Particulier::class, inversedBy="commentaries")
+     */
+    private $Particulier;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getParticulier(): ?Particulier
-    {
-        return $this->Particulier;
-    }
-
-    public function setParticulier(?Particulier $Particulier): self
-    {
-        $this->Particulier = $Particulier;
-
-        return $this;
-    }
 
     public function getProduct(): ?Product
     {
@@ -69,6 +60,18 @@ class Commentary
     public function setComment(string $Comment): self
     {
         $this->Comment = $Comment;
+
+        return $this;
+    }
+
+    public function getParticulier(): ?Particulier
+    {
+        return $this->Particulier;
+    }
+
+    public function setParticulier(?Particulier $Particulier): self
+    {
+        $this->Particulier = $Particulier;
 
         return $this;
     }

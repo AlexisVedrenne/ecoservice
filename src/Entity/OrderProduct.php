@@ -25,19 +25,19 @@ class OrderProduct
     private $DateOrder;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="orderProducts")
+     * @ORM\ManyToMany(targetEntity=product::class, inversedBy="orderProducts")
      */
     private $Product;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=255)
      */
     private $QuantityProduct;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      */
-    private $Particulier;
+    private $TotalPrice;
 
     /**
      * @ORM\OneToOne(targetEntity=Payment::class, cascade={"persist", "remove"})
@@ -47,7 +47,7 @@ class OrderProduct
     /**
      * @ORM\ManyToOne(targetEntity=Particulier::class, inversedBy="orderProducts")
      */
-    private $ParticulierN;
+    private $Particulier;
 
     public function __construct()
     {
@@ -72,14 +72,14 @@ class OrderProduct
     }
 
     /**
-     * @return Collection|Product[]
+     * @return Collection|product[]
      */
     public function getProduct(): Collection
     {
         return $this->Product;
     }
 
-    public function addProduct(Product $product): self
+    public function addProduct(product $product): self
     {
         if (!$this->Product->contains($product)) {
             $this->Product[] = $product;
@@ -88,7 +88,7 @@ class OrderProduct
         return $this;
     }
 
-    public function removeProduct(Product $product): self
+    public function removeProduct(product $product): self
     {
         $this->Product->removeElement($product);
 
@@ -107,14 +107,14 @@ class OrderProduct
         return $this;
     }
 
-    public function getParticulier(): ?string
+    public function getTotalPrice(): ?string
     {
-        return $this->Particulier;
+        return $this->TotalPrice;
     }
 
-    public function setParticulier(string $Particulier): self
+    public function setTotalPrice(string $TotalPrice): self
     {
-        $this->Particulier = $Particulier;
+        $this->TotalPrice = $TotalPrice;
 
         return $this;
     }
@@ -131,14 +131,14 @@ class OrderProduct
         return $this;
     }
 
-    public function getParticulierN(): ?Particulier
+    public function getParticulier(): ?Particulier
     {
-        return $this->ParticulierN;
+        return $this->Particulier;
     }
 
-    public function setParticulierN(?Particulier $ParticulierN): self
+    public function setParticulier(?Particulier $Particulier): self
     {
-        $this->ParticulierN = $ParticulierN;
+        $this->Particulier = $Particulier;
 
         return $this;
     }

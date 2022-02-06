@@ -27,7 +27,7 @@ class Particulier
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $LasttName;
+    private $LastName;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -50,14 +50,19 @@ class Particulier
     private $City;
 
     /**
-     * @ORM\Column(type="string", length=6)
+     * @ORM\Column(type="string", length=7)
      */
     private $CP;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=100)
      */
     private $Adress;
+
+    /**
+     * @ORM\OneToMany(targetEntity=OrderProduct::class, mappedBy="Particulier")
+     */
+    private $orderProducts;
 
     /**
      * @ORM\OneToMany(targetEntity=Commentary::class, mappedBy="Particulier")
@@ -69,16 +74,11 @@ class Particulier
      */
     private $cards;
 
-    /**
-     * @ORM\OneToMany(targetEntity=OrderProduct::class, mappedBy="ParticulierN")
-     */
-    private $orderProducts;
-
     public function __construct()
     {
+        $this->orderProducts = new ArrayCollection();
         $this->commentaries = new ArrayCollection();
         $this->cards = new ArrayCollection();
-        $this->orderProducts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -98,14 +98,14 @@ class Particulier
         return $this;
     }
 
-    public function getLasttName(): ?string
+    public function getLastName(): ?string
     {
-        return $this->LasttName;
+        return $this->LastName;
     }
 
-    public function setLasttName(string $LasttName): self
+    public function setLastName(string $LastName): self
     {
-        $this->LasttName = $LasttName;
+        $this->LastName = $LastName;
 
         return $this;
     }
@@ -183,6 +183,36 @@ class Particulier
     }
 
     /**
+     * @return Collection|OrderProduct[]
+     */
+    public function getOrderProducts(): Collection
+    {
+        return $this->orderProducts;
+    }
+
+    public function addOrderProduct(OrderProduct $orderProduct): self
+    {
+        if (!$this->orderProducts->contains($orderProduct)) {
+            $this->orderProducts[] = $orderProduct;
+            $orderProduct->setParticulier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderProduct(OrderProduct $orderProduct): self
+    {
+        if ($this->orderProducts->removeElement($orderProduct)) {
+            // set the owning side to null (unless already changed)
+            if ($orderProduct->getParticulier() === $this) {
+                $orderProduct->setParticulier(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @return Collection|Commentary[]
      */
     public function getCommentaries(): Collection
@@ -236,36 +266,6 @@ class Particulier
             // set the owning side to null (unless already changed)
             if ($card->getParticulier() === $this) {
                 $card->setParticulier(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|OrderProduct[]
-     */
-    public function getOrderProducts(): Collection
-    {
-        return $this->orderProducts;
-    }
-
-    public function addOrderProduct(OrderProduct $orderProduct): self
-    {
-        if (!$this->orderProducts->contains($orderProduct)) {
-            $this->orderProducts[] = $orderProduct;
-            $orderProduct->setParticulierN($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrderProduct(OrderProduct $orderProduct): self
-    {
-        if ($this->orderProducts->removeElement($orderProduct)) {
-            // set the owning side to null (unless already changed)
-            if ($orderProduct->getParticulierN() === $this) {
-                $orderProduct->setParticulierN(null);
             }
         }
 

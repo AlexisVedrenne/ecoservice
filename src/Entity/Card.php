@@ -39,15 +39,17 @@ class Card
      */
     private $CardType;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Particulier::class, inversedBy="cards")
-     */
-    private $Particulier;
+
 
     /**
      * @ORM\OneToMany(targetEntity=Payment::class, mappedBy="Card")
      */
     private $payments;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Particulier::class, inversedBy="cards")
+     */
+    private $Particulier;
 
     public function __construct()
     {
@@ -107,17 +109,7 @@ class Card
         return $this;
     }
 
-    public function getParticulier(): ?Particulier
-    {
-        return $this->Particulier;
-    }
 
-    public function setParticulier(?Particulier $Particulier): self
-    {
-        $this->Particulier = $Particulier;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Payment[]
@@ -145,6 +137,18 @@ class Card
                 $payment->setCard(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getParticulier(): ?Particulier
+    {
+        return $this->Particulier;
+    }
+
+    public function setParticulier(?Particulier $Particulier): self
+    {
+        $this->Particulier = $Particulier;
 
         return $this;
     }

@@ -74,6 +74,8 @@ class Product
      */
     private $orderProducts;
 
+
+
     public function __construct()
     {
         $this->commentaries = new ArrayCollection();
