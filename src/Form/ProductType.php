@@ -20,8 +20,8 @@ class ProductType extends AbstractType
             ->add('State')
             ->add('RecyclingIndex')
             ->add('CategoryPoduct')
-            ->add('payments')
-            ->add('orderProducts')
+            //->add('payments')
+            //->add('orderProducts')
         ;
     }
 
