@@ -42,10 +42,12 @@ class Quote
     /**
      * @ORM\ManyToOne(targetEntity=Commercial::class, inversedBy="quotes")
      */
-    private $Commercial;
+    private $NameCommercial;
 
-
-
+    /**
+     * @ORM\ManyToMany(targetEntity=Service::class, inversedBy="quotes")
+     */
+    private $Service;
 
     public function __construct()
     {
@@ -105,7 +107,17 @@ class Quote
         return $this;
     }
 
+    public function getNameCommercial(): ?Commercial
+    {
+        return $this->NameCommercial;
+    }
 
+    public function setNameCommercial(?Commercial $NameCommercial): self
+    {
+        $this->NameCommercial = $NameCommercial;
+
+        return $this;
+    }
 
     /**
      * @return Collection|Service[]
@@ -115,14 +127,18 @@ class Quote
         return $this->Service;
     }
 
-    public function getCommercial(): ?Commercial
+    public function addService(Service $service): self
     {
-        return $this->Commercial;
+        if (!$this->Service->contains($service)) {
+            $this->Service[] = $service;
+        }
+
+        return $this;
     }
 
-    public function setCommercial(?Commercial $Commercial): self
+    public function removeService(Service $service): self
     {
-        $this->Commercial = $Commercial;
+        $this->Service->removeElement($service);
 
         return $this;
     }

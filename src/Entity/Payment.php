@@ -34,10 +34,7 @@ class Payment
      */
     private $Mail;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $Password;
+
 
     /**
      * @ORM\Column(type="string", length=11)
@@ -130,17 +127,7 @@ class Payment
         return $this;
     }
 
-    public function getPassword(): ?string
-    {
-        return $this->Password;
-    }
 
-    public function setPassword(string $Password): self
-    {
-        $this->Password = $Password;
-
-        return $this;
-    }
 
     public function getTel(): ?string
     {
