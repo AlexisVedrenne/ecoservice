@@ -17,63 +17,60 @@ class Commentary
      */
     private $id;
 
-
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commentaries")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $particulier;
 
     /**
      * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="commentaries")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $Product;
+    private $product;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Comment;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Particulier::class, inversedBy="commentaries")
-     */
-    private $Particulier;
-
-
+    private $comment;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    public function getParticulier(): ?User
+    {
+        return $this->particulier;
+    }
+
+    public function setParticulier(?User $particulier): self
+    {
+        $this->particulier = $particulier;
+
+        return $this;
+    }
 
     public function getProduct(): ?Product
     {
-        return $this->Product;
+        return $this->product;
     }
 
-    public function setProduct(?Product $Product): self
+    public function setProduct(?Product $product): self
     {
-        $this->Product = $Product;
+        $this->product = $product;
 
         return $this;
     }
 
     public function getComment(): ?string
     {
-        return $this->Comment;
+        return $this->comment;
     }
 
-    public function setComment(string $Comment): self
+    public function setComment(string $comment): self
     {
-        $this->Comment = $Comment;
-
-        return $this;
-    }
-
-    public function getParticulier(): ?Particulier
-    {
-        return $this->Particulier;
-    }
-
-    public function setParticulier(?Particulier $Particulier): self
-    {
-        $this->Particulier = $Particulier;
+        $this->comment = $comment;
 
         return $this;
     }

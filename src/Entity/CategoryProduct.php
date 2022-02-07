@@ -22,10 +22,10 @@ class CategoryProduct
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $Name;
+    private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="CategoryPoduct")
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="categoryProduct")
      */
     private $products;
 
@@ -41,12 +41,12 @@ class CategoryProduct
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): self
+    public function setName(string $name): self
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
@@ -63,7 +63,7 @@ class CategoryProduct
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
-            $product->setCategoryPoduct($this);
+            $product->setCategoryProduct($this);
         }
 
         return $this;
@@ -73,8 +73,8 @@ class CategoryProduct
     {
         if ($this->products->removeElement($product)) {
             // set the owning side to null (unless already changed)
-            if ($product->getCategoryPoduct() === $this) {
-                $product->setCategoryPoduct(null);
+            if ($product->getCategoryProduct() === $this) {
+                $product->setCategoryProduct(null);
             }
         }
 

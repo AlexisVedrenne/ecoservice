@@ -8,30 +8,30 @@ use App\Service\MailJetAp;
 class MailJetApi
 {
 
-  static private function getClient()
-  {
-    return new Client('0843d33c52ad141defeeff5a94eb0081', '71bb0e7dddb6eec924f71afc00cad193', true, ['version' => 'v3.1']);
-  }
+    static private function getClient()
+    {
+        return new Client('0843d33c52ad141defeeff5a94eb0081', '71bb0e7dddb6eec924f71afc00cad193', true, ['version' => 'v3.1']);
+    }
 
-  static public function envoie(User $user, string $objet, string $titre, string $message)
-  {
+    static public function envoie(User $user, string $objet, string $titre, string $message)
+    {
 
-    $body = [
-      'Messages' => [
-        [
-          'From' => [
-            'Email' => "service@ficheweb.fr",
-            'Name' => "Service EcoService"
-          ],
-          'To' => [
-            [
-              'Email' => $user->getEmail(),
-              'Name' => $user->getNom() . ' ' . $user->getPrenom()
-            ]
-          ],
-          'Subject' => $objet,
-          'TextPart' => "",
-          'HTMLPart' => `
+        $body = [
+            'Messages' => [
+                [
+                    'From' => [
+                        'Email' => "service@ficheweb.fr",
+                        'Name' => "Service EcoService"
+                    ],
+                    'To' => [
+                        [
+                            'Email' => $user->getEmail(),
+                            'Name' => $user->getNom() . ' ' . $user->getPrenom()
+                        ]
+                    ],
+                    'Subject' => $objet,
+                    'TextPart' => "",
+                    'HTMLPart' => `
                 <head>
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
@@ -141,10 +141,10 @@ class MailJetApi
             <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
         </body>`,
 
-        ]
-      ]
-    ];
-    $response = MailJetApi::getClient()->post(Resources::$Email, ['body' => $body]);
-    return $response->success();
-  }
+                ]
+            ]
+        ];
+        $response = MailJetApi::getClient()->post(Resources::$Email, ['body' => $body]);
+        return $response->success();
+    }
 }
