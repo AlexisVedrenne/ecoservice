@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ServiceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,32 +22,43 @@ class Service
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $Image;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Des;
+    private $image;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $Reference;
+    private $des;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $reference;
 
     /**
      * @ORM\ManyToOne(targetEntity=CategoryService::class, inversedBy="services")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $CategoryService;
+    private $categoryService;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $Price;
+    private $price;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $State;
+    private $state;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Quote::class, mappedBy="service")
+     */
+    private $quotes;
+
+    public function __construct()
+    {
+        $this->quotes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -54,72 +67,99 @@ class Service
 
     public function getImage(): ?string
     {
-        return $this->Image;
+        return $this->image;
     }
 
-    public function setImage(string $Image): self
+    public function setImage(string $image): self
     {
-        $this->Image = $Image;
+        $this->image = $image;
 
         return $this;
     }
 
     public function getDes(): ?string
     {
-        return $this->Des;
+        return $this->des;
     }
 
-    public function setDes(string $Des): self
+    public function setDes(string $des): self
     {
-        $this->Des = $Des;
+        $this->des = $des;
 
         return $this;
     }
 
     public function getReference(): ?string
     {
-        return $this->Reference;
+        return $this->reference;
     }
 
-    public function setReference(string $Reference): self
+    public function setReference(string $reference): self
     {
-        $this->Reference = $Reference;
+        $this->reference = $reference;
 
         return $this;
     }
 
     public function getCategoryService(): ?CategoryService
     {
-        return $this->CategoryService;
+        return $this->categoryService;
     }
 
-    public function setCategoryService(?CategoryService $CategoryService): self
+    public function setCategoryService(?CategoryService $categoryService): self
     {
-        $this->CategoryService = $CategoryService;
+        $this->categoryService = $categoryService;
 
         return $this;
     }
 
     public function getPrice(): ?string
     {
-        return $this->Price;
+        return $this->price;
     }
 
-    public function setPrice(string $Price): self
+    public function setPrice(string $price): self
     {
-        $this->Price = $Price;
+        $this->price = $price;
 
         return $this;
     }
 
     public function getState(): ?bool
     {
-        return $this->State;
+        return $this->state;
     }
 
-    public function setState(bool $State): self
+    public function setState(bool $state): self
     {
-        $this->State = $State;
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Quote[]
+     */
+    public function getQuotes(): Collection
+    {
+        return $this->quotes;
+    }
+
+    public function addQuote(Quote $quote): self
+    {
+        if (!$this->quotes->contains($quote)) {
+            $this->quotes[] = $quote;
+            $quote->addService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuote(Quote $quote): self
+    {
+        if ($this->quotes->removeElement($quote)) {
+            $quote->removeService($this);
+        }
 
         return $this;
     }

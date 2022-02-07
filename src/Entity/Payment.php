@@ -22,71 +22,67 @@ class Payment
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $FirstName;
+    private $firstName;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $LastName;
+    private $lastName;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $Mail;
+    private $email;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $Password;
-
-    /**
-     * @ORM\Column(type="string", length=11)
-     */
-    private $Tel;
+    private $tel;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $Country;
+    private $country;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $City;
-
-    /**
-     * @ORM\Column(type="string", length=6)
-     */
-    private $CP;
+    private $city;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $Adress;
+    private $cp;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $Des;
+    private $adress;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $des;
 
     /**
      * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="payments")
      */
-    private $Product;
+    private $product;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $TotalPrice;
+    private $totalPrice;
 
     /**
      * @ORM\ManyToOne(targetEntity=Card::class, inversedBy="payments")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $Card;
+    private $card;
 
     public function __construct()
     {
-        $this->Product = new ArrayCollection();
+        $this->product = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -96,120 +92,108 @@ class Payment
 
     public function getFirstName(): ?string
     {
-        return $this->FirstName;
+        return $this->firstName;
     }
 
-    public function setFirstName(string $FirstName): self
+    public function setFirstName(string $firstName): self
     {
-        $this->FirstName = $FirstName;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
     public function getLastName(): ?string
     {
-        return $this->LastName;
+        return $this->lastName;
     }
 
-    public function setLastName(string $LastName): self
+    public function setLastName(string $lastName): self
     {
-        $this->LastName = $LastName;
+        $this->lastName = $lastName;
 
         return $this;
     }
 
-    public function getMail(): ?string
+    public function getEmail(): ?string
     {
-        return $this->Mail;
+        return $this->email;
     }
 
-    public function setMail(string $Mail): self
+    public function setEmail(string $email): self
     {
-        $this->Mail = $Mail;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->Password;
-    }
-
-    public function setPassword(string $Password): self
-    {
-        $this->Password = $Password;
+        $this->email = $email;
 
         return $this;
     }
 
     public function getTel(): ?string
     {
-        return $this->Tel;
+        return $this->tel;
     }
 
-    public function setTel(string $Tel): self
+    public function setTel(string $tel): self
     {
-        $this->Tel = $Tel;
+        $this->tel = $tel;
 
         return $this;
     }
 
     public function getCountry(): ?string
     {
-        return $this->Country;
+        return $this->country;
     }
 
-    public function setCountry(string $Country): self
+    public function setCountry(string $country): self
     {
-        $this->Country = $Country;
+        $this->country = $country;
 
         return $this;
     }
 
     public function getCity(): ?string
     {
-        return $this->City;
+        return $this->city;
     }
 
-    public function setCity(string $City): self
+    public function setCity(string $city): self
     {
-        $this->City = $City;
+        $this->city = $city;
 
         return $this;
     }
 
-    public function getCP(): ?string
+    public function getCp(): ?string
     {
-        return $this->CP;
+        return $this->cp;
     }
 
-    public function setCP(string $CP): self
+    public function setCp(string $cp): self
     {
-        $this->CP = $CP;
+        $this->cp = $cp;
 
         return $this;
     }
 
     public function getAdress(): ?string
     {
-        return $this->Adress;
+        return $this->adress;
     }
 
-    public function setAdress(string $Adress): self
+    public function setAdress(string $adress): self
     {
-        $this->Adress = $Adress;
+        $this->adress = $adress;
 
         return $this;
     }
 
     public function getDes(): ?string
     {
-        return $this->Des;
+        return $this->des;
     }
 
-    public function setDes(string $Des): self
+    public function setDes(string $des): self
     {
-        $this->Des = $Des;
+        $this->des = $des;
 
         return $this;
     }
@@ -219,13 +203,13 @@ class Payment
      */
     public function getProduct(): Collection
     {
-        return $this->Product;
+        return $this->product;
     }
 
     public function addProduct(Product $product): self
     {
-        if (!$this->Product->contains($product)) {
-            $this->Product[] = $product;
+        if (!$this->product->contains($product)) {
+            $this->product[] = $product;
         }
 
         return $this;
@@ -233,31 +217,31 @@ class Payment
 
     public function removeProduct(Product $product): self
     {
-        $this->Product->removeElement($product);
+        $this->product->removeElement($product);
 
         return $this;
     }
 
     public function getTotalPrice(): ?string
     {
-        return $this->TotalPrice;
+        return $this->totalPrice;
     }
 
-    public function setTotalPrice(string $TotalPrice): self
+    public function setTotalPrice(string $totalPrice): self
     {
-        $this->TotalPrice = $TotalPrice;
+        $this->totalPrice = $totalPrice;
 
         return $this;
     }
 
     public function getCard(): ?Card
     {
-        return $this->Card;
+        return $this->card;
     }
 
-    public function setCard(?Card $Card): self
+    public function setCard(?Card $card): self
     {
-        $this->Card = $Card;
+        $this->card = $card;
 
         return $this;
     }

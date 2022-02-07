@@ -22,7 +22,7 @@ class Quote
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $NameProfessional;
+    private $nameProfessional;
 
     /**
      * @ORM\Column(type="boolean")
@@ -32,24 +32,26 @@ class Quote
     /**
      * @ORM\Column(type="date")
      */
-    private $DateQuote;
+    private $dateQuote;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $TotalPrice;
+    private $totalPrice;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Commercial::class, inversedBy="quotes")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="quotes")
      */
-    private $Commercial;
+    private $commercial;
 
-
-
+    /**
+     * @ORM\ManyToMany(targetEntity=Service::class, inversedBy="quotes")
+     */
+    private $service;
 
     public function __construct()
     {
-        $this->Service = new ArrayCollection();
+        $this->service = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -59,12 +61,12 @@ class Quote
 
     public function getNameProfessional(): ?string
     {
-        return $this->NameProfessional;
+        return $this->nameProfessional;
     }
 
-    public function setNameProfessional(string $NameProfessional): self
+    public function setNameProfessional(string $nameProfessional): self
     {
-        $this->NameProfessional = $NameProfessional;
+        $this->nameProfessional = $nameProfessional;
 
         return $this;
     }
@@ -83,46 +85,60 @@ class Quote
 
     public function getDateQuote(): ?\DateTimeInterface
     {
-        return $this->DateQuote;
+        return $this->dateQuote;
     }
 
-    public function setDateQuote(\DateTimeInterface $DateQuote): self
+    public function setDateQuote(\DateTimeInterface $dateQuote): self
     {
-        $this->DateQuote = $DateQuote;
+        $this->dateQuote = $dateQuote;
 
         return $this;
     }
 
     public function getTotalPrice(): ?string
     {
-        return $this->TotalPrice;
+        return $this->totalPrice;
     }
 
-    public function setTotalPrice(string $TotalPrice): self
+    public function setTotalPrice(string $totalPrice): self
     {
-        $this->TotalPrice = $TotalPrice;
+        $this->totalPrice = $totalPrice;
 
         return $this;
     }
 
+    public function getCommercial(): ?User
+    {
+        return $this->commercial;
+    }
 
+    public function setCommercial(?User $commercial): self
+    {
+        $this->commercial = $commercial;
+
+        return $this;
+    }
 
     /**
      * @return Collection|Service[]
      */
     public function getService(): Collection
     {
-        return $this->Service;
+        return $this->service;
     }
 
-    public function getCommercial(): ?Commercial
+    public function addService(Service $service): self
     {
-        return $this->Commercial;
+        if (!$this->service->contains($service)) {
+            $this->service[] = $service;
+        }
+
+        return $this;
     }
 
-    public function setCommercial(?Commercial $Commercial): self
+    public function removeService(Service $service): self
     {
-        $this->Commercial = $Commercial;
+        $this->service->removeElement($service);
 
         return $this;
     }
