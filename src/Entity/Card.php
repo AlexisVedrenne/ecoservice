@@ -22,34 +22,34 @@ class Card
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $NumberCard;
+    private $numberCard;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $NameCard;
+    private $nameCard;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $ExpirationDate;
+    private $expirationDate;
 
     /**
      * @ORM\ManyToOne(targetEntity=CardType::class, inversedBy="cards")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $CardType;
-
-
+    private $cardType;
 
     /**
-     * @ORM\OneToMany(targetEntity=Payment::class, mappedBy="Card")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="cards")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $particulier;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Payment::class, mappedBy="card")
      */
     private $payments;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Particulier::class, inversedBy="cards")
-     */
-    private $Particulier;
 
     public function __construct()
     {
@@ -63,53 +63,63 @@ class Card
 
     public function getNumberCard(): ?string
     {
-        return $this->NumberCard;
+        return $this->numberCard;
     }
 
-    public function setNumberCard(string $NumberCard): self
+    public function setNumberCard(string $numberCard): self
     {
-        $this->NumberCard = $NumberCard;
+        $this->numberCard = $numberCard;
 
         return $this;
     }
 
     public function getNameCard(): ?string
     {
-        return $this->NameCard;
+        return $this->nameCard;
     }
 
-    public function setNameCard(string $NameCard): self
+    public function setNameCard(string $nameCard): self
     {
-        $this->NameCard = $NameCard;
+        $this->nameCard = $nameCard;
 
         return $this;
     }
 
     public function getExpirationDate(): ?\DateTimeInterface
     {
-        return $this->ExpirationDate;
+        return $this->expirationDate;
     }
 
-    public function setExpirationDate(\DateTimeInterface $ExpirationDate): self
+    public function setExpirationDate(\DateTimeInterface $expirationDate): self
     {
-        $this->ExpirationDate = $ExpirationDate;
+        $this->expirationDate = $expirationDate;
 
         return $this;
     }
 
     public function getCardType(): ?CardType
     {
-        return $this->CardType;
+        return $this->cardType;
     }
 
-    public function setCardType(?CardType $CardType): self
+    public function setCardType(?CardType $cardType): self
     {
-        $this->CardType = $CardType;
+        $this->cardType = $cardType;
 
         return $this;
     }
 
+    public function getParticulier(): ?User
+    {
+        return $this->particulier;
+    }
 
+    public function setParticulier(?User $particulier): self
+    {
+        $this->particulier = $particulier;
+
+        return $this;
+    }
 
     /**
      * @return Collection|Payment[]
@@ -137,18 +147,6 @@ class Card
                 $payment->setCard(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getParticulier(): ?Particulier
-    {
-        return $this->Particulier;
-    }
-
-    public function setParticulier(?Particulier $Particulier): self
-    {
-        $this->Particulier = $Particulier;
 
         return $this;
     }

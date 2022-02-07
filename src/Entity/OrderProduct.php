@@ -22,36 +22,33 @@ class OrderProduct
     /**
      * @ORM\Column(type="date")
      */
-    private $DateOrder;
+    private $dateOrder;
 
     /**
-     * @ORM\ManyToMany(targetEntity=product::class, inversedBy="orderProducts")
+     * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="orderProducts")
      */
-    private $Product;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $QuantityProduct;
+    private $product;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $TotalPrice;
+    private $quantityProduct;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orderProducts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $particulier;
 
     /**
      * @ORM\OneToOne(targetEntity=Payment::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $Payment;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Particulier::class, inversedBy="orderProducts")
-     */
-    private $Particulier;
+    private $payment;
 
     public function __construct()
     {
-        $this->Product = new ArrayCollection();
+        $this->product = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -61,84 +58,72 @@ class OrderProduct
 
     public function getDateOrder(): ?\DateTimeInterface
     {
-        return $this->DateOrder;
+        return $this->dateOrder;
     }
 
-    public function setDateOrder(\DateTimeInterface $DateOrder): self
+    public function setDateOrder(\DateTimeInterface $dateOrder): self
     {
-        $this->DateOrder = $DateOrder;
+        $this->dateOrder = $dateOrder;
 
         return $this;
     }
 
     /**
-     * @return Collection|product[]
+     * @return Collection|Product[]
      */
     public function getProduct(): Collection
     {
-        return $this->Product;
+        return $this->product;
     }
 
-    public function addProduct(product $product): self
+    public function addProduct(Product $product): self
     {
-        if (!$this->Product->contains($product)) {
-            $this->Product[] = $product;
+        if (!$this->product->contains($product)) {
+            $this->product[] = $product;
         }
 
         return $this;
     }
 
-    public function removeProduct(product $product): self
+    public function removeProduct(Product $product): self
     {
-        $this->Product->removeElement($product);
+        $this->product->removeElement($product);
 
         return $this;
     }
 
     public function getQuantityProduct(): ?string
     {
-        return $this->QuantityProduct;
+        return $this->quantityProduct;
     }
 
-    public function setQuantityProduct(string $QuantityProduct): self
+    public function setQuantityProduct(string $quantityProduct): self
     {
-        $this->QuantityProduct = $QuantityProduct;
+        $this->quantityProduct = $quantityProduct;
 
         return $this;
     }
 
-    public function getTotalPrice(): ?string
+    public function getParticulier(): ?User
     {
-        return $this->TotalPrice;
+        return $this->particulier;
     }
 
-    public function setTotalPrice(string $TotalPrice): self
+    public function setParticulier(?User $particulier): self
     {
-        $this->TotalPrice = $TotalPrice;
+        $this->particulier = $particulier;
 
         return $this;
     }
 
     public function getPayment(): ?Payment
     {
-        return $this->Payment;
+        return $this->payment;
     }
 
-    public function setPayment(?Payment $Payment): self
+    public function setPayment(Payment $payment): self
     {
-        $this->Payment = $Payment;
-
-        return $this;
-    }
-
-    public function getParticulier(): ?Particulier
-    {
-        return $this->Particulier;
-    }
-
-    public function setParticulier(?Particulier $Particulier): self
-    {
-        $this->Particulier = $Particulier;
+        $this->payment = $payment;
 
         return $this;
     }

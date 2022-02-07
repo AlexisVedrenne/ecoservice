@@ -22,14 +22,12 @@ class CategoryService
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $Name;
+    private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Service::class, mappedBy="CategoryService")
+     * @ORM\OneToMany(targetEntity=Service::class, mappedBy="categoryService")
      */
     private $services;
-
-
 
     public function __construct()
     {
@@ -43,12 +41,12 @@ class CategoryService
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): self
+    public function setName(string $name): self
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }

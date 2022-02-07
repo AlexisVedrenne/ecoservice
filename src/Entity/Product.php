@@ -22,59 +22,58 @@ class Product
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $Image;
-
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $Des;
-
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $Ref;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=CategoryProduct::class, inversedBy="products")
-     */
-    private $CategoryPoduct;
-
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $Price;
+    private $image;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Quantity;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $State;
+    private $des;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $RecyclingIndex;
+    private $reference;
 
     /**
-     * @ORM\OneToMany(targetEntity=Commentary::class, mappedBy="Product")
+     * @ORM\ManyToOne(targetEntity=CategoryProduct::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $categoryProduct;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $price;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $quantity;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $state;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $recyclingIndex;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commentary::class, mappedBy="product", orphanRemoval=true)
      */
     private $commentaries;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Payment::class, mappedBy="Product")
+     * @ORM\ManyToMany(targetEntity=Payment::class, mappedBy="product")
      */
     private $payments;
 
     /**
-     * @ORM\ManyToMany(targetEntity=OrderProduct::class, mappedBy="Product")
+     * @ORM\ManyToMany(targetEntity=OrderProduct::class, mappedBy="product")
      */
     private $orderProducts;
-
-
 
     public function __construct()
     {
@@ -90,96 +89,96 @@ class Product
 
     public function getImage(): ?string
     {
-        return $this->Image;
+        return $this->image;
     }
 
-    public function setImage(string $Image): self
+    public function setImage(string $image): self
     {
-        $this->Image = $Image;
+        $this->image = $image;
 
         return $this;
     }
 
     public function getDes(): ?string
     {
-        return $this->Des;
+        return $this->des;
     }
 
-    public function setDes(string $Des): self
+    public function setDes(string $des): self
     {
-        $this->Des = $Des;
+        $this->des = $des;
 
         return $this;
     }
 
-    public function getRef(): ?string
+    public function getReference(): ?string
     {
-        return $this->Ref;
+        return $this->reference;
     }
 
-    public function setRef(string $Ref): self
+    public function setReference(string $reference): self
     {
-        $this->Ref = $Ref;
+        $this->reference = $reference;
 
         return $this;
     }
 
-    public function getCategoryPoduct(): ?CategoryProduct
+    public function getCategoryProduct(): ?CategoryProduct
     {
-        return $this->CategoryPoduct;
+        return $this->categoryProduct;
     }
 
-    public function setCategoryPoduct(?CategoryProduct $CategoryPoduct): self
+    public function setCategoryProduct(?CategoryProduct $categoryProduct): self
     {
-        $this->CategoryPoduct = $CategoryPoduct;
+        $this->categoryProduct = $categoryProduct;
 
         return $this;
     }
 
     public function getPrice(): ?string
     {
-        return $this->Price;
+        return $this->price;
     }
 
-    public function setPrice(string $Price): self
+    public function setPrice(string $price): self
     {
-        $this->Price = $Price;
+        $this->price = $price;
 
         return $this;
     }
 
     public function getQuantity(): ?string
     {
-        return $this->Quantity;
+        return $this->quantity;
     }
 
-    public function setQuantity(string $Quantity): self
+    public function setQuantity(string $quantity): self
     {
-        $this->Quantity = $Quantity;
+        $this->quantity = $quantity;
 
         return $this;
     }
 
     public function getState(): ?bool
     {
-        return $this->State;
+        return $this->state;
     }
 
-    public function setState(bool $State): self
+    public function setState(bool $state): self
     {
-        $this->State = $State;
+        $this->state = $state;
 
         return $this;
     }
 
     public function getRecyclingIndex(): ?string
     {
-        return $this->RecyclingIndex;
+        return $this->recyclingIndex;
     }
 
-    public function setRecyclingIndex(string $RecyclingIndex): self
+    public function setRecyclingIndex(string $recyclingIndex): self
     {
-        $this->RecyclingIndex = $RecyclingIndex;
+        $this->recyclingIndex = $recyclingIndex;
 
         return $this;
     }
