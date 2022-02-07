@@ -1,10 +1,7 @@
-.wrapper {
-    height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    perspective: 2px;
-  }
-  
+a:link 
+{ 
+ text-decoration:none; 
+}
 
 .hero{
     background-color: #00461d;
@@ -58,4 +55,35 @@
 .nav{
     padding-top: 10px!important;
     padding-bottom: 15px!important;
+}
+
+.img-a{
+    height: 90%;
+    width: 90%;
+}
+
+.img-a:hover{
+    transition: 0.5s;
+    height: 93%;
+    width: 93%;
+}
+
+.img{
+    height: 97%;
+    width: 97%;
+}
+.img:hover{
+    transition: 0.5s;
+    height: 100%;
+    width: 100%;
+}
+
+.card:hover{
+    transition: 0.3s;
+    border: 5px solid #00461d
+}
+
+.car-img:hover{
+    transition: 0.3s;
+    border: 5px solid #00461d
 }

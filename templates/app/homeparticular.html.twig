@@ -41,14 +41,102 @@
   </button>
 </div>
 <main class="container">
-    <div>
-        <div class="card mt-3" style="width: 18rem;">
+    <section class="d-flex justify-content-center">
+        <div class="card mt-3 ms-5" style="width: 18rem;">
             <div class="card-body">
                 <p class="title text-center">Produits plastiques</p>
             </div>
-            <img  class="card-img-top" src="{{ asset('image/homeparticular/plastique.png') }}"/>
+            <div class="d-flex justify-content-center">
+              <a class="img" href="#"><img  class="card-img-top" src="{{ asset('image/homeparticular/plastique.png') }}"/></a>
+            </div>
         </div>
-    </div>
+        <div class="card mt-3 ms-5" style="width: 18rem;">
+            <div class="card-body">
+                <p class="title text-center">Produits en verres</p>
+            </div>
+            <div class="d-flex justify-content-center">
+              <a class="img-a mb-2" href="#"><img  class="card-img-top" src="{{ asset('image/homeparticular/verre.png') }}"/></a>
+            </div>
+        </div>
+        <div class="card mt-3 ms-5" style="width: 18rem;">
+            <div class="card-body">
+                <p class="title text-center">Produits en cartons</p>
+            </div>
+            <div class="d-flex justify-content-center">
+              <a class="img-a" href="#"><img  class="card-img-top" src="{{ asset('image/homeparticular/carton.png') }}"/></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="row mt-5">
+      <div class="col">
+        <div id="carProduit" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carProduit" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carProduit" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carProduit" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="container-fluid">
+                <div class="row">      
+                  <div class="col car-img">
+                    <a class="link-dark" href="#">
+                      <img src="https://mouillotins.fr/festival/wp-content/uploads/banniere-site-1.png" class="d-block w-100" alt="...">
+                        <div class="text-center">
+                          <h5>Produit 1 - 0.50€</h5>
+                          <p>Un super produit !</p>
+                        </div>
+                    </a>
+                  </div>
+                  <div class="col car-img">
+                    <a class="link-dark" href="#">
+                      <img src="https://mouillotins.fr/festival/wp-content/uploads/banniere-site-1.png" class="d-block w-100" alt="...">
+                      <div class="text-center">
+                        <h5>Produit 2 - 32.99€</h5>
+                        <p>Un super produit 2 !</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col car-img">
+                    <a class="link-dark" href="#">
+                      <img src="https://mouillotins.fr/festival/wp-content/uploads/banniere-site-1.png" class="d-block w-100" alt="...">
+                      <div class="text-center">
+                        <h5>Produit 3 - 50.99€</h5>
+                        <p>Un super produit 3 !</p>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col car-img">
+                    <a class="link-dark" href="#">
+                      <img src="https://mouillotins.fr/festival/wp-content/uploads/banniere-site-1.png" class="d-block w-100" alt="...">
+                      <div class="text-center">
+                        <h5>Produit 4 - 99.99€</h5>
+                        <p>Un super produit 4 !</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carProduit" data-bs-slide="prev">                
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carProduit" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </section>
 </main>
 
 {% endblock %}
