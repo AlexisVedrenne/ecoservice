@@ -8,10 +8,18 @@
       <div class="container">
         <div class="d-flex justify-content-center">
             <div class="input-group mb-3">
-              <input type="text" class="form-control d-flex align-items-center" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+              <input type="text" class="form-control d-flex align-items-center" placeholder="Rechercher un produit..." aria-label="Rechercher un produit..." aria-describedby="button-addon2">
               <button class="btn btn-secondary d-flex align-items-center" type="button" id="button-addon2"><img src="{{ asset('bootstrap/icon/search.svg') }}"></button>
             </div>
-            <button type="button" class=" ms-3 btn" data-bs-toggle="modal" data-bs-target="#connexion"></button>
+            <a class="ms-3" type="button" data-bs-toggle="modal" href="#connexion"><img class="acount-logo" src="{{ asset('bootstrap/icon/person-circle.svg') }}"></a>
+            <a class="ms-3" type="button" href="#">
+              <div class="cady">
+                <img class="acount-logo" src="{{ asset('bootstrap/icon/basket3-fill.svg') }}">
+                <span class="mt-4 ms-2 position-absolute top-0 translate-middle badge rounded-pill bg-danger">
+                5
+                </span>
+              </div>
+            </a>
         </div>
       </div>
     </div>

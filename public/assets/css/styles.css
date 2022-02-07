@@ -87,3 +87,24 @@ a:link
     transition: 0.3s;
     border: 5px solid #00461d
 }
+
+.acount-logo{
+    height: 40px;
+    width: 40px;
+}
+
+.acount-logo{
+    border-radius: 100%;
+
+}
+
+.acount-logo:hover{
+    transition: 0.3s;
+    height: 43px;
+    width: 43px;
+    border: 2px solid rgb(126, 126, 126);
+}
+
+.cady{
+    width: 40px;
+}
