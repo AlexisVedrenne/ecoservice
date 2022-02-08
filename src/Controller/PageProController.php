@@ -17,4 +17,14 @@ class PageProController extends AbstractController
             'controller_name' => 'PageProController',
         ]);
     }
+
+     /**
+     * @Route("/catalogueservice", name="catalogue_service")
+     */
+    public function indexcatalogue(): Response
+    {
+        return $this->render('app/servicescatalogue.html.twig', [
+            'controller_name' => 'PageProController',
+        ]);
+    }
 }
