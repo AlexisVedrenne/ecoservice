@@ -27,4 +27,14 @@ class PageProController extends AbstractController
             'controller_name' => 'PageProController',
         ]);
     }
+
+     /**
+     * @Route("/detailservice", name="détail_service")
+     */
+    public function indexdétailservice(): Response
+    {
+        return $this->render('app/detailservices.html.twig', [
+            'controller_name' => 'PageProController',
+        ]);
+    }
 }
