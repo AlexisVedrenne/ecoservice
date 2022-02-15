@@ -27,4 +27,34 @@ class PageAdminController extends AbstractController
             'controller_name' => 'PageAdminController',
         ]);
     }
+
+    /**
+     * @Route("/gestionproduit", name="gestion_produit")
+     */
+    public function indexproductmanagement(): Response
+    {
+        return $this->render('app/productmanagement.html.twig', [
+            'controller_name' => 'PageProController',
+        ]);
+    }
+
+      /**
+     * @Route("/gestionservices", name="gestion_services")
+     */
+    public function indexservicesmanagement(): Response
+    {
+        return $this->render('app/servicesmanagement.html.twig', [
+            'controller_name' => 'PageProController',
+        ]);
+    }
+
+       /**
+     * @Route("/gestiondevis", name="gestion_devis")
+     */
+    public function indexquotemanagement(): Response
+    {
+        return $this->render('app/quotesmanagement.html.twig', [
+            'controller_name' => 'PageProController',
+        ]);
+    }
 }
