@@ -21,4 +21,14 @@ class AppController extends AbstractController
             'controller_name' => 'AppController',
         ]);
     }
+
+    /**
+     * @Route("faq", name="page_faq")
+     */
+    public function FAQ(): Response
+    {
+        return $this->render('app/faq.html.twig', [
+            'controller_name' => 'AppController',
+        ]);
+    }
 }
