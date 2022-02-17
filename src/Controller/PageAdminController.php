@@ -34,7 +34,7 @@ class PageAdminController extends AbstractController
     public function indexproductmanagement(): Response
     {
         return $this->render('app/productmanagement.html.twig', [
-            'controller_name' => 'PageProController',
+            'controller_name' => 'PageAdminController',
         ]);
     }
 
@@ -44,7 +44,7 @@ class PageAdminController extends AbstractController
     public function indexservicesmanagement(): Response
     {
         return $this->render('app/servicesmanagement.html.twig', [
-            'controller_name' => 'PageProController',
+            'controller_name' => 'PageAdminController',
         ]);
     }
 
@@ -54,7 +54,7 @@ class PageAdminController extends AbstractController
     public function indexquotemanagement(): Response
     {
         return $this->render('app/quotesmanagement.html.twig', [
-            'controller_name' => 'PageProController',
+            'controller_name' => 'PageAdminController',
         ]);
     }
 }
