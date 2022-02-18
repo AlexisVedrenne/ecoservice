@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PageAdminController extends AbstractController
 {
     /**
-     * @Route("adminstatscustomer", name="page_admin")
+     * @Route("adminstatscustomer", name="stats_customer")
      */
     public function statscustomer(): Response
     {
@@ -19,7 +19,7 @@ class PageAdminController extends AbstractController
     }
 
     /**
-     * @Route("adminstatsservices", name="page_admin")
+     * @Route("adminstatsservices", name="stats_services")
      */
     public function statsservices(): Response
     {
