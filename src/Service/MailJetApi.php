@@ -1,10 +1,13 @@
 <?php
 namespace App\Service;
 
+namespace App\Service;
+
 use \Mailjet\Resources;
 use \Mailjet\Client;
 use App\Entity\User;
 use App\Service\MailJetAp;
+
 
 class MailJetApi
 {
