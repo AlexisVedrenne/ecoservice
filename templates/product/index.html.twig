@@ -21,7 +21,9 @@
             </tr>
         </thead>
         <tbody>
+        
         {% for product in products %}
+        
             <tr>
                 <td>{{ product.id }}</td>
                 <td><img src={{ product.image }} alt=""></td>
@@ -30,11 +32,17 @@
                 <td>{{ product.reference }}</td>
                 <td>{{ product.price }}</td>
                 <td>{{ product.quantity }}</td>
-                <td>{{ product.state ? 'Yes' : 'No' }}</td>
+                <td>{% if product.quantity > 0 %}
+                    Available
+                    {% else %}
+                    Sold-out!
+                {% endif %}</td>
+                
                 <td>{{ product.recyclingIndex }}</td>
                 <td>
                     <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
                     <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+                    <a href="{{path('cart_add', {id : product.id} )}}">Add To Cart</a>
                 </td>
             </tr>
         {% else %}
