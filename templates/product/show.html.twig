@@ -13,10 +13,10 @@
             </tr>
             <tr>
                 <th>Image</th>
-                <td>{{ product.image }}</td>
+                <td><img src={{ product.image }} alt=""></td>
             </tr>
             <tr>
-                <th>Des</th>
+                <th>Description</th>
                 <td>{{ product.des }}</td>
             </tr>
             <tr>
@@ -37,7 +37,11 @@
             </tr>
             <tr>
                 <th>State</th>
-                <td>{{ product.state ? 'Yes' : 'No' }}</td>
+                <td>{% if product.quantity > 0 %}
+                    Available
+                    {% else %}
+                    Sold-out!
+                {% endif %}</td>
             </tr>
             <tr>
                 <th>RecyclingIndex</th>
