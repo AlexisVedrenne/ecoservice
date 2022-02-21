@@ -31,4 +31,14 @@ class AppController extends AbstractController
             'controller_name' => 'AppController',
         ]);
     }
+
+     /**
+     * @Route("aproposdenous", name="page_a_propos_de_nous")
+     */
+    public function Aboutus(): Response
+    {
+        return $this->render('app/aboutus.html.twig', [
+            'controller_name' => 'AppController',
+        ]);
+    }
 }
