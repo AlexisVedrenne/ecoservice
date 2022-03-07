@@ -6,7 +6,11 @@
     </head>
     <header>
     
-        {{ include('assets/footer.html.twig') }}
-        <script src="{{ asset('js/homeRedirect/home.js') }}"></script>       
+     <h1><a href="{{path('professional_home')}}"> Professionel</a></h1>
+     <h1><a href="{{path('home')}}"> Particulier</a></h1>
+
+       
+        <script src="{{ asset('js/homeRedirect/home.js') }}"></script>    
+           
     </body>
 </html>
