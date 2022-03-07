@@ -14,7 +14,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/stats/customer", name="stats_customer")
      */
-    public function statscustomer(): Response
+    public function statscustomer()
     {
         return $this->render('admin/statscustomeradmin.html.twig');
     }
@@ -22,7 +22,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/stats/services", name="stats_services")
      */
-    public function statsservices(): Response
+    public function statsservices()
     {
         return $this->render('admin/statsservicesadmin.html.twig');
     }
@@ -30,7 +30,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/manager/product", name="gestion_produit")
      */
-    public function indexproductmanagement(): Response
+    public function indexproductmanagement()
     {
         return $this->render('admin/productmanagement.html.twig');
     }
@@ -38,7 +38,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/manager/services", name="gestion_services")
      */
-    public function indexservicesmanagement(): Response
+    public function indexservicesmanagement()
     {
         return $this->render('admin/servicesmanagement.html.twig');
     }
@@ -46,8 +46,16 @@ class AdminController extends AbstractController
     /**
      * @Route("/manager/quotes", name="gestion_devis")
      */
-    public function indexquotemanagement(): Response
+    public function indexquotemanagement()
     {
         return $this->render('admin/quotesmanagement.html.twig');
+    }
+
+    /**
+     * @Route("/login", name="login")
+     */
+    public function adminLogin()
+    {
+        return $this->render('admin/login.html.twig');
     }
 }
