@@ -16,11 +16,12 @@ class AppController extends AbstractController
     {
         $user = $this->getUser();
         if ($user) {
-            if ($user->getRoles()[0] == 'ROLE_ADMIN') {
-                return $this->redirectToRoute('admin_stats_customer');
-            } else {
-                return $this->render('app/homeparticular.html.twig');
+            foreach ($user->getRoles() as $role) {
+                if ($role == 'ROLE_ADMIN') {
+                    return $this->redirectToRoute('admin_stats_customer');
+                }
             }
+            return $this->redirectToRoute('particular');
         }
         return $this->render('app/home.html.twig');
     }

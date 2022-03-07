@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Repository\CategoryProductRepository;
 use App\Repository\ProductRepository;
 use App\Services\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,10 +22,10 @@ class ProductController extends AbstractController
     /**
      * @Route("/", name="product_index")
      */
-    public function index(ProductRepository $productRepository): Response
+    public function index(ProductRepository $productRepository, CategoryProductRepository $repoCat): Response
     {
         return $this->render('product/index.html.twig', [
-            'products' => $productRepository->findAll(),
+            'products' => $productRepository->findAll(), 'cats' => $repoCat->findAll()
         ]);
     }
 
