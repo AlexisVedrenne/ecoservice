@@ -9,6 +9,7 @@ use App\Entity\Contact;
 use App\Form\ContactFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Service\MailJetApi;
 
 class ContactController extends AbstractController
 {
@@ -20,19 +21,29 @@ class ContactController extends AbstractController
         $contact = new Contact() ; 
         $form = $this->createForm(ContactFormType::class, $contact);
         $form->handleRequest($request);
+        $state = false;
+        $msg='';
 
         if($form->isSubmitted()){
-            
-            $contact = $form->getData();
-            return $this->redirectToRoute('contact',['succesMessage'=>'Message bien envoyé']);
+         
+               
+            if (($request->request->get('mail') == null)) {
+                return $this->render('contact/index.html.twig');
+            } 
+            else {
+                MailJetApi::envoie(
+                    $request->request->get('mail'),
+                    $request->request->get('name'),
+                    $request->request->get('objet'),
+                    $request->request->get('message'),
 
-        }else{
-            return $this->render('contact/index.html.twig', ['form' => $form->createView()
-        ]);
+                );
+                $state = true;
+                $msg='Message bien envoyé';
+                
+            }
         }
         
-
+        return $this->render('contact/index.html.twig',['form' => $form->createView(),'state'=>$state,'message'=>$msg]);
     }
-
-    
 }
