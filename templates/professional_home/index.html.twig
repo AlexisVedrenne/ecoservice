@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+    <h1>Home Professionnel </h1>
+ 
+  {% if is_granted('ROLE_USER') %}
+
+    <a href="{{path('app_logout')}}"> déconnexion</a>
+    <a hidden href="{{path('app_login')}}"> Connexion</a>
+    <a hidden href="{{path('app_register')}}"> Inscription</a>
+
+    {% else %}
+
+    <a  href="{{path('app_login')}}"> Connexion</a>
+    <a  href="{{path('app_register')}}"> Inscription</a>
+
+  {% endif %}
+<a  href="{{path('contact')}}">Contact</a>
+  
+ 
+      
+  
+
+    
+  
+    <a href="{{path('index')}}"> retour</a>
+{% endblock %}
