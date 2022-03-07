@@ -198,8 +198,9 @@ a:link
 
 .blockmanagement {
     border: 1px solid grey;
-    display: flex; 
-    justify-content: space-evenly;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 300px; 
     height: 150px;
     margin-top: 50px;
