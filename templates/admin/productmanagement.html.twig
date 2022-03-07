@@ -45,23 +45,49 @@
 	<div style="display: flex; justify-content:center; width: 100%">
 		<div class="container">
 			<div style="display: flex; justify-content: space-evenly; align-items: center;">
+				{% set actif = 0 %}
+				{% set inactif = 0 %}
+				{% for product in products %}
+					{% if product.state %}
+						{% set actif = actif + 1 %}
+					{% else %}
+						{% set inactif = inactif + 1 %}
+					{% endif %}
+				{% endfor %}
 				<div class="blockmanagement">
 					<div>Produit(s) actif(s)</div>
+					{% if actif >= 1  %}
+						<h1 style="color:green;">{{ actif }}</h1>
+					{% else %}
+						<h1 style="color:red;">{{ actif }}</h1>
+					{% endif %}
 				</div>
 				<div class="blockmanagement">
 					<div>Produit(s) en rupture</div>
+					{% if inactif <= 0  %}
+						<h1 style="color:green;">{{ inactif }}</h1>
+					{% else %}
+						<h1 style="color:red;">{{ inactif }}</h1>
+					{% endif %}
 				</div>
+			</div>
+			<div class="d-flex justify-content-center mb-3 mt-2">
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					Ajouter un nouveau produit
+				</button>
 			</div>
 			<div class="input-group mb-2 d-flex justify-content-start" style="width: 50%">
 				<input type="text" class="form-control" placeholder="Recherche..." aria-label="Recherche..." aria-describedby="button-addon2">
 				<button class="btn btn-secondary d-flex align-items-center" type="button" id="button-addon2"><img src="{{ asset('bootstrap/icon/search.svg') }}"></button>
 			</div>
-			<table class="table">
+			<!-- Button trigger modal -->
+			<table class="table text-center">
 				<thead>
 					<tr>
-						<th scope="col">numero</th>
-						<th scope="col">image</th>
-						<th scope="col">désignation</th>
+						<th scope="col">Numéro</th>
+						<th scpre="col">Images</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Déscription</th>
 						<th scope="col">référence</th>
 						<th scope="col">Catégorie</th>
 						<th scope="col">Prix</th>
@@ -71,20 +97,56 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
+					{% for product in products %}
+						<tr>
+							<td>{{ product.id }}</td>
+							<td>
+								<a href="#" class="">Voir les images</a>
+							</td>
+							<td>{{ product.name }}</td>
+							<td>{{ product.des }}</td>
+							<td>{{ product.reference }}</td>
+							<td>{{ product.categoryProduct.name }}</td>
+							<td>{{ product.price }}€</td>
+							<td>{{ product.quantity}}</td>
+							<td>
+								{% if product.state %}
+									<p style="color:green;">Actif</p>
+								{% else %}
+									<p style="color:red;">Inactif</p>
+								{% endif %}
+							</td>
+							<td>{{ product.recyclingIndex }}%</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td>
+								<p class="text-muted">Aucun produit dans la base...</p>
+							</td>
+						</tr>
+					{% endfor %}
+
 				</tbody>
-			</table>
+			</tbody>
+		</table>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ajout d'un produit</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					{{ render(controller('App\\Controller\\ProductController::new',{'fileUploader':file})) }}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+					<button id="btn_product" type="button" class="btn btn-primary">Ajouter le produit</button>
+				</div>
+			</div>
 		</div>
 	</div>
-
+	<script src="{{ asset('js/admin/manageproduct.js') }}"></script>
 </div>

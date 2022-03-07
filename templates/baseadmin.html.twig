@@ -12,5 +12,8 @@
 
 	<body>
 		{% block body %}{% endblock %}
+		{% block javascripts %}
+			<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+		{% endblock %}
 	</body>
 </html>

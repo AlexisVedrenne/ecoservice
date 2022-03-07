@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\ProductRepository;
+use App\Services\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,9 +32,9 @@ class AdminController extends AbstractController
     /**
      * @Route("/manager/product", name="gestion_produit")
      */
-    public function indexproductmanagement()
+    public function indexproductmanagement(ProductRepository $repo, FileUploader $fileUploader)
     {
-        return $this->render('admin/productmanagement.html.twig');
+        return $this->render('admin/productmanagement.html.twig', ['products' => $repo->findAll(), 'file' => $fileUploader]);
     }
 
     /**
