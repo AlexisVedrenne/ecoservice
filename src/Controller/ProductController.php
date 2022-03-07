@@ -88,15 +88,15 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="product_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="product_delete")
      */
-    public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
+    public function delete(Product $product, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($product);
-            $entityManager->flush();
+        foreach ($product->getImages() as $img) {
+            unlink('assets/uploads/' . $img);
         }
-
-        return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
+        $entityManager->remove($product);
+        $entityManager->flush();
+        return $this->redirectToRoute('admin_gestion_produit', [], Response::HTTP_SEE_OTHER);
     }
 }

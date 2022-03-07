@@ -94,6 +94,7 @@
 						<th scope="col">Quantité</th>
 						<th scope="col">Etat</th>
 						<th scope="col">Indice de recyclage</th>
+						<th scope="col">Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -117,6 +118,31 @@
 								{% endif %}
 							</td>
 							<td>{{ product.recyclingIndex }}%</td>
+							<td>
+								<div class="modal fade" id="delProd-{{ product.id }}" tabindex="-1" aria-labelledby="delProd-{{ product.id }}Label" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="delProd-{{ product.id }}Label">Attention !</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												Etes vous sur de vouloir supprimer le produit :
+												{{ product.name }}
+												?
+												<p class="text-muted mt-3">Référence du produit :
+													{{ product.reference }}</p>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+												<a href="{{ path('product_delete',{'id': product.id }) }}" type="button" class="btn btn-danger">Supprimer</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<a href="#"><img src="{{ asset('bootstrap/icon/pencil-square.svg') }}"></a>
+								<a role="button" data-bs-toggle="modal" href="#delProd-{{ product.id }}"><img src="{{ asset('bootstrap/icon/trash-fill.svg') }}"></a>
+							</td>
 							<div class="modal fade" id="imgMd-{{ product.id }}" tabindex="-1" aria-labelledby="imgMd-{{ product.id }}Label" aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
