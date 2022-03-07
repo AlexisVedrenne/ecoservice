@@ -72,7 +72,7 @@
 				</div>
 			</div>
 			<div class="d-flex justify-content-center mb-3 mt-2">
-				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProd">
 					Ajouter un nouveau produit
 				</button>
 			</div>
@@ -101,7 +101,7 @@
 						<tr>
 							<td>{{ product.id }}</td>
 							<td>
-								<a href="#" class="">Voir les images</a>
+								<a role="button" data-bs-toggle="modal" href="#imgMd-{{ product.id }}" class="">Voir les images</a>
 							</td>
 							<td>{{ product.name }}</td>
 							<td>{{ product.des }}</td>
@@ -117,6 +117,28 @@
 								{% endif %}
 							</td>
 							<td>{{ product.recyclingIndex }}%</td>
+							<div class="modal fade" id="imgMd-{{ product.id }}" tabindex="-1" aria-labelledby="imgMd-{{ product.id }}Label" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="imgMd-{{ product.id }}Label">{{ product.name }}</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<div class="d-flex justify-content-center">
+												{% for img in product.images %}
+													<img class="bg-secondary" style="heigth:20%;width:20%;" src="{{ asset('uploads/' ~ img) }}">
+												{% else %}
+													<p class="text-muted">Aucune image...</p>
+												{% endfor %}
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</tr>
 					{% else %}
 						<tr>
@@ -131,11 +153,11 @@
 		</table>
 	</div>
 	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="addProd" tabindex="-1" aria-labelledby="addProdLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ajout d'un produit</h5>
+					<h5 class="modal-title" id="addProdLabel">Ajout d'un produit</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
