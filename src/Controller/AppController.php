@@ -8,8 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AppController extends AbstractController
 {
-    public function home():Response{
-        return $this->render('app/homeparticular.html.twig');
+    public function home(): Response
+    {
+        return $this->render('app/home.html.twig');
     }
 
     /**
@@ -32,7 +33,7 @@ class AppController extends AbstractController
         ]);
     }
 
-     /**
+    /**
      * @Route("aproposdenous", name="page_a_propos_de_nous")
      */
     public function Aboutus(): Response
@@ -42,7 +43,7 @@ class AppController extends AbstractController
         ]);
     }
 
-      /**
+    /**
      * @Route("panier", name="panier")
      */
     public function ShoppingCart(): Response
