@@ -7,6 +7,7 @@ use App\Services\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/admin", name="admin_")
@@ -15,6 +16,7 @@ class AdminController extends AbstractController
 {
     /**
      * @Route("/stats/customer", name="stats_customer")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function statscustomer()
     {
@@ -23,6 +25,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/stats/services", name="stats_services")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function statsservices()
     {
@@ -31,6 +34,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/manager/product", name="gestion_produit")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function indexproductmanagement(ProductRepository $repo, FileUploader $fileUploader)
     {
@@ -39,6 +43,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/manager/services", name="gestion_services")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function indexservicesmanagement()
     {
@@ -47,6 +52,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/manager/quotes", name="gestion_devis")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function indexquotemanagement()
     {

@@ -29,7 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private $roles;
 
     /**
      * @var string The hashed password
@@ -117,8 +117,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
         return array_unique($roles);
     }
 

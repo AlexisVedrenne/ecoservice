@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/category/service")
@@ -18,6 +19,7 @@ class CategoryServiceController extends AbstractController
 {
     /**
      * @Route("/", name="category_service_index", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(CategoryServiceRepository $categoryServiceRepository): Response
     {
@@ -28,6 +30,7 @@ class CategoryServiceController extends AbstractController
 
     /**
      * @Route("/new", name="category_service_new", methods={"GET", "POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -48,18 +51,10 @@ class CategoryServiceController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="category_service_show", methods={"GET"})
-     */
-    public function show(CategoryService $categoryService): Response
-    {
-        return $this->render('category_service/show.html.twig', [
-            'category_service' => $categoryService,
-        ]);
-    }
 
     /**
      * @Route("/{id}/edit", name="category_service_edit", methods={"GET", "POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, CategoryService $categoryService, EntityManagerInterface $entityManager): Response
     {
@@ -80,10 +75,11 @@ class CategoryServiceController extends AbstractController
 
     /**
      * @Route("/{id}", name="category_service_delete", methods={"POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, CategoryService $categoryService, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$categoryService->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $categoryService->getId(), $request->request->get('_token'))) {
             $entityManager->remove($categoryService);
             $entityManager->flush();
         }

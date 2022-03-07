@@ -47,4 +47,10 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getLimitProduct($limit)
+    {
+        $dql = "SELECT p FROM App\Entity\Product p";
+        return $this->getEntityManager()->createQuery($dql)->setMaxResults($limit)->execute();
+    }
 }

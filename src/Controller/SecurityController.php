@@ -16,11 +16,12 @@ class SecurityController extends AbstractController
     {
         $user = $this->getUser();
         if ($user) {
-            if ($user->getRoles()['ROLE_ADMIN']) {
-                return $this->redirectToRoute('admin_stats_customer');
-            } else {
-                return $this->redirectToRoute('index');
+            foreach ($user->getRoles() as $role) {
+                if ($role == 'ROLE_ADMIN') {
+                    return $this->redirectToRoute('admin_stats_customer');
+                }
             }
+            return $this->redirectToRoute('index');
         }
 
         // get the login error if there is one
