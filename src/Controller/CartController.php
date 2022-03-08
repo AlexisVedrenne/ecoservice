@@ -69,8 +69,9 @@ class CartController extends AbstractController
 
     /**
      * @Route("/add/{id}", name="add")
+     * @Route("add/cata/{id}" ,name="add_cata")
      */
-    public function add(Product $product, SessionInterface $session)
+    public function add(Product $product, SessionInterface $session, Request $request)
     {
         //on récupére le panier actuel
         $panier = $session->get("panier", []);
@@ -83,7 +84,12 @@ class CartController extends AbstractController
         }
         //on sauvegarde dans la session 
         $session->set("panier", $panier);
-        return $this->redirectToRoute('cart_index');
+        $tempRoute = $request->attributes->get('_route');
+        if ($tempRoute == 'cart_add') {
+            return $this->redirectToRoute('cart_index');
+        } else {
+            return $this->redirectToRoute('product_index');
+        }
     }
 
     /**
