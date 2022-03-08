@@ -21,10 +21,10 @@
 							<div class="dropdown-menu dropdown-menu-end">
 								<a href="#" class="dropdown-item">Mon compte</a>
 								<div class="dropdown-divider"></div>
-								<a href="#" class="dropdown-item">Déconnexion</a>
+								<a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
 							</div>
 							<div></ul>
-							<a class="ms-1" type="button" href="#">
+							<a class="ms-1" type="button" href="{{ path('cart_index') }}">
 								<div class="cady">
 									<img class="acount-logo" src="{{ asset('bootstrap/icon/basket3-fill.svg') }}"/>
 								</div>

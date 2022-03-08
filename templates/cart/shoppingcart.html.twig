@@ -31,89 +31,88 @@
 													<h6 class="text-black mb-0">{{ article.produit.des }}</h6>
 												</div>
 												<div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-													<button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-														<i class="fas fa-minus"></i>
-													</button>
+													<a href="{{ path('cart_remove',{'id':article.produit.id}) }}" class="btn btn-link px-2">
+														<img src="{{ asset('bootstrap/icon/dash.svg') }}"></img>
+												</a>
 
-													<input id="form1" min="0" name="quantity" value="{{ article.quantite }}" type="number" class="form-control form-control-sm"/>
+												<input id="form1" min="0" name="quantity" value="{{ article.quantite }}" type="number" class="form-control form-control-sm" readonly/>
 
-													<button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-														<i class="fas fa-plus"></i>
-													</button>
-												</div>
-												<div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-													<h6 class="mb-0">€
-														{{ article.produit.price }}</h6>
-												</div>
-												<div class="col-md-1 col-lg-1 col-xl-1 text-end">
-													<a href="{{ path('cart_remove',{'id':article.produit.id}) }}" role="button" class="btn btn-close" aria-label="Close"></a>
-												</div>
-											</div>
-
-											<hr class="my-4">
-										{% else %}
-											<p class="text-muted">Votre panier est vide...</p>
-										{% endfor %}
-										<div class="pt-5">
-											<h6 class="mb-0">
-												<a href="#!" class="text-body">
-													<i class="fas fa-long-arrow-alt-left me-2"></i>
-													<a></a>
-												</h6>
-											</div>
+												<a href="{{ path('cart_add',{'id':article.produit.id}) }}" class="btn btn-link px-2">
+													<img src="{{ asset('bootstrap/icon/plus.svg') }}"></img>
+											</a>
+										</div>
+										<div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+											<h6 class="mb-0">€
+												{{ article.produit.price * article.quantite }}</h6>
+										</div>
+										<div class="col-md-1 col-lg-1 col-xl-1 text-end">
+											<a href="{{ path('cart_delete',{'id':article.produit.id}) }}" role="button" class="btn btn-close" aria-label="Close"></a>
 										</div>
 									</div>
-									<div class="col-lg-4 bg-grey" style="border-radius: 15px;">
-										<div class="p-5">
-											<h3 class="fw-bold mb-5 mt-2 pt-1">Résumé de la commande</h3>
-											<hr class="my-4">
 
-											<div class="d-flex justify-content-between mb-4">
-												<h5 class="text-uppercase">{{ dataPanier|length }}
-													articles</h5>
-												<h5>€
-													{{ total }}</h5>
-											</div>
+									<hr class="my-4">
+								{% else %}
+									<p class="text-muted">Votre panier est vide...</p>
+								{% endfor %}
+								<div class="pt-5">
+									<h6 class="mb-0">
+										<a href="#!" class="text-body">
+											<i class="fas fa-long-arrow-alt-left me-2"></i>
+											<a></a>
+										</h6>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4 bg-grey" style="border-radius: 15px;">
+								<div class="p-5">
+									<h3 class="fw-bold mb-5 mt-2 pt-1">Résumé de la commande</h3>
+									<hr class="my-4">
 
-											<h5 class="text-uppercase mb-3">Mode de livraison</h5>
+									<div class="d-flex justify-content-between mb-4">
+										<h5 class="text-uppercase">{{ dataPanier|length }}
+											articles</h5>
+										<h5>€
+											{{ total }}</h5>
+									</div>
 
-											<div class="mb-4 pb-2">
-												<select class="select">
-													<option value="1">Livraison 10 minutes- €5.00</option>
-													<option value="2">Livraison 1 jour - €3.00</option>
-													<option value="3">Livraison 2 jours - €2.00</option>
-													<option selected value="4">Livraison 3 jours - Gratuit !</option>
-												</select>
-											</div>
+									<h5 class="text-uppercase mb-3">Mode de livraison</h5>
 
-											<h5 class="text-uppercase mb-3">Avez-vous un code promotionnel ?</h5>
+									<div class="mb-4 pb-2">
+										<select class="select">
+											<option value="1">Livraison 10 minutes- €5.00</option>
+											<option value="2">Livraison 1 jour - €3.00</option>
+											<option value="3">Livraison 2 jours - €2.00</option>
+											<option selected value="4">Livraison 3 jours - Gratuit !</option>
+										</select>
+									</div>
 
-											<div class="mb-5">
-												<div class="form-outline">
-													<input type="text" id="form3Examplea2" class="form-control form-control-lg"/>
-													<label class="form-label" for="form3Examplea2">Entrez votre code</label>
-												</div>
-											</div>
+									<h5 class="text-uppercase mb-3">Avez-vous un code promotionnel ?</h5>
 
-											<hr class="my-4">
-
-											<div class="d-flex justify-content-between mb-5">
-												<h5 class="text-uppercase">Prix total</h5>
-												<h5>€
-													{{ total }}</h5>
-											</div>
-
-											<form action="" method="POST">
-												<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-label="Passer au paiement" data-currency="eur" data-key="pk_test_51KabbgBf0vZfGc8ScJVN6IvZKFqqjitig8gziF6j3DPveOEI5tKbeI1QyTxqdWZ4s66NLeVNrWWbyVJL2zFUm2fR007NfrHBLf" data-amount="{{ total * 100 }}" data-name="Eco Service" data-description="Payer votre commande" redirect.failure-reason="product/index.html.twig" data-zip-code="true" data-locale="auto"></script>
-											</form>
-
+									<div class="mb-5">
+										<div class="form-outline">
+											<input type="text" id="form3Examplea2" class="form-control form-control-lg"/>
+											<label class="form-label" for="form3Examplea2">Entrez votre code</label>
 										</div>
 									</div>
+
+									<hr class="my-4">
+
+									<div class="d-flex justify-content-between mb-5">
+										<h5 class="text-uppercase">Prix total</h5>
+										<h5>€
+											{{ total }}</h5>
+									</div>
+
+									<form action="" method="POST">
+										<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-label="Passer au paiement" data-currency="eur" data-key="pk_test_51KabbgBf0vZfGc8ScJVN6IvZKFqqjitig8gziF6j3DPveOEI5tKbeI1QyTxqdWZ4s66NLeVNrWWbyVJL2zFUm2fR007NfrHBLf" data-amount="{{ total * 100 }}" data-name="Eco Service" data-description="Payer votre commande" redirect.failure-reason="product/index.html.twig" data-zip-code="true" data-locale="auto"></script>
+									</form>
+
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
-	{% endblock %}
+		</div>
+	</div>
+</section>{% endblock %}
