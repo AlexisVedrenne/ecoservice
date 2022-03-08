@@ -59,7 +59,7 @@
 												{% else %}
 													<button class="btn btn-danger me-3" disabled>En rupture de stock</button>
 												{% endif %}
-												<a href="#"><img src="{{ asset('bootstrap/icon/search.svg') }}"></a>
+												<a href="{{ path('product_show',{'id':product.id}) }}"><img src="{{ asset('bootstrap/icon/search.svg') }}"></a>
 											</div>
 											<div class="col">
 												<h6 class="text-end">Catégorie :
