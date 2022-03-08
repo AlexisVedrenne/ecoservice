@@ -65,10 +65,7 @@ class Product
      */
     private $commentaries;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Payment::class, mappedBy="product")
-     */
-    private $payments;
+    
 
     /**
      * @ORM\ManyToMany(targetEntity=Order::class, mappedBy="product")
@@ -215,32 +212,11 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection|Payment[]
-     */
-    public function getPayments(): Collection
-    {
-        return $this->payments;
-    }
+    
 
-    public function addPayment(Payment $payment): self
-    {
-        if (!$this->payments->contains($payment)) {
-            $this->payments[] = $payment;
-            $payment->addProduct($this);
-        }
+    
 
-        return $this;
-    }
-
-    public function removePayment(Payment $payment): self
-    {
-        if ($this->payments->removeElement($payment)) {
-            $payment->removeProduct($this);
-        }
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection|Order[]
