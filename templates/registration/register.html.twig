@@ -2,19 +2,32 @@
 
 
 {% block body %}
-    <h1>inscription</h1>
-     
+	<div class="container">
+		<h1>Inscription</h1>
+		<p>Entrez vos informations personnelles</p>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.firstname) }}
-        {{ form_row(registrationForm.lastname) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-       
+		{{ form_start(registrationForm) }}
+		<div class="form-floating mb-3">
+			{{ form_widget(registrationForm.email) }}
+			<label for="floatingInput">Adresse Email</label>
+		</div>
+		<div class="form-floating mb-3">
+			{{ form_widget(registrationForm.firstname) }}
+			<label for="floatingInput">Votre nom</label>
+		</div>
+		<div class="form-floating mb-3">
+			{{ form_widget(registrationForm.lastname) }}
+			<label for="floatingInput">Votre prénom</label>
+		</div>
+		<div class="form-floating mb-3">
+			{{ form_widget(registrationForm.plainPassword) }}
+			<label for="floatingInput">Votre mot de passe</label>
+		</div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-     <a href="{{ path('app_login') }}">Vous avez déja un compte ?</a>
+		<div class="d-flex justify-content-center">
+			<button type="submit" class="btn btn-success me-2">Créer son compte</button>
+			<a class="mt-1" href="{{ path('app_login') }}">Vous avez déja un compte ?</a>
+		</div>
+		{{ form_end(registrationForm) }}
+	</div>
 {% endblock %}
