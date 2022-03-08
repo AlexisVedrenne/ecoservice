@@ -51,8 +51,30 @@
                         
                 </td>
                 <td>Passer la commande</td>
+                
             </tr>
+            
+            
         </tfoot>
+        
 </table>
-
+<form action="" method="POST">
+                    <script
+                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-label="Payer avec votre carte"
+                        data-currency="eur"
+                        data-key="pk_test_51KabbgBf0vZfGc8ScJVN6IvZKFqqjitig8gziF6j3DPveOEI5tKbeI1QyTxqdWZ4s66NLeVNrWWbyVJL2zFUm2fR007NfrHBLf"
+                        data-amount="{{ total * 100 }}"
+                        data-name="Eco Service"
+                        data-description="Payer votre commande"
+                        redirect.failure-reason="product/index.html.twig"
+                        
+                        data-zip-code="true"
+                        
+                        data-locale="auto">
+                        
+                        
+                        
+                    </script>
+        </form>
 {% endblock %}

@@ -29,7 +29,7 @@ class MailJetApi
                     'To' => [
                         [
                             'Email' => $user->getEmail(),
-                            'Name' => $user->getNom() . ' ' . $user->getPrenom()
+                            'Name' => $user->getLastName() . ' ' . $user->getFirstName()
                         ]
                     ],
                     'Subject' => $objet,
@@ -122,7 +122,7 @@ class MailJetApi
         
         
                 <h1 class="text-center mt-3 mb-3">` . $titre . `</h1>
-                <h5>Notre chèr(e) ` . $user->getNom() . ` ` . $user->getPrenom() . `,</h5>
+                <h5>Notre chèr(e) ` . $user->getLastName() . ` ` . $user->getFirstName() . `,</h5>
                 <p class="p">
                         ` . $message . `
                 </p>

@@ -63,16 +63,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $cards;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrderProduct::class, mappedBy="particulier")
+     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="particulier")
      */
-    private $orderProducts;
+    private $orders;
+
+    
 
     public function __construct()
     {
         $this->quotes = new ArrayCollection();
         $this->commentaries = new ArrayCollection();
         $this->cards = new ArrayCollection();
-        $this->orderProducts = new ArrayCollection();
+        $this->orders = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -279,32 +282,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection|OrderProduct[]
+     * @return Collection|Order[]
      */
-    public function getOrderProducts(): Collection
+    public function getOrders(): Collection
     {
-        return $this->orderProducts;
+        return $this->orders;
     }
 
-    public function addOrderProduct(OrderProduct $orderProduct): self
+    public function addOrder(Order $order): self
     {
-        if (!$this->orderProducts->contains($orderProduct)) {
-            $this->orderProducts[] = $orderProduct;
-            $orderProduct->setParticulier($this);
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->setParticulier($this);
         }
 
         return $this;
     }
 
-    public function removeOrderProduct(OrderProduct $orderProduct): self
+    public function removeOrder(Order $order): self
     {
-        if ($this->orderProducts->removeElement($orderProduct)) {
+        if ($this->orders->removeElement($order)) {
             // set the owning side to null (unless already changed)
-            if ($orderProduct->getParticulier() === $this) {
-                $orderProduct->setParticulier(null);
+            if ($order->getParticulier() === $this) {
+                $order->setParticulier(null);
             }
         }
 
         return $this;
     }
+
+   
+
+    
 }
