@@ -57,10 +57,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $commentaries;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Card::class, mappedBy="particulier", orphanRemoval=true)
-     */
-    private $cards;
+    
 
     /**
      * @ORM\OneToMany(targetEntity=Order::class, mappedBy="particulier")
@@ -73,7 +70,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->quotes = new ArrayCollection();
         $this->commentaries = new ArrayCollection();
-        $this->cards = new ArrayCollection();
         $this->orders = new ArrayCollection();
         
     }
@@ -249,35 +245,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Card[]
-     */
-    public function getCards(): Collection
-    {
-        return $this->cards;
-    }
-
-    public function addCard(Card $card): self
-    {
-        if (!$this->cards->contains($card)) {
-            $this->cards[] = $card;
-            $card->setParticulier($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCard(Card $card): self
-    {
-        if ($this->cards->removeElement($card)) {
-            // set the owning side to null (unless already changed)
-            if ($card->getParticulier() === $this) {
-                $card->setParticulier(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Order[]
