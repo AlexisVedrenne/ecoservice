@@ -7,63 +7,73 @@
 	<div class="container mt-3">
 		<div class="row">
 			<div class="col-5">
-				<div class="card text-center" style="color:white;">
-					<div class="card-header bg-primary">
-						Toute Catégorie
+				<div class="card text-center">
+					<div class="card-header bg-primary" style="color:white;">
+						<span id="filtreCat">Toute Catégorie</span>
 					</div>
 					<div>
 						<ul class="list-group">
 							{% for cat in cats %}
-								<a href="#" class="list-group-item list-group-item-action">{{ cat.name }}</a>
+								<a href="#" onclick="addCat('{{ cat.name }}')" class="list-group-item list-group-item-action">{{ cat.name }}</a>
 							{% endfor %}
 						</ul>
 					</div>
 					<hr>
 					<div class="card-body">
-						<h6>Prix</h6>
-						<input type="range" class="form-range" min="0" max="500" id="customRange2">
+						<h5>Prix</h5>
+						<p id="price">Aucun filtre</p>
+						<input id="filterPrice" type="range" class="form-range" min="0" max="1000">
+						<button id="btnResetFiltre" class="btn btn-danger">Rénitialiser les filtres</button>
 					</div>
 				</div>
 			</div>
 			<div class="col-md">
 				{% for product in products %}
-					<div class="card mb-3">
-						<div class="row g-0">
-							<div class="col-md-4">
-								{% if product.images %}
-									<img style="height:100%!important;" class="img-fluid rounded-start" src="{{ asset('uploads/' ~ product.images[0]) }}">
-								{% else %}
-									<img class="img-fluid rounded-start" src="{{ asset('image/imgnofound.png') }}">
-								{% endif %}
-							</div>
-							<div class="col-md-8">
-								<div class="card-body">
-									<h5 class="card-title">{{ product.name }}</h5>
-									<p class="text-end">50 avis</p>
-									<p class="text-end">Recyclable à
-										{{ product.recyclingIndex }}%
-									</p>
-									<p>
-										<h5>{{ product.price }}€</h5>
-									</p>
-									<p class="card-text">{{ product.des }}</p>
-									<div class="row align-items-center">
-										<div class="col">
-											<button class="btn btn-primary me-3">Ajouter au panier</button>
-											<a href="#"><img src="{{ asset('bootstrap/icon/search.svg') }}"></a>
+					<div class="mb-3">
+						<card class="card">
+							<div class="row g-0">
+								<div class="col-md-4">
+									{% if product.images %}
+										<img style="height:100%!important;" class="img-fluid rounded-start" src="{{ asset('uploads/' ~ product.images[0]) }}">
+									{% else %}
+										<img class="img-fluid rounded-start" src="{{ asset('image/imgnofound.png') }}">
+									{% endif %}
+								</div>
+								<div class="col-md-8">
+									<div class="card-body">
+										<h5 class="card-title">{{ product.name }}</h5>
+										<p class="text-end">50 avis</p>
+										<p class="text-end">Recyclable à
+											{{ product.recyclingIndex }}%
+										</p>
+										<p>
+											<price class="h5">{{ product.price }}</price>€
+										</p>
+										<p class="card-text">{{ product.des }}</p>
+										<div class="row align-items-center">
+											<div class="col">
+												{% if product.state %}
+													<button class="btn btn-primary me-3">Ajouter au panier</button>
+												{% else %}
+													<button class="btn btn-danger me-3" disabled>En rupture de stock</button>
+												{% endif %}
+												<a href="#"><img src="{{ asset('bootstrap/icon/search.svg') }}"></a>
+											</div>
+											<div class="col">
+												<h6 class="text-end">Catégorie :
+													<cat style="display:inline;">{{ product.categoryProduct.name }}</cat>
+												</h6>
+											</div>
 										</div>
-										<div class="col">
-											<h6 class="text-end">Catégorie :
-												{{ product.categoryProduct.name }}</h6>
-										</div>
-									</div>
 
-								</p>
+									</p>
+								</div>
 							</div>
-						</div>
+						</card>
 					</div>
 				</div>
 			{% endfor %}
 		</div>
 	</div>
+	<script src="{{ asset('js/produit/produit.js') }}"></script>
 </div>{% endblock %}
