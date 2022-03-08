@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Entity\Order;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 /**
@@ -18,7 +21,7 @@ class CartController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(SessionInterface $session, ProductRepository $productRepository)
+    public function index(SessionInterface $session, ProductRepository $productRepository, Request $request, EntityManagerInterface $entityManager)
     {
         $panier = $session->get("panier", []);
         //on fabrique les données
@@ -27,14 +30,45 @@ class CartController extends AbstractController
 
         foreach ($panier as $id => $quantite) {
             $product = $productRepository->find($id);
-            $dataPanier[] = [
+            $tempObj = [
                 "produit" => $product,
                 "quantite" => $quantite
             ];
+            array_push($dataPanier,(object)$tempObj);
             $total += $product->getPrice() * $quantite;
         }
+        
 
+        
+        if ($request->isMethod('POST')) {
+            
+            
+            $token = $request->request->get('stripeToken');
+            \Stripe\Stripe::setApiKey("sk_test_51KabbgBf0vZfGc8SGE7gCsIGarhN0cXyCydjTCCZHNO3YbyFyGg9We8v6FRkaPpUUzT5brfSzYdio5SNQSEJhjn400qXPy0NXW");
+            \Stripe\Charge::create(array(
+              "amount" => $total,
+              "currency" => "eur",
+              "source" => $token,
+              "description" => "First test charge!",
+              
+            ));
+            $session->remove("panier");
+            $order = new Order();
+            foreach ($dataPanier as $panier) {
+                $order->addProduct($panier->produit);
+                $order->setQuantity($order->getQuantity()+$panier->quantite);
+            }
+            $order->setTotal($total);
+            $entityManager->persist($order);
+            $entityManager->flush();
+            $this->addFlash('success', 'Commande validé');
+            return $this->render('payment/success.html.twig', compact("dataPanier", "total"));
+            
+            
+        }
         return $this->render('cart/index.html.twig', compact("dataPanier", "total"));
+            
+        
     }
 
     /**
@@ -106,5 +140,32 @@ class CartController extends AbstractController
         $session->remove("panier");
 
         return $this->redirectToRoute("cart_index");
+    }
+
+    /**
+     * @Route("/checkout", name="checkout")
+     */
+    public function checkout(Request $request, SessionInterface $session): Response
+    {
+        
+        if ($request->isMethod('POST')) {
+            
+            $token = $request->request->get('stripeToken');
+            \Stripe\Stripe::setApiKey("sk_test_51KabbgBf0vZfGc8SGE7gCsIGarhN0cXyCydjTCCZHNO3YbyFyGg9We8v6FRkaPpUUzT5brfSzYdio5SNQSEJhjn400qXPy0NXW");
+            \Stripe\Charge::create(array(
+              "amount" => 110,
+              "currency" => "eur",
+              "source" => $token,
+              "description" => "Eco Service"
+            ));
+            $this->addFlash('success', 'Order Complete! Yay!');
+            $session->remove("panier");
+            return $this->redirectToRoute('home');
+
+        }
+        return $this->render('cart/index.html.twig', array(
+            
+        ));
+
     }
 }
