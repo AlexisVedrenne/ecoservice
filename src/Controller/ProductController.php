@@ -4,12 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Repository\CategoryProductRepository;
 use App\Repository\ProductRepository;
+use App\Services\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/product")
@@ -17,29 +20,38 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/", name="product_index", methods={"GET"})
+     * @Route("/", name="product_index")
      */
-    public function index(ProductRepository $productRepository): Response
+    public function index(ProductRepository $productRepository, CategoryProductRepository $repoCat): Response
     {
         return $this->render('product/index.html.twig', [
-            'products' => $productRepository->findAll(),
+            'products' => $productRepository->findAll(), 'cats' => $repoCat->findAll()
         ]);
     }
 
     /**
      * @Route("/new", name="product_new", methods={"GET", "POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $images = $form->get('image')->getData();
+            if ($images) {
+                foreach ($images as $img) {
+                    $tempFileName = $fileUploader->upload($img);
+                    $product->addImages($tempFileName);
+                }
+            }
             $entityManager->persist($product);
             $entityManager->flush();
 
-            return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_gestion_produit', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('product/new.html.twig', [
@@ -49,7 +61,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="product_show", methods={"GET"})
+     * @Route("/show/{id}", name="product_show", methods={"GET"})
      */
     public function show(Product $product): Response
     {
@@ -59,7 +71,8 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="product_edit", methods={"GET", "POST"})
+     * @Route("/edit/{id}", name="product_edit", methods={"GET", "POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
@@ -79,15 +92,16 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="product_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="product_delete")
+     * @IsGranted("ROLE_ADMIN")
      */
-    public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
+    public function delete(Product $product, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($product);
-            $entityManager->flush();
+        foreach ($product->getImages() as $img) {
+            unlink('assets/uploads/' . $img);
         }
-
-        return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
+        $entityManager->remove($product);
+        $entityManager->flush();
+        return $this->redirectToRoute('admin_gestion_produit', [], Response::HTTP_SEE_OTHER);
     }
 }

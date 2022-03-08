@@ -17,17 +17,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ServiceController extends AbstractController
 {
     /**
-     * @Route("/", name="service_index", methods={"GET"})
+     * @Route("/", name="service_index")
      */
     public function index(ServiceRepository $serviceRepository): Response
     {
-        return $this->render('service/index.html.twig', [
+        return $this->render('service/servicescatalogue.html.twig', [
             'services' => $serviceRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="service_new", methods={"GET", "POST"})
+     * @Route("/new", name="service_new")
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -49,17 +49,17 @@ class ServiceController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="service_show", methods={"GET"})
+     * @Route("/show/{id}", name="service_show")
      */
     public function show(Service $service): Response
     {
-        return $this->render('service/show.html.twig', [
+        return $this->render('service/detailservices.html.twig', [
             'service' => $service,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="service_edit", methods={"GET", "POST"})
+     * @Route("/edit/{id}", name="service_edit")
      */
     public function edit(Request $request, Service $service, EntityManagerInterface $entityManager): Response
     {
@@ -79,11 +79,11 @@ class ServiceController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="service_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="service_delete")
      */
     public function delete(Request $request, Service $service, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$service->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $service->getId(), $request->request->get('_token'))) {
             $entityManager->remove($service);
             $entityManager->flush();
         }

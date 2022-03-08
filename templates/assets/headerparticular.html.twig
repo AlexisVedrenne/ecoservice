@@ -1,6 +1,50 @@
-<header>
-  <div class="container-fluid">
-
+<nav class="navbar nave navbar-expand-lg navbar-dark bg-primary">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="#">EcoServices</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarText">
+			<div class="container">
+				<div class="d-flex justify-content-center">
+					<div class="input-group mb-3">
+						<input type="text" class="form-control d-flex align-items-center" placeholder="Rechercher un produit..." aria-label="Rechercher un produit..." aria-describedby="button-addon2">
+						<button class="btn btn-secondary d-flex align-items-center" type="button" id="button-addon2"><img src="{{ asset('bootstrap/icon/search.svg') }}"></button>
+					</div>
+					<a class="ms-3" type="button" data-bs-toggle="modal" href="#connexion"><img class="acount-logo" src="{{ asset('bootstrap/icon/person-circle.svg') }}"></a>
+					<a class="ms-3" type="button" href="#">
+						<div class="cady">
+							<img class="acount-logo" src="{{ asset('bootstrap/icon/basket3-fill.svg') }}">
+							<span class="mt-4 ms-2 position-absolute top-0 translate-middle badge rounded-pill bg-danger">
+								5
+							</span>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
+<!-- Modal -->
+<div class="modal fade" id="connexion" tabindex="-1" aria-labelledby="connexionLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="connexionLabel">Bonjour ! Connexion !</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<section class="container">
+					{% if not app.user %}
+						{{ render(controller('App\\Controller\\SecurityController::login')) }}
+					{% endif %}
+				</section>
+			</div>
+			<div class="text-center">
+				<p class="">Vous n'avez pas de compte ?
+					<a href="{{ path('app_register') }}">Cliquer ici</a>
+				</p>
+			</div>
+		</div>
+	</div>
 </div>
-</header>
-<script src="{{ asset('bulma/js/navbar.js') }}"></script>

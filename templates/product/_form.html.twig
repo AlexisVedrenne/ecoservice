@@ -1,4 +1,55 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form,{'action': path('product_new'),'attr':{'id':'form_product'}}) }}
+<div class="mb-3">
+	<div class="col">
+		<div class="form-floating mb-3">
+			{{ form_widget(form.reference)}}
+			<label for="floatingInput">Référence</label>
+		</div>
+	</div>
+	<div class="mb-3">
+		<label for="formFileMultiple" class="form-label">Choisir une ou plusieur images</label>
+		{{ form_widget(form.image)}}
+	</div>
+	<div class="col">
+		<div class="form-floating mb-3">
+			{{ form_widget(form.name)}}
+			<label for="floatingInput">Nom</label>
+		</div>
+	</div>
+	<div class="col">
+		<div class="form-floating mb-3">
+			{{ form_widget(form.categoryProduct)}}
+			<label for="floatingInput">Catégorie</label>
+		</div>
+	</div>
+	<div class="col">
+		<div class="form-floating mb-3">
+			{{ form_widget(form.des)}}
+			<label for="floatingInput">Déscription</label>
+		</div>
+
+	</div>
+	<div class="col">
+		<div class="form-floating mb-3">
+			{{ form_widget(form.price)}}
+			<label for="floatingInput">Prix</label>
+		</div>
+	</div>
+	<div class="col">
+		<div class="form-floating mb-3">
+			{{ form_widget(form.quantity)}}
+			<label for="floatingInput">Quantité disponible</label>
+		</div>
+	</div>
+	<div class="col">
+		<div class="form-floating mb-3">
+			{{ form_widget(form.recyclingIndex)}}
+			<label for="floatingInput">Indice de recyclabilité</label>
+		</div>
+	</div>
+	<div class="col mb-3">
+		{{ form_widget(form.state)}}
+		<label>Disponible en stock</label>
+	</div>
+</div>
 {{ form_end(form) }}

@@ -19,10 +19,6 @@ class Product
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $image;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -75,6 +71,16 @@ class Product
      */
     private $orders;
 
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $images = [];
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -87,18 +93,6 @@ class Product
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
     }
 
     public function getDes(): ?string
@@ -269,15 +263,27 @@ class Product
         return $this;
     }
 
-    
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
 
-    
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
-    
+        return $this;
+    }
 
-    
+    public function getImages(): ?array
+    {
+        return $this->images;
+    }
 
-    
+    public function addImages(string $image): self
+    {
+        array_push($this->images, $image);
 
-    
+        return $this;
+    }
 }
