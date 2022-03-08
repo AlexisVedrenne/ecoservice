@@ -71,16 +71,18 @@ class Product
     private $payments;
 
     /**
-     * @ORM\ManyToMany(targetEntity=OrderProduct::class, mappedBy="product")
+     * @ORM\ManyToMany(targetEntity=Order::class, mappedBy="product")
      */
-    private $orderProducts;
+    private $orders;
 
     public function __construct()
     {
-        $this->commentaries = new ArrayCollection();
-        $this->payments = new ArrayCollection();
-        $this->orderProducts = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
+
+   
+
+    
 
     public function getId(): ?int
     {
@@ -241,29 +243,41 @@ class Product
     }
 
     /**
-     * @return Collection|OrderProduct[]
+     * @return Collection|Order[]
      */
-    public function getOrderProducts(): Collection
+    public function getOrders(): Collection
     {
-        return $this->orderProducts;
+        return $this->orders;
     }
 
-    public function addOrderProduct(OrderProduct $orderProduct): self
+    public function addOrder(Order $order): self
     {
-        if (!$this->orderProducts->contains($orderProduct)) {
-            $this->orderProducts[] = $orderProduct;
-            $orderProduct->addProduct($this);
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->addProduct($this);
         }
 
         return $this;
     }
 
-    public function removeOrderProduct(OrderProduct $orderProduct): self
+    public function removeOrder(Order $order): self
     {
-        if ($this->orderProducts->removeElement($orderProduct)) {
-            $orderProduct->removeProduct($this);
+        if ($this->orders->removeElement($order)) {
+            $order->removeProduct($this);
         }
 
         return $this;
     }
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 }
