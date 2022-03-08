@@ -6,24 +6,26 @@
 {% block body %}
 	<div class="container mt-3">
 		<div class="row">
-			<div class="col-5">
-				<div class="card text-center">
-					<div class="card-header bg-primary" style="color:white;">
-						<span id="filtreCat">Toute Catégorie</span>
-					</div>
-					<div>
-						<ul class="list-group">
-							{% for cat in cats %}
-								<a href="#" onclick="addCat('{{ cat.name }}')" class="list-group-item list-group-item-action">{{ cat.name }}</a>
-							{% endfor %}
-						</ul>
-					</div>
-					<hr>
-					<div class="card-body">
-						<h5>Prix</h5>
-						<p id="price">Aucun filtre</p>
-						<input id="filterPrice" type="range" class="form-range" min="0" max="1000">
-						<button id="btnResetFiltre" class="btn btn-danger">Rénitialiser les filtres</button>
+			<div class="col-5 d-flex justify-content-center">
+				<div class="col-3 fixe">
+					<div class="card text-center">
+						<div class="card-header bg-primary" style="color:white;">
+							<span id="filtreCat">Toute Catégorie</span>
+						</div>
+						<div>
+							<ul class="list-group">
+								{% for cat in cats %}
+									<a href="#" onclick="addCat('{{ cat.name }}')" class="list-group-item list-group-item-action">{{ cat.name }}</a>
+								{% endfor %}
+							</ul>
+						</div>
+						<hr>
+						<div class="card-body">
+							<h5>Prix</h5>
+							<p id="price">Aucun filtre</p>
+							<input id="filterPrice" type="range" class="form-range" min="0" max="1000">
+							<button id="btnResetFiltre" class="btn btn-danger">Rénitialiser les filtres</button>
+						</div>
 					</div>
 				</div>
 			</div>

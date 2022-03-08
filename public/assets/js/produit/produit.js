@@ -3,9 +3,14 @@ var catFil = false
 catFiltre= document.getElementById('filtreCat')
 
 document.getElementById('filterPrice').addEventListener('change',function(){
+
+    addPrice(this.value)
+})
+
+function addPrice(value){
     var cards = document.querySelectorAll('card')
     var price = document.getElementById('price')
-    price.innerText='Entre 0 et '+this.value+'€'
+    price.innerText='Entre 0 et '+value+'€'
     if(price.innerText == 'Aucun filtre'){
         priceFilter = false
         cards.forEach(val => {
@@ -17,7 +22,7 @@ document.getElementById('filterPrice').addEventListener('change',function(){
         cards.forEach(card => {
             let p = parseInt(card.querySelector('price').innerText)
             let c = card.querySelector('cat').innerText
-            if(catFiltre.innerText==c&&(p >= 0 && p <= this.value)){
+            if(catFiltre.innerText==c&&(p >= 0 && p <= value)){
                 card.removeAttribute('hidden')
             }
             else{
@@ -30,7 +35,7 @@ document.getElementById('filterPrice').addEventListener('change',function(){
         priceFilter = true
         cards.forEach(card => {
             let p = parseInt(card.querySelector('price').innerText)
-            if(p >= 0 && p <= this.value){
+            if(p >= 0 && p <= value){
                 card.removeAttribute('hidden')
             }
             else{
@@ -39,10 +44,7 @@ document.getElementById('filterPrice').addEventListener('change',function(){
             
         })
     }
-
-})
-
-
+}
 
 function addCat(value){
     catFiltre.innerText=value
@@ -82,5 +84,7 @@ function addCat(value){
 }
 
 document.getElementById('btnResetFiltre').addEventListener('click',function(){
-
+    document.getElementById('price').innerText='Aucun filtre'
+    addCat('Toute Catégorie')
+    document.getElementById('filterPrice').value=500
 })
