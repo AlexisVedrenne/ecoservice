@@ -20,16 +20,33 @@
 		{% else %}
 			{{ include('assets/headerparticular.html.twig') }}
 		{% endif %}
-		<nav class="nav nav-pills flex-column flex-md-row bg-dark">
-			<a class="flex-sm-fill text-sm-center nav-link link-light" href="#">FAQ</a>
-			<a class="flex-sm-fill text-sm-center nav-link link-light" href="#">Contact</a>
+		<nav class="navbar navbar-dark bg-dark">
+			<div class="container-fluid row justify-content-md" style="color: white;">
+
+				<div class="col-3">
+					<button aria-controls="navbarToggleExternalContent" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+				</div>
+				<div class="col-9 d-flex justify-content-md-around">
+					<a class="flex-sm-fill text-sm-center nav-link link-light" href="#">FAQ</a>
+					<a class="flex-sm-fill text-sm-center nav-link link-light" href="#">Contact</a>
+				</div>
+			</div>
+
 		</nav>
+		<div class="collapse" id="navbarToggleExternalContent">
+			<div class="bg-dark p-4">
+				<h5 class="text-white h4">
+					Catégories</h5>
+				<a class="flex-sm-fill text-sm-center nav-link link-light" href="#">Catégorie 1</a>
+				<a class="flex-sm-fill text-sm-center nav-link link-light" href="#">Catégorie 2
+				</a>
+			</div>
+		</div>
 	</header>
 	<body>
 		{% block body %}{% endblock %}
 	</body>
 	{{ include('assets/footer.html.twig') }}
-	{% block javascripts %}
-		<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-	{% endblock %}
-</html></html>
+</html>
