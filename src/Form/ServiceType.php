@@ -2,6 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Service;
+use App\Entity\CategoryService;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,23 +14,23 @@ class ServiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add("type d'equipement", EntityType::class, [
-                'class' => CategoryProduct::class,
-                'choice_label' => 'name',])
-
-            ->add('Equipement', EntityType::class,[
-                'class' => Product::class
+            ->add('image')
+            ->add('des')
+            ->add('reference')
+            ->add('price')
+            ->add('state')
+            ->add('categoryService', EntityType::class, [
+                'class' => CategoryService::class,
+                'choice_label' => 'name',
             ])
-            ->add('Quantité')
-            
-            ->add('Poids')
+            //->add('quotes')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => Service::class,
         ]);
     }
 }

@@ -1,0 +1,198 @@
+{% include "baseadmin.html.twig" %}
+<div style="display: flex; ">
+	<div class="d-flex flex-column vh-100 flex-shrink-0 p-3 text-white classPerso" style="width: 250px;">
+		<ul class="nav nav-pills flex-column mb-auto">
+			<li class="nav-item d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"></li>
+			<li>
+				<a href="{{ path('admin_stats_customer') }}" class="nav-link text-white">
+					<i class="fa fa-dashboard"></i>
+					<span class="ms-2">Statistiques clients</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('admin_stats_services') }}" class="nav-link text-white">
+					<i class="fa fa-first-order"></i>
+					<span class="ms-2">Statistiques services</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('admin_gestion_produit') }}" class="nav-link active text-white">
+					<i class="fa fa-cog"></i>
+					<span class="ms-2">Gestion des produits</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('admin_gestion_services') }}" class="nav-link text-white">
+					<i class="fa fa-cog"></i>
+					<span class="ms-2">Gestion des services</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('admin_gestion_devis') }}" class="nav-link text-white">
+					<i class="fa fa-bookmark"></i>
+					<span class="ms-2">Gestion des devis</span>
+				</a>
+			</li>
+			<hr>
+			<li>
+				<a href="/logout" class="nav-link text-white">
+					<i class="fa fa-bookmark"></i>
+					<span class="ms-2">Déconnexion</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div style="display: flex; justify-content:center; width: 100%">
+		<div class="container">
+			<div style="display: flex; justify-content: space-evenly; align-items: center;">
+				{% set actif = 0 %}
+				{% set inactif = 0 %}
+				{% for product in products %}
+					{% if product.state %}
+						{% set actif = actif + 1 %}
+					{% else %}
+						{% set inactif = inactif + 1 %}
+					{% endif %}
+				{% endfor %}
+				<div class="blockmanagement">
+					<div>Produit(s) actif(s)</div>
+					{% if actif >= 1  %}
+						<h1 style="color:green;">{{ actif }}</h1>
+					{% else %}
+						<h1 style="color:red;">{{ actif }}</h1>
+					{% endif %}
+				</div>
+				<div class="blockmanagement">
+					<div>Produit(s) en rupture</div>
+					{% if inactif <= 0  %}
+						<h1 style="color:green;">{{ inactif }}</h1>
+					{% else %}
+						<h1 style="color:red;">{{ inactif }}</h1>
+					{% endif %}
+				</div>
+			</div>
+			<div class="d-flex justify-content-center mb-3 mt-2">
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProd">
+					Ajouter un nouveau produit
+				</button>
+			</div>
+			<div class="input-group mb-2 d-flex justify-content-start" style="width: 50%">
+				<input type="text" class="form-control" placeholder="Recherche..." aria-label="Recherche..." aria-describedby="button-addon2">
+				<button class="btn btn-secondary d-flex align-items-center" type="button" id="button-addon2"><img src="{{ asset('bootstrap/icon/search.svg') }}"></button>
+			</div>
+			<!-- Button trigger modal -->
+			<table class="table text-center">
+				<thead>
+					<tr>
+						<th scope="col">Numéro</th>
+						<th scpre="col">Images</th>
+						<th scope="col">Nom</th>
+						<th scope="col">référence</th>
+						<th scope="col">Catégorie</th>
+						<th scope="col">Prix</th>
+						<th scope="col">Quantité</th>
+						<th scope="col">Etat</th>
+						<th scope="col">Indice de recyclage</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for product in products %}
+						<tr>
+							<td>{{ product.id }}</td>
+							<td>
+								<a role="button" data-bs-toggle="modal" href="#imgMd-{{ product.id }}" class="">Voir les images</a>
+							</td>
+							<td>{{ product.name }}</td>
+							<td>{{ product.reference }}</td>
+							<td>{{ product.categoryProduct.name }}</td>
+							<td>{{ product.price }}€</td>
+							<td>{{ product.quantity}}</td>
+							<td>
+								{% if product.state %}
+									<p style="color:green;">Actif</p>
+								{% else %}
+									<p style="color:red;">Inactif</p>
+								{% endif %}
+							</td>
+							<td>{{ product.recyclingIndex }}%</td>
+							<td>
+								<div class="modal fade" id="delProd-{{ product.id }}" tabindex="-1" aria-labelledby="delProd-{{ product.id }}Label" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="delProd-{{ product.id }}Label">Attention !</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												Etes vous sur de vouloir supprimer le produit :
+												{{ product.name }}
+												?
+												<p class="text-muted mt-3">Référence du produit :
+													{{ product.reference }}</p>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+												<a href="{{ path('product_delete',{'id': product.id }) }}" type="button" class="btn btn-danger">Supprimer</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<a href="#"><img src="{{ asset('bootstrap/icon/pencil-square.svg') }}"></a>
+								<a role="button" data-bs-toggle="modal" href="#delProd-{{ product.id }}"><img src="{{ asset('bootstrap/icon/trash-fill.svg') }}"></a>
+							</td>
+							<div class="modal fade" id="imgMd-{{ product.id }}" tabindex="-1" aria-labelledby="imgMd-{{ product.id }}Label" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="imgMd-{{ product.id }}Label">{{ product.name }}</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<div class="d-flex justify-content-center">
+												{% for img in product.images %}
+													<img class="bg-secondary" style="heigth:20%;width:20%;" src="{{ asset('uploads/' ~ img) }}">
+												{% else %}
+													<p class="text-muted">Aucune image...</p>
+												{% endfor %}
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</tr>
+					{% else %}
+						<tr>
+							<td>
+								<p class="text-muted">Aucun produit dans la base...</p>
+							</td>
+						</tr>
+					{% endfor %}
+
+				</tbody>
+			</tbody>
+		</table>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="addProd" tabindex="-1" aria-labelledby="addProdLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addProdLabel">Ajout d'un produit</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					{{ render(controller('App\\Controller\\ProductController::new',{'fileUploader':file})) }}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+					<button id="btn_product" type="button" class="btn btn-primary">Ajouter le produit</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="{{ asset('js/admin/manageproduct.js') }}"></script>
+</div>

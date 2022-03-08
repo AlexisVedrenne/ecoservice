@@ -1,0 +1,119 @@
+{% extends "base.html.twig" %}
+{% block body %}
+	<section class="h-100 h-custom" style="background-color:white;">
+		<div class="container py-5 h-100">
+			<div class="row d-flex justify-content-center align-items-center h-100">
+				<div class="col-12">
+					<div class="border border-left-0 border-dark" style="border-radius: 15px;">
+						<div class="card-body p-0">
+							<div class="row g-0">
+								<div class="col-lg-8">
+									<div class="p-5">
+										<div class="d-flex justify-content-between align-items-center mb-5">
+											<h1 class="fw-bold mb-0 text-black">Récapitulatif du panier</h1>
+											<a href="{{ path('cart_delete_all') }}" role="button" class="btn btn-outline-danger">Vider le panier</a>
+											<h6 class="mb-0 text-muted">
+												<strong>{{ dataPanier|length }}</strong>
+												articles</h6>
+										</div>
+
+										{% for article in dataPanier %}
+											<hr class="my-4">
+											<div class="row mb-4 d-flex justify-content-between align-items-center">
+												<div class="col-md-2 col-lg-2 col-xl-2 d-flex justify-content-center">
+													{% if article.produit.images %}
+														<img class="img-fluid rounded-3" src="{{ asset('uploads/' ~ article.produit.images[0]) }}">
+													{% else %}
+														<img class="img-fluid rounded-3" src="{{ asset('image/imgnofound.png') }}">
+													{% endif %}
+												</div>
+												<div class="col-md-3 col-lg-3 col-xl-3">
+													<h6 class="text-muted">{{ article.produit.name }}</h6>
+													<h6 class="text-black mb-0">{{ article.produit.des }}</h6>
+												</div>
+												<div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+													<a href="{{ path('cart_remove',{'id':article.produit.id}) }}" class="btn btn-link px-2">
+														<img src="{{ asset('bootstrap/icon/dash.svg') }}"></img>
+												</a>
+
+												<input id="form1" min="0" name="quantity" value="{{ article.quantite }}" type="number" class="form-control form-control-sm" readonly/>
+
+												<a href="{{ path('cart_add',{'id':article.produit.id}) }}" class="btn btn-link px-2">
+													<img src="{{ asset('bootstrap/icon/plus.svg') }}"></img>
+											</a>
+										</div>
+										<div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+											<h6 class="mb-0">€
+												{{ article.produit.price * article.quantite }}</h6>
+										</div>
+										<div class="col-md-1 col-lg-1 col-xl-1 text-end">
+											<a href="{{ path('cart_delete',{'id':article.produit.id}) }}" role="button" class="btn btn-close" aria-label="Close"></a>
+										</div>
+									</div>
+
+									<hr class="my-4">
+								{% else %}
+									<p class="text-muted">Votre panier est vide...</p>
+								{% endfor %}
+								<div class="pt-5">
+									<h6 class="mb-0">
+										<a href="#!" class="text-body">
+											<i class="fas fa-long-arrow-alt-left me-2"></i>
+											<a></a>
+										</h6>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4 bg-grey" style="border-radius: 15px;">
+								<div class="p-5">
+									<h3 class="fw-bold mb-5 mt-2 pt-1">Résumé de la commande</h3>
+									<hr class="my-4">
+
+									<div class="d-flex justify-content-between mb-4">
+										<h5 class="text-uppercase">{{ dataPanier|length }}
+											articles</h5>
+										<h5>€
+											{{ total }}</h5>
+									</div>
+
+									<h5 class="text-uppercase mb-3">Mode de livraison</h5>
+
+									<div class="mb-4 pb-2">
+										<select class="select">
+											<option value="1">Livraison 10 minutes- €5.00</option>
+											<option value="2">Livraison 1 jour - €3.00</option>
+											<option value="3">Livraison 2 jours - €2.00</option>
+											<option selected value="4">Livraison 3 jours - Gratuit !</option>
+										</select>
+									</div>
+
+									<h5 class="text-uppercase mb-3">Avez-vous un code promotionnel ?</h5>
+
+									<div class="mb-5">
+										<div class="form-outline">
+											<input type="text" id="form3Examplea2" class="form-control form-control-lg"/>
+											<label class="form-label" for="form3Examplea2">Entrez votre code</label>
+										</div>
+									</div>
+
+									<hr class="my-4">
+
+									<div class="d-flex justify-content-between mb-5">
+										<h5 class="text-uppercase">Prix total</h5>
+										<h5>€
+											{{ total }}</h5>
+									</div>
+
+									<form action="" method="POST">
+										<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-label="Passer au paiement" data-currency="eur" data-key="pk_test_51KabbgBf0vZfGc8ScJVN6IvZKFqqjitig8gziF6j3DPveOEI5tKbeI1QyTxqdWZ4s66NLeVNrWWbyVJL2zFUm2fR007NfrHBLf" data-amount="{{ total * 100 }}" data-name="Eco Service" data-description="Payer votre commande" redirect.failure-reason="product/index.html.twig" data-zip-code="true" data-locale="auto"></script>
+									</form>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>{% endblock %}

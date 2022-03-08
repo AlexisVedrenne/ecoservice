@@ -1,49 +1,81 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Product index{% endblock %}
+{% block title %}Product index
+{% endblock %}
 
 {% block body %}
-    <h1>Product index</h1>
+	<div class="container mt-3">
+		<div class="row">
+			<div class="col-5 d-flex justify-content-center">
+				<div class="col-3 fixe">
+					<div class="card text-center">
+						<div class="card-header bg-primary" style="color:white;">
+							<span id="filtreCat">Toute Catégorie</span>
+						</div>
+						<div>
+							<ul class="list-group">
+								{% for cat in cats %}
+									<a href="#" onclick="addCat('{{ cat.name }}')" class="list-group-item list-group-item-action">{{ cat.name }}</a>
+								{% endfor %}
+							</ul>
+						</div>
+						<hr>
+						<div class="card-body">
+							<h5>Prix</h5>
+							<p id="price">Aucun filtre</p>
+							<input id="filterPrice" type="range" class="form-range" min="0" max="1000">
+							<button id="btnResetFiltre" class="btn btn-danger">Rénitialiser les filtres</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md">
+				{% for product in products %}
+					<div class="mb-3">
+						<card class="card">
+							<div class="row g-0">
+								<div class="col-md-4">
+									{% if product.images %}
+										<img style="height:100%!important;" class="img-fluid rounded-start" src="{{ asset('uploads/' ~ product.images[0]) }}">
+									{% else %}
+										<img class="img-fluid rounded-start" src="{{ asset('image/imgnofound.png') }}">
+									{% endif %}
+								</div>
+								<div class="col-md-8">
+									<div class="card-body">
+										<h5 class="card-title">{{ product.name }}</h5>
+										<p class="text-end">50 avis</p>
+										<p class="text-end">Recyclable à
+											{{ product.recyclingIndex }}%
+										</p>
+										<p>
+											<price class="h5">{{ product.price }}</price>€
+										</p>
+										<p class="card-text">{{ product.des }}</p>
+										<div class="row align-items-center">
+											<div class="col">
+												{% if product.state %}
+													<a href="{{ path('cart_add_cata',{'id':product.id}) }}" class="btn btn-primary me-3">Ajouter au panier</a>
+												{% else %}
+													<button class="btn btn-danger me-3" disabled>En rupture de stock</button>
+												{% endif %}
+												<a href="#"><img src="{{ asset('bootstrap/icon/search.svg') }}"></a>
+											</div>
+											<div class="col">
+												<h6 class="text-end">Catégorie :
+													<cat style="display:inline;">{{ product.categoryProduct.name }}</cat>
+												</h6>
+											</div>
+										</div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Image</th>
-                <th>Des</th>
-                <th>Reference</th>
-                <th>Catégorie</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>State</th>
-                <th>RecyclingIndex</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for product in products %}
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.image }}</td>
-                <td>{{ product.des }}</td>
-                <td>{{ product.categoryProduct.name }}</td>
-                <td>{{ product.reference }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.quantity }}</td>
-                <td>{{ product.state ? 'Yes' : 'No' }}</td>
-                <td>{{ product.recyclingIndex }}</td>
-                <td>
-                    <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('product_new') }}">Create new</a>
-{% endblock %}
+									</p>
+								</div>
+							</div>
+						</card>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	<script src="{{ asset('js/produit/produit.js') }}"></script>
+</div>{% endblock %}

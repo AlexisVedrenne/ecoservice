@@ -19,10 +19,6 @@ class Product
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $image;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -65,38 +61,35 @@ class Product
      */
     private $commentaries;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Payment::class, mappedBy="product")
-     */
-    private $payments;
+    
 
     /**
-     * @ORM\ManyToMany(targetEntity=OrderProduct::class, mappedBy="product")
+     * @ORM\ManyToMany(targetEntity=Order::class, mappedBy="product")
      */
-    private $orderProducts;
+    private $orders;
+
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $images = [];
 
     public function __construct()
     {
-        $this->commentaries = new ArrayCollection();
-        $this->payments = new ArrayCollection();
-        $this->orderProducts = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
+
+   
+
+    
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
     }
 
     public function getDes(): ?string
@@ -213,56 +206,59 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection|Payment[]
-     */
-    public function getPayments(): Collection
-    {
-        return $this->payments;
-    }
+    
 
-    public function addPayment(Payment $payment): self
-    {
-        if (!$this->payments->contains($payment)) {
-            $this->payments[] = $payment;
-            $payment->addProduct($this);
-        }
+    
 
-        return $this;
-    }
-
-    public function removePayment(Payment $payment): self
-    {
-        if ($this->payments->removeElement($payment)) {
-            $payment->removeProduct($this);
-        }
-
-        return $this;
-    }
+    
 
     /**
-     * @return Collection|OrderProduct[]
+     * @return Collection|Order[]
      */
-    public function getOrderProducts(): Collection
+    public function getOrders(): Collection
     {
-        return $this->orderProducts;
+        return $this->orders;
     }
 
-    public function addOrderProduct(OrderProduct $orderProduct): self
+    public function addOrder(Order $order): self
     {
-        if (!$this->orderProducts->contains($orderProduct)) {
-            $this->orderProducts[] = $orderProduct;
-            $orderProduct->addProduct($this);
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->addProduct($this);
         }
 
         return $this;
     }
 
-    public function removeOrderProduct(OrderProduct $orderProduct): self
+    public function removeOrder(Order $order): self
     {
-        if ($this->orderProducts->removeElement($orderProduct)) {
-            $orderProduct->removeProduct($this);
+        if ($this->orders->removeElement($order)) {
+            $order->removeProduct($this);
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getImages(): ?array
+    {
+        return $this->images;
+    }
+
+    public function addImages(string $image): self
+    {
+        array_push($this->images, $image);
 
         return $this;
     }
