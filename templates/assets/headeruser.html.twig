@@ -1,6 +1,10 @@
 <nav class="navbar nave navbar-expand-lg navbar-dark bg-primary">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="#">EcoServices</a>
+		<nav class="navbar navbar-light bg-light header">
+		<a class="navbar-brand" href="#">
+			<img class="logo" src="{{ asset('image/logoEcoService.svg') }}" width="100" height="80" alt="">
+		</a>
+	</nav>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -12,14 +16,14 @@
 						<button class="btn btn-secondary d-flex align-items-center" type="button" id="button-addon2"><img src="{{ asset('bootstrap/icon/search.svg') }}"></button>
 					</div>
 	     <ul class="nav navbar-nav ms-auto">
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><img class="acount-logo" src="{{ asset('bootstrap/icon/person-circle.svg') }}"</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><img class="acount-logo" src="{{ asset('bootstrap/icon/person-circle.svg') }}"></a>
                         <div class="dropdown-menu dropdown-menu-end">
                             <a href="#" class="dropdown-item">Mon compte</a>
                             <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item">Déconnexion</a>
                         </div>
-                    </li>
+                    <div>
                 </ul>
 					<a class="ms-1" type="button" href="#">
 						<div class="cady">
