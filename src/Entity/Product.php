@@ -61,7 +61,7 @@ class Product
      */
     private $commentaries;
 
-    
+
 
     /**
      * @ORM\ManyToMany(targetEntity=Order::class, mappedBy="product")
@@ -83,9 +83,9 @@ class Product
         $this->orders = new ArrayCollection();
     }
 
-   
 
-    
+
+
 
     public function getId(): ?int
     {
@@ -206,11 +206,11 @@ class Product
         return $this;
     }
 
-    
 
-    
 
-    
+
+
+
 
     /**
      * @return Collection|Order[]
@@ -260,6 +260,12 @@ class Product
     {
         array_push($this->images, $image);
 
+        return $this;
+    }
+
+    public function resetImg(array $images): self
+    {
+        $this->images = $images;
         return $this;
     }
 }
