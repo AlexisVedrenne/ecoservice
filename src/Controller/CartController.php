@@ -34,41 +34,37 @@ class CartController extends AbstractController
                 "produit" => $product,
                 "quantite" => $quantite
             ];
-            array_push($dataPanier,(object)$tempObj);
+            array_push($dataPanier, (object)$tempObj);
             $total += $product->getPrice() * $quantite;
         }
-        
 
-        
+
+
         if ($request->isMethod('POST')) {
-            
-            
+
+
             $token = $request->request->get('stripeToken');
             \Stripe\Stripe::setApiKey("sk_test_51KabbgBf0vZfGc8SGE7gCsIGarhN0cXyCydjTCCZHNO3YbyFyGg9We8v6FRkaPpUUzT5brfSzYdio5SNQSEJhjn400qXPy0NXW");
             \Stripe\Charge::create(array(
-              "amount" => $total,
-              "currency" => "eur",
-              "source" => $token,
-              "description" => "First test charge!",
-              
+                "amount" => $total,
+                "currency" => "eur",
+                "source" => $token,
+                "description" => "First test charge!",
+
             ));
             $session->remove("panier");
             $order = new Order();
             foreach ($dataPanier as $panier) {
                 $order->addProduct($panier->produit);
-                $order->setQuantity($order->getQuantity()+$panier->quantite);
+                $order->setQuantity($order->getQuantity() + $panier->quantite);
             }
             $order->setTotal($total);
             $entityManager->persist($order);
             $entityManager->flush();
             $this->addFlash('success', 'Commande validé');
             return $this->render('payment/success.html.twig', compact("dataPanier", "total"));
-            
-            
         }
-        return $this->render('cart/index.html.twig', compact("dataPanier", "total"));
-            
-        
+        return $this->render('cart/shoppingcart.html.twig', compact("dataPanier", "total"));
     }
 
     /**
@@ -147,25 +143,21 @@ class CartController extends AbstractController
      */
     public function checkout(Request $request, SessionInterface $session): Response
     {
-        
+
         if ($request->isMethod('POST')) {
-            
+
             $token = $request->request->get('stripeToken');
             \Stripe\Stripe::setApiKey("sk_test_51KabbgBf0vZfGc8SGE7gCsIGarhN0cXyCydjTCCZHNO3YbyFyGg9We8v6FRkaPpUUzT5brfSzYdio5SNQSEJhjn400qXPy0NXW");
             \Stripe\Charge::create(array(
-              "amount" => 110,
-              "currency" => "eur",
-              "source" => $token,
-              "description" => "Eco Service"
+                "amount" => 110,
+                "currency" => "eur",
+                "source" => $token,
+                "description" => "Eco Service"
             ));
             $this->addFlash('success', 'Order Complete! Yay!');
             $session->remove("panier");
             return $this->redirectToRoute('home');
-
         }
-        return $this->render('cart/index.html.twig', array(
-            
-        ));
-
+        return $this->render('cart/index.html.twig', array());
     }
 }
