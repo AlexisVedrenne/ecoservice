@@ -74,15 +74,22 @@ class ProductController extends AbstractController
      * @Route("/edit/{id}", name="product_edit", methods={"GET", "POST"})
      * @IsGranted("ROLE_ADMIN")
      */
-    public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Product $product, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $images = $form->get('image')->getData();
+            if ($images) {
+                foreach ($images as $img) {
+                    $tempFileName = $fileUploader->upload($img);
+                    $product->addImages($tempFileName);
+                }
+            }
             $entityManager->flush();
 
-            return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_gestion_produit', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('product/edit.html.twig', [
@@ -102,6 +109,27 @@ class ProductController extends AbstractController
         }
         $entityManager->remove($product);
         $entityManager->flush();
+        return $this->redirectToRoute('admin_gestion_produit', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/delete/img/{id}/{imgVal}", name="product_img")
+     */
+    public function deleteImg(Product $product, string $imgVal, EntityManagerInterface $entityManager)
+    {
+        $images = $product->getImages();
+        $cpt = 0;
+        foreach ($product->getImages() as $img) {
+            if ($img == $imgVal) {
+                unset($images[$cpt]);
+                $product->resetImg($images);
+                $entityManager->persist($product);
+                $entityManager->flush();
+                unlink('assets/uploads/' . $img);
+                return $this->redirectToRoute('admin_gestion_produit', [], Response::HTTP_SEE_OTHER);
+            }
+            $cpt = $cpt + 1;
+        }
         return $this->redirectToRoute('admin_gestion_produit', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -1,49 +1,50 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-bg {{ app.session.flashbag.peek('success')|length > 0 ? '' : 'mb-5' }}">
-    {% for message in app.flashes('success') %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-    {% endfor %}
+	<nav class="navbar navbar-expand-lg navbar-dark navbar-bg {{ app.session.flashbag.peek('success')|length > 0 ? '' : 'mb-5' }}">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
 
-    <h4>Merci pour votre commande</h4>
-    <h5>Récapitulatif de votre commande</h5>
-    <table>
-    <thead>
-        <tr>Produit</tr>
-        
-        <tr>Prix</tr>
-        <tr>Quantité</tr>
-        <tr>Total</tr>
-        
-    </thead>
-    <tbody>
-        {% for element in dataPanier %}
-                <tr>
-                    <td>{{ element.produit.des }}</td>
-                    
-                    <td class="text-end">{{ element.produit.price }} €</td>
-                    <td>{{ element.quantite }}</td>
-                    <td class="text-end">{{ element.quantite * element.produit.price }} €</td>
-                    
-                </tr>
-            
-            {% endfor %}
-    </tbody>
-    <tfoot>
-            <tr>
-                <td colspan="3">Total</td>
-                <td class="text-end">{{ total }} €</td>
-                
-                
-                
-            </tr>
-            
-            
-        </tfoot>
-        
-</table>
-  
+		<h4>Merci pour votre commande</h4>
+		<h5>Récapitulatif de votre commande</h5>
+		<table>
+			<thead>
+				<tr>Produit</tr>
+				<tr>Image</tr>
+				<tr>Prix</tr>
+				<tr>Quantité</tr>
+				<tr>Total</tr>
 
-{% endblock %}
+			</thead>
+			<tbody>
+				{% for element in dataPanier %}
+					<tr>
+						<td>{{ element.produit.des }}</td>
+						<td class="text-end">{{ element.produit.price }}
+							€</td>
+						<td>{{ element.quantite }}</td>
+						<td class="text-end">{{ element.quantite * element.produit.price }}
+							€</td>
+
+					</tr>
+
+				{% endfor %}
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="3">Total</td>
+					<td class="text-end">{{ total }}
+						€</td>
+
+
+				</tr>
+
+
+			</tfoot>
+
+		</table>
+
+
+	{% endblock %}

@@ -42,7 +42,7 @@ class CategoryServiceController extends AbstractController
             $entityManager->persist($categoryService);
             $entityManager->flush();
 
-            return $this->redirectToRoute('category_service_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_gestion_services', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('category_service/new.html.twig', [

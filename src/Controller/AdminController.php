@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ProductRepository;
+use App\Repository\ServiceRepository;
 use App\Services\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,9 +46,9 @@ class AdminController extends AbstractController
      * @Route("/manager/services", name="gestion_services")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function indexservicesmanagement()
+    public function indexservicesmanagement(ServiceRepository $repo, FileUploader $fileUploader)
     {
-        return $this->render('admin/servicesmanagement.html.twig');
+        return $this->render('admin/servicesmanagement.html.twig', ['services' => $repo->findAll(), 'file' => $fileUploader]);
     }
 
     /**
