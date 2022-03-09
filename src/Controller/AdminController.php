@@ -30,9 +30,9 @@ class AdminController extends AbstractController
      * @Route("/stats/services", name="stats_services")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function statsservices()
+    public function statsservices(ServiceRepository $repo)
     {
-        return $this->render('admin/statsservicesadmin.html.twig');
+        return $this->render('admin/statsservicesadmin.html.twig', ['services' => $repo->findAll()]);
     }
 
     /**

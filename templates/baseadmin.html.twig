@@ -11,7 +11,51 @@
 	</nav>
 
 	<body>
-		{% block body %}{% endblock %}
+		<div class="d-flex">
+			<div class="d-flex flex-column vh-100 flex-shrink-0 p-3 text-white classPerso" style="width: 250px;">
+				<ul class="nav nav-pills flex-column mb-auto">
+					<li class="nav-item d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"></li>
+					<li>
+						<a href="{{ path('admin_stats_customer') }}" class="nav-link text-white {% if app.request.attributes.get('_route') == 'admin_stats_customer' %} active {% endif %}">
+							<i class="fa fa-dashboard"></i>
+							<span class="ms-2">Statistiques clients</span>
+						</a>
+					</li>
+					<li>
+						<a href="{{ path('admin_stats_services') }}" class="nav-link text-white {% if app.request.attributes.get('_route') == 'admin_stats_services' %} active {% endif %}">
+							<i class="fa fa-first-order"></i>
+							<span class="ms-2">Statistiques services</span>
+						</a>
+					</li>
+					<li>
+						<a href="{{ path('admin_gestion_produit') }}" class="nav-link text-white {% if app.request.attributes.get('_route') == 'admin_gestion_produit' %} active {% endif %}">
+							<i class="fa fa-cog"></i>
+							<span class="ms-2">Gestion des produits</span>
+						</a>
+					</li>
+					<li>
+						<a href="{{ path('admin_gestion_services') }}" class="nav-link text-white {% if app.request.attributes.get('_route') == 'admin_gestion_services' %} active {% endif %}">
+							<i class="fa fa-cog"></i>
+							<span class="ms-2">Gestion des services</span>
+						</a>
+					</li>
+					<li>
+						<a href="{{ path('admin_gestion_devis') }}" class="nav-link text-white {% if app.request.attributes.get('_route') == 'admin_gestion_devis' %} active {% endif %}">
+							<i class="fa fa-bookmark"></i>
+							<span class="ms-2">Gestion des devis</span>
+						</a>
+					</li>
+					<hr>
+					<li>
+						<a href="/logout" class="nav-link text-white">
+							<i class="fa fa-bookmark"></i>
+							<span class="ms-2">Déconnexion</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			{% block body %}{% endblock %}
+		</div>
 		{% block javascripts %}
 			<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 		{% endblock %}
