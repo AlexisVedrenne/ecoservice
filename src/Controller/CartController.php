@@ -55,6 +55,10 @@ class CartController extends AbstractController
             $session->remove("panier");
             $order = new Order();
             foreach ($dataPanier as $panier) {
+                $panier->produit->setQuantity($panier->produit->getQuantity() - $panier->quantite);
+                if ($panier->produit->getQuantity() <= 0) {
+                    $panier->produit->setState(false);
+                }
                 $order->addProduct($panier->produit);
                 $order->setQuantity($order->getQuantity() + $panier->quantite);
             }
@@ -70,6 +74,7 @@ class CartController extends AbstractController
     /**
      * @Route("/add/{id}", name="add")
      * @Route("add/cata/{id}" ,name="add_cata")
+     * @Route("add/show/{id}",name="add_show")
      */
     public function add(Product $product, SessionInterface $session, Request $request)
     {
@@ -87,6 +92,8 @@ class CartController extends AbstractController
         $tempRoute = $request->attributes->get('_route');
         if ($tempRoute == 'cart_add') {
             return $this->redirectToRoute('cart_index');
+        } else if ($tempRoute == 'cart_add_show') {
+            return $this->redirectToRoute('product_show', ['id' => $product->getId()]);
         } else {
             return $this->redirectToRoute('product_index');
         }

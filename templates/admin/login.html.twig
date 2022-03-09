@@ -2,6 +2,8 @@
 
 {% block body %}
 	{% if not app.user %}
-		{{ render(controller('App\\Controller\\SecurityController::login')) }}
+		<div class="container col-5 mt-5">
+			{{ render(controller('App\\Controller\\SecurityController::login')) }}
+		</div>
 	{% endif %}
 {% endblock %}

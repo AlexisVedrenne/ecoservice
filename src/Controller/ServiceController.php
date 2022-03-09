@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Service;
 use App\Form\ServiceType;
 use App\Repository\ServiceRepository;
+use App\Services\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,17 +30,22 @@ class ServiceController extends AbstractController
     /**
      * @Route("/new", name="service_new")
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
     {
         $service = new Service();
         $form = $this->createForm(ServiceType::class, $service);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
+            if ($image) {
+                $tempFileName = $fileUploader->upload($image);
+                $service->setImage($tempFileName);
+            }
             $entityManager->persist($service);
             $entityManager->flush();
 
-            return $this->redirectToRoute('service_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_gestion_services', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('service/new.html.twig', [

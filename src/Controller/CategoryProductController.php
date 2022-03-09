@@ -42,7 +42,7 @@ class CategoryProductController extends AbstractController
             $entityManager->persist($categoryProduct);
             $entityManager->flush();
 
-            return $this->redirectToRoute('category_product_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_gestion_produit', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('category_product/new.html.twig', [

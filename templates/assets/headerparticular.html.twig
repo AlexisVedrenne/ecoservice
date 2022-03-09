@@ -1,7 +1,7 @@
 <nav class="navbar nave navbar-expand-lg navbar-dark bg-primary">
 	<div class="container-fluid">
 		<nav class="navbar navbar-light bg-light header">
-			<a class="navbar-brand" href="#">
+			<a class="navbar-brand" href="{{ path('particular') }}">
 				<img class="logo" src="{{ asset('image/logoEcoService.svg') }}" width="100" height="80" alt="">
 			</a>
 		</nav>
@@ -19,9 +19,6 @@
 					<a class="ms-3" type="button" href="{{ path('cart_index') }}">
 						<div class="cady">
 							<img class="acount-logo" src="{{ asset('bootstrap/icon/basket3-fill.svg') }}">
-							<span class="mt-4 ms-2 position-absolute top-0 translate-middle badge rounded-pill bg-danger">
-								5
-							</span>
 						</div>
 					</a>
 				</div>

@@ -36,15 +36,7 @@ class Product
      */
     private $categoryProduct;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $price;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $quantity;
 
     /**
      * @ORM\Column(type="boolean")
@@ -61,7 +53,7 @@ class Product
      */
     private $commentaries;
 
-    
+
 
     /**
      * @ORM\ManyToMany(targetEntity=Order::class, mappedBy="product")
@@ -78,14 +70,24 @@ class Product
      */
     private $images = [];
 
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2)
+     */
+    private $price;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=0)
+     */
+    private $quantity;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
     }
 
-   
 
-    
+
+
 
     public function getId(): ?int
     {
@@ -124,30 +126,6 @@ class Product
     public function setCategoryProduct(?CategoryProduct $categoryProduct): self
     {
         $this->categoryProduct = $categoryProduct;
-
-        return $this;
-    }
-
-    public function getPrice(): ?string
-    {
-        return $this->price;
-    }
-
-    public function setPrice(string $price): self
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    public function getQuantity(): ?string
-    {
-        return $this->quantity;
-    }
-
-    public function setQuantity(string $quantity): self
-    {
-        $this->quantity = $quantity;
 
         return $this;
     }
@@ -206,11 +184,11 @@ class Product
         return $this;
     }
 
-    
 
-    
 
-    
+
+
+
 
     /**
      * @return Collection|Order[]
@@ -259,6 +237,36 @@ class Product
     public function addImages(string $image): self
     {
         array_push($this->images, $image);
+
+        return $this;
+    }
+
+    public function resetImg(array $images): self
+    {
+        $this->images = $images;
+        return $this;
+    }
+
+    public function getPrice(): ?string
+    {
+        return $this->price;
+    }
+
+    public function setPrice(string $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?string
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(string $quantity): self
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }
