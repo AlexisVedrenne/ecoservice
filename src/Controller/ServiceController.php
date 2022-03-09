@@ -55,6 +55,8 @@ class ServiceController extends AbstractController
     {
         return $this->render('service/detailservices.html.twig', [
             'service' => $service,
+
+            
         ]);
     }
 

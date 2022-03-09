@@ -22,7 +22,7 @@
         {% for element in dataPanier %}
                 <tr>
                     <td>{{ element.produit.des }}</td>
-                    <td><img src={{ element.produit.image }}></td>
+                    
                     <td class="text-end">{{ element.produit.price }} €</td>
                     <td>{{ element.quantite }}</td>
                     <td class="text-end">{{ element.quantite * element.produit.price }} €</td>
@@ -68,7 +68,7 @@
                         data-name="Eco Service"
                         data-description="Payer votre commande"
                         redirect.failure-reason="product/index.html.twig"
-                        
+                        data-shippingAddress='true'
                         data-zip-code="true"
                         
                         data-locale="auto">

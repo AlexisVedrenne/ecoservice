@@ -55,6 +55,11 @@ class Service
      */
     private $quotes;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
     public function __construct()
     {
         $this->quotes = new ArrayCollection();
@@ -160,6 +165,18 @@ class Service
         if ($this->quotes->removeElement($quote)) {
             $quote->removeService($this);
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

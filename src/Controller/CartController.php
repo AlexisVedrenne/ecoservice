@@ -46,7 +46,7 @@ class CartController extends AbstractController
             $token = $request->request->get('stripeToken');
             \Stripe\Stripe::setApiKey("sk_test_51KabbgBf0vZfGc8SGE7gCsIGarhN0cXyCydjTCCZHNO3YbyFyGg9We8v6FRkaPpUUzT5brfSzYdio5SNQSEJhjn400qXPy0NXW");
             \Stripe\Charge::create(array(
-              "amount" => $total,
+              "amount" => $total * 100 ,
               "currency" => "eur",
               "source" => $token,
               "description" => "First test charge!",
@@ -58,6 +58,12 @@ class CartController extends AbstractController
                 $order->addProduct($panier->produit);
                 $order->setQuantity($order->getQuantity()+$panier->quantite);
             }
+             if ($this->getUser() ){
+                $order->setParticulier($this->getUser());
+             };
+		        
+	         
+            $order->setParticulier($this->getUser());
             $order->setTotal($total);
             $entityManager->persist($order);
             $entityManager->flush();
@@ -67,7 +73,7 @@ class CartController extends AbstractController
             
         }
         return $this->render('cart/index.html.twig', compact("dataPanier", "total"));
-            
+        
         
     }
 

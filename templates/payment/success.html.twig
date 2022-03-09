@@ -12,7 +12,7 @@
     <table>
     <thead>
         <tr>Produit</tr>
-        <tr>Image</tr>
+        
         <tr>Prix</tr>
         <tr>Quantité</tr>
         <tr>Total</tr>
@@ -22,7 +22,7 @@
         {% for element in dataPanier %}
                 <tr>
                     <td>{{ element.produit.des }}</td>
-                    <td><img src={{ element.produit.image }}></td>
+                    
                     <td class="text-end">{{ element.produit.price }} €</td>
                     <td>{{ element.quantite }}</td>
                     <td class="text-end">{{ element.quantite * element.produit.price }} €</td>

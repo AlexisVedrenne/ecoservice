@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+    <form action="{{path('account_user')}}" method="POST">
+    <input type="text" value="{{app.user.firstname}}" name="firstname">
+    <input type="text" value="{{app.user.lastname}}" name="lastname">
+    <input type="text" value="{{app.user.username}}" name="username">
+    <button type="submit">Modifier</button>
+    </form>
+{% endblock %}
