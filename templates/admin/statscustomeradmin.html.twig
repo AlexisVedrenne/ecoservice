@@ -43,20 +43,30 @@
 				</li>
 			</ul>
 		</div>
-		<div class="container">
-			<pre>
-			{{ dump(statUsers) }}
-		</pre>
-			<h2>Nombre d'utilisateurs :
-				{{ users|length }}</h2>
-			<canvas id="statU" width="auto" height="auto"></canvas>
-			<h2>Nombre de vente/mois :
-				{{ orders|length }}</h2>
-				<canvas id="statO" width="auto" height="auto"></canvas>
-			<h2>Bénefice de cette année</h2>
+		{% set benef = 0 %}
+		{% for order in orders %}
+			{% if order.date|date('Y') == date()|date('Y') %}
+				{% set benef = benef + order.total %}
+			{% endif %}
+		{% endfor %}
+		<div class="container mt-3">
+			<h1 class="text-center mb-3">Statistiques relative aux clients</h1>
+			<div class="row">
+				<div class="col-md">
+					<h2 class="text-center">Nombre d'utilisateurs : {{ users|length }}</h2>
+					<canvas id="statU" width="auto" height="auto"></canvas>
+				</div>
+				<div class="col-md">
+					<h2 class="text-center">Nombre de vente total : {{ orders|length }}</h2>
+					<canvas id="statO" width="auto" height="auto"></canvas>
+				</div>
+				<h2 class="text-center">Bénefice de cette année : {{ benef }}€</h2>
+			</div>
 		</div>
 
 	</div>
+
+
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script>
 		function r(max) {
@@ -99,13 +109,25 @@ const uChart = new Chart(ctxU, {
         }
     }
 });
+labels=[]
+data=[]
+bgColor=[]
+bdColor=[]
+{% for stat in statOrders %}
+	labels.push('{{ stat['date']|date('Y-m') }}')
+	data.push('{{ stat['nb'] }}')
+{% endfor %}
+for(let i = 0; i < labels.length; i++){
+	bgColor.push(rColor())
+	bdColor.push(rColor())
+}
 const ctxO = document.getElementById('statO').getContext('2d');
 const oChart = new Chart(ctxO, {
     type: 'bar',
     data: {
         labels: labels,
         datasets: [{
-            label: 'Création de compte',
+            label: "Mois de vente",
             data: data,
             backgroundColor: bgColor,
             borderColor: bdColor,

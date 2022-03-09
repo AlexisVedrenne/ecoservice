@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Order;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use DateTime;
 
 /**
  * @method Order|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +48,11 @@ class OrderRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function getOrderCreateMonth()
+    {
+        $anneeActu = (new DateTime('NOW'))->format('Y');
+        $dql = "SELECT o.date , COUNT(o) as nb FROM App\Entity\Order o WHERE o.date LIKE '%" . $anneeActu . "%' GROUP BY o.date";
+        $res = $this->getEntityManager()->createQuery($dql)->execute();
+        return $res;
+    }
 }

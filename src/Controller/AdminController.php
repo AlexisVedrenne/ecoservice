@@ -23,7 +23,7 @@ class AdminController extends AbstractController
      */
     public function statscustomer(UserRepository $repoUser, OrderRepository $repoOrder)
     {
-        return $this->render('admin/statscustomeradmin.html.twig', ['users' => $repoUser->findAll(), 'orders' => $repoOrder->findAll(), 'statUsers' => $repoUser->getUserCreateMonth()]);
+        return $this->render('admin/statscustomeradmin.html.twig', ['users' => $repoUser->findAll(), 'orders' => $repoOrder->findAll(), 'statUsers' => $repoUser->getUserCreateMonth(), 'statOrders' => $repoOrder->getOrderCreateMonth()]);
     }
 
     /**

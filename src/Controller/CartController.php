@@ -63,7 +63,7 @@ class CartController extends AbstractController
                 $order->setQuantity($order->getQuantity() + $panier->quantite);
             }
             $order->setTotal($total);
-            $order->setDate(new DateTime('NOW'));
+            $order->setDate((new DateTime('NOW'))->format('Y-m'));
             $entityManager->persist($order);
             $entityManager->flush();
             $this->addFlash('success', 'Commande validé');

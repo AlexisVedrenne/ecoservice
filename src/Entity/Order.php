@@ -43,9 +43,11 @@ class Order
     private $product;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=50)
      */
     private $date;
+
+
 
     public function __construct()
     {
@@ -120,12 +122,12 @@ class Order
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?string
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(string $date): self
     {
         $this->date = $date;
 
