@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Services\MailJetApi;
+use DateTime;
+
 
 class RegistrationController extends AbstractController
 {
@@ -26,6 +28,7 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setRoles(['ROLE_USER']);
+            $user->setDateCreate(new DateTime('NOW'));
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,

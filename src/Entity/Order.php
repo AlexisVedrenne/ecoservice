@@ -20,7 +20,7 @@ class Order
      */
     private $id;
 
-    
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -42,23 +42,23 @@ class Order
      */
     private $product;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date;
+
     public function __construct()
     {
         $this->product = new ArrayCollection();
     }
 
-    
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    
-
-    
-
-    
 
     public function getQuantity(): ?string
     {
@@ -116,6 +116,18 @@ class Order
     public function removeProduct(Product $product): self
     {
         $this->product->removeElement($product);
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

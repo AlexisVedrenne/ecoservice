@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use App\Repository\ServiceRepository;
+use App\Repository\UserRepository;
 use App\Services\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,9 +21,9 @@ class AdminController extends AbstractController
      * @Route("/stats/customer", name="stats_customer")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function statscustomer()
+    public function statscustomer(UserRepository $repoUser, OrderRepository $repoOrder)
     {
-        return $this->render('admin/statscustomeradmin.html.twig');
+        return $this->render('admin/statscustomeradmin.html.twig', ['users' => $repoUser->findAll(), 'orders' => $repoOrder->findAll(), 'statUsers' => $repoUser->getUserCreateMonth()]);
     }
 
     /**

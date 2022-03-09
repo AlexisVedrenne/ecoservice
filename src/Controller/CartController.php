@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
-
+use DateTime;
 
 /**
  * @Route("/cart", name="cart_")
@@ -63,6 +63,7 @@ class CartController extends AbstractController
                 $order->setQuantity($order->getQuantity() + $panier->quantite);
             }
             $order->setTotal($total);
+            $order->setDate(new DateTime('NOW'));
             $entityManager->persist($order);
             $entityManager->flush();
             $this->addFlash('success', 'Commande validé');
