@@ -67,15 +67,20 @@ class ServiceController extends AbstractController
     /**
      * @Route("/edit/{id}", name="service_edit")
      */
-    public function edit(Request $request, Service $service, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Service $service, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(ServiceType::class, $service);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
+            if ($image) {
+                unlink('assets/uploads/' . $service->getImage());
+                $tempFileName = $fileUploader->upload($image);
+                $service->setImage($tempFileName);
+            }
             $entityManager->flush();
-
-            return $this->redirectToRoute('service_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_gestion_services', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('service/edit.html.twig', [
@@ -89,11 +94,9 @@ class ServiceController extends AbstractController
      */
     public function delete(Request $request, Service $service, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $service->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($service);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('service_index', [], Response::HTTP_SEE_OTHER);
+        $entityManager->remove($service);
+        $entityManager->flush();
+        unlink('assets/uploads/' . $service->getImage());
+        return $this->redirectToRoute('admin_gestion_services', [], Response::HTTP_SEE_OTHER);
     }
 }
