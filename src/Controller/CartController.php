@@ -55,6 +55,10 @@ class CartController extends AbstractController
             $session->remove("panier");
             $order = new Order();
             foreach ($dataPanier as $panier) {
+                $panier->produit->setQuantity($panier->produit->getQuantity() - $panier->quantite);
+                if ($panier->produit->getQuantity() <= 0) {
+                    $panier->produit->setState(false);
+                }
                 $order->addProduct($panier->produit);
                 $order->setQuantity($order->getQuantity() + $panier->quantite);
             }

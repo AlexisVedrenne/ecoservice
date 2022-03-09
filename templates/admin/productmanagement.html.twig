@@ -142,6 +142,7 @@
 									</div>
 								</div>
 								<a role="button" data-bs-toggle="modal" href="#editProd-{{ product.id }}" href="#"><img src="{{ asset('bootstrap/icon/pencil-square.svg') }}"></a>
+								<a role="button" data-bs-toggle="modal" href="#delProd-{{ product.id }}"><img src="{{ asset('bootstrap/icon/trash-fill.svg') }}"></a>
 								<div class="modal fade" id="editProd-{{ product.id }}" tabindex="-1" aria-labelledby="editProd-{{ product.id }}Label" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">
@@ -153,7 +154,7 @@
 										</div>
 									</div>
 								</div>
-								<a role="button" data-bs-toggle="modal" href="#delProd-{{ product.id }}"><img src="{{ asset('bootstrap/icon/trash-fill.svg') }}"></a>
+
 							</td>
 							<div class="modal fade" id="imgMd-{{ product.id }}" tabindex="-1" aria-labelledby="imgMd-{{ product.id }}Label" aria-hidden="true">
 								<div class="modal-dialog">
@@ -165,7 +166,7 @@
 										<div class="modal-body">
 											<div class="d-flex justify-content-center">
 												{% for img in product.images %}
-													<img class="bg-secondary" style="heigth:20%;width:20%;" src="{{ asset('uploads/' ~ img) }}">
+													<img style="heigth:20%;width:20%;" src="{{ asset('uploads/' ~ img) }}">
 												{% else %}
 													<p class="text-muted">Aucune image...</p>
 												{% endfor %}

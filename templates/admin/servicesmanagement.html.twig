@@ -52,6 +52,16 @@
 					<div>Service(s) inactif(s)</div>
 				</div>
 			</div>
+			<!-- Button trigger modal -->
+			<div class="d-flex justify-content-center mb-3">
+				<button type="button" class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#mdNewService">
+					Ajouter un nouveau service
+				</button>
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mdNewCat">
+					Ajouter une catégorie de service
+				</button>
+			</div>
 			<div class="input-group mb-2 d-flex justify-content-start" style="width: 50%">
 				<input type="text" class="form-control" placeholder="Recherche..." aria-label="Recherche..." aria-describedby="button-addon2">
 				<button class="btn btn-secondary d-flex align-items-center" type="button" id="button-addon2"><img src="{{ asset('bootstrap/icon/search.svg') }}"></button>
@@ -81,5 +91,32 @@
 			</table>
 		</div>
 	</div>
-
+	<!-- Modal -->
+	<div class="modal fade" id="mdNewService" tabindex="-1" aria-labelledby="mdNewServiceLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="mdNewServiceLabel">Modal title</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					{{ render(controller('App\\Controller\\ServiceController::new',{'fileUploader':file})) }}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="mdNewCat" tabindex="-1" aria-labelledby="mdNewCatLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="mdNewCatLabel">Modal title</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					{{ render(controller('App\\Controller\\CategoryServiceController::new')) }}
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
