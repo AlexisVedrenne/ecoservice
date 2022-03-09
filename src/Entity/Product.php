@@ -36,15 +36,7 @@ class Product
      */
     private $categoryProduct;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $price;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $quantity;
 
     /**
      * @ORM\Column(type="boolean")
@@ -77,6 +69,16 @@ class Product
      * @ORM\Column(type="array")
      */
     private $images = [];
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2)
+     */
+    private $price;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=0)
+     */
+    private $quantity;
 
     public function __construct()
     {
@@ -124,30 +126,6 @@ class Product
     public function setCategoryProduct(?CategoryProduct $categoryProduct): self
     {
         $this->categoryProduct = $categoryProduct;
-
-        return $this;
-    }
-
-    public function getPrice(): ?string
-    {
-        return $this->price;
-    }
-
-    public function setPrice(string $price): self
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    public function getQuantity(): ?string
-    {
-        return $this->quantity;
-    }
-
-    public function setQuantity(string $quantity): self
-    {
-        $this->quantity = $quantity;
 
         return $this;
     }
@@ -266,6 +244,30 @@ class Product
     public function resetImg(array $images): self
     {
         $this->images = $images;
+        return $this;
+    }
+
+    public function getPrice(): ?string
+    {
+        return $this->price;
+    }
+
+    public function setPrice(string $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?string
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(string $quantity): self
+    {
+        $this->quantity = $quantity;
+
         return $this;
     }
 }
