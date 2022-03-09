@@ -44,7 +44,8 @@
 								<div class="col-md-8">
 									<div class="card-body">
 										<h5 class="card-title">{{ product.name }}</h5>
-										<p class="text-end">50 avis</p>
+										<p class="text-end">{{product.commentaries|length}}
+											avis</p>
 										<p class="text-end">Recyclable à
 											{{ product.recyclingIndex }}%
 										</p>
@@ -75,6 +76,7 @@
 					</div>
 				</div>
 			{% endfor %}
+			<div class="mb-3"></div>
 		</div>
 	</div>
 	<script src="{{ asset('js/produit/produit.js') }}"></script>

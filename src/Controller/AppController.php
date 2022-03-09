@@ -72,16 +72,6 @@ class AppController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("panier", name="panier")
-     */
-    public function ShoppingCart(): Response
-    {
-        return $this->render('app/shoppingcart.html.twig', [
-            'controller_name' => 'AppController',
-        ]);
-    }
-
     public function register(): Response
     {
 
