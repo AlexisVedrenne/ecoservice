@@ -6,6 +6,7 @@ use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ServiceRepository;
 
 class AppController extends AbstractController
 {
@@ -37,9 +38,9 @@ class AppController extends AbstractController
     /**
      * @Route("/professionnal" ,name="professionnal")
      */
-    public function homePro()
+    public function homePro(ServiceRepository $service)
     {
-        return $this->render('app/homepro.html.twig');
+        return $this->render('app/homepro.html.twig',['services'=> $service->findAll()]);
     }
 
     /**
@@ -87,4 +88,6 @@ class AppController extends AbstractController
 
         return $this->render('templates\registration\register.html.twig');
     }
+
+    
 }

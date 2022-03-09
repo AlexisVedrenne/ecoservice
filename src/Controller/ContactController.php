@@ -25,13 +25,15 @@ class ContactController extends AbstractController
         $msg='';
 
 
-        if($form->isSubmitted()){
+        if( $form->isSubmitted() ){
          
                
-            if (($request->request->get('mail') == null)) {
+            if ( ($request->request->get('mail') == null) ) {
+
                 return $this->render('contact/index.html.twig');
             } 
             else {
+                
                 MailJetApi::envoie(
                     $request->request->get('mail'),
                     $request->request->get('name'),
@@ -41,10 +43,8 @@ class ContactController extends AbstractController
                 );
                 $state = true;
                 $msg='Message bien envoyé';
-                
             }
         }
-        
         return $this->render('contact/index.html.twig',['form' => $form->createView(),'state'=>$state,'message'=>$msg]);
     }
 }
