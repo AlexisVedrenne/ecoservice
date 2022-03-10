@@ -9,11 +9,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class PaiementController extends AbstractController
 {
     /**
-     * @Route("/paiement", name="paiement")
+     * @Route("/paiementvalidated", name="paiement")
      */
     public function index(): Response
     {
         
-        return $this->render('payment/success.html.twig',compact("dataPanier", "total"));
+        return $this->render('payment/success.html.twig');
     }
 }
