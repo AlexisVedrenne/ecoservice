@@ -30,7 +30,7 @@ class Quote
     private $status;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string",length=50)
      */
     private $dateQuote;
 
@@ -109,12 +109,12 @@ class Quote
         return $this;
     }
 
-    public function getDateQuote(): ?\DateTimeInterface
+    public function getDateQuote(): String
     {
         return $this->dateQuote;
     }
 
-    public function setDateQuote(\DateTimeInterface $dateQuote): self
+    public function setDateQuote(string $dateQuote): self
     {
         $this->dateQuote = $dateQuote;
 
