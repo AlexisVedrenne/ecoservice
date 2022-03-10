@@ -18,7 +18,7 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('des', TextareaType::class, [
-                'attr' => ['class' => 'form-control', 'placeholder' => 'x']
+                'attr' => ['class' => 'form-control', 'placeholder' => 'x', 'style' => "height: 167px;"]
             ])
             ->add('name', TextType::class, [
                 'attr' => ['class' => 'form-control', 'placeholder' => 'x']

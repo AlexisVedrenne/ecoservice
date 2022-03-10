@@ -64,4 +64,11 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
     */
+
+    public function getUserCreateMonth()
+    {
+        $dql = "SELECT u.dateCreate, COUNT(u) as nb FROM App\Entity\User u GROUP BY u.dateCreate";
+        $res = $this->getEntityManager()->createQuery($dql)->execute();
+        return $res;
+    }
 }

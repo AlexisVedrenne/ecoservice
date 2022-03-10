@@ -3,6 +3,11 @@
 
 {% block body %}
 	<div class="container">
+		{% if 'Integrity' in error %}
+			<div class=" text-center alert alert-danger mt-3" role="alert">
+				L'adresse email existe déjà !
+			</div>
+		{% endif %}
 		<h1>Inscription</h1>
 		<p>Entrez vos informations personnelles</p>
 

@@ -32,7 +32,7 @@ class ServiceType extends AbstractType
                 // in the associated entity, so you can use the PHP constraint classes
             ])
             ->add('des', TextareaType::class, [
-                'attr' => ['class' => 'form-control', 'placeholder' => 'x']
+                'attr' => ['style' => "height: 167px;", 'class' => 'form-control', 'placeholder' => 'x']
             ])
             ->add('reference', TextType::class, [
                 'attr' => ['class' => 'form-control', 'placeholder' => 'x']
@@ -41,6 +41,9 @@ class ServiceType extends AbstractType
                 'attr' => ['class' => 'form-control', 'placeholder' => 'x']
             ])
             ->add('state')
+            ->add('name', TextType::class, [
+                'attr' => ['class' => 'form-control', 'placeholder' => 'x']
+            ])
             ->add('categoryService', EntityType::class, [
                 'class' => CategoryService::class,
                 'choice_label' => 'name',

@@ -57,21 +57,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $commentaries;
 
-    
+
 
     /**
      * @ORM\OneToMany(targetEntity=Order::class, mappedBy="particulier")
      */
     private $orders;
 
-    
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateCreate;
 
     public function __construct()
     {
         $this->quotes = new ArrayCollection();
         $this->commentaries = new ArrayCollection();
         $this->orders = new ArrayCollection();
-        
     }
 
     public function getId(): ?int
@@ -276,7 +278,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-   
+    public function getDateCreate(): ?\DateTimeInterface
+    {
+        return $this->dateCreate;
+    }
 
-    
+    public function setDateCreate(\DateTimeInterface $dateCreate): self
+    {
+        $this->dateCreate = $dateCreate;
+
+        return $this;
+    }
 }

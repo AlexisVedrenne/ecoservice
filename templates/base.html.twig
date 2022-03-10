@@ -29,25 +29,25 @@
 						<span class="navbar-toggler-icon"></span>
 					</button>
 				</div>
-				<div class="col-9 d-flex justify-content-md-around">
-					<a class="flex-sm-fill text-sm-center nav-link link-light" href="#">FAQ</a>
-					<a class="flex-sm-fill text-sm-center nav-link link-light" href="#">Contact</a>
-				</div>
-			</div>
+			</nav>
+			<div class="collapse" id="navbarToggleExternalContent">
+				<div class="bg-dark p-4">
+					<div class="row justify-content-center">
+						<div class="col">
+							<a class="text-center nav-link link-light" href="{{ path('product_index') }}">Produits</a>
+						</div>
+						<div class="col">
+							<a class="text-center nav-link link-light" href="{{ path('page_faq') }}">FAQ</a>
+						</div>
+						<div class="col">
+							<a class="text-center nav-link link-light" href="#">Contact</a>
 
-		</nav>
-		<div class="collapse" id="navbarToggleExternalContent">
-			<div class="bg-dark p-4">
-				<h5 class="text-white h4">
-					Catégories</h5>
-				<a class="flex-sm-fill text-sm-center nav-link link-light" href="#">Catégorie 1</a>
-				<a class="flex-sm-fill text-sm-center nav-link link-light" href="#">Catégorie 2
-				</a>
-			</div>
-		</div>
-	</header>
-	<body>
-		{% block body %}{% endblock %}
-	</body>
-	{{ include('assets/footer.html.twig') }}
-</html>
+						</div>
+					</div>
+				</div>
+			</html>
+		</html>
+	</html>
+</html></header><body>
+{% block body %}{% endblock %}
+<br><br><br><br><br><br><br><br><br></body>{{ include('assets/footer.html.twig') }}</html>

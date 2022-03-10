@@ -1,26 +1,22 @@
 {% extends "base.html.twig" %}
-{% block javascripts %} <script type="text/javascript" src="{{ asset("js/inscription.js") }}"></script> {% endblock %}
 {% block body %}
 
-    <div class ="bannierre"> 
-        <h1 class="bannierre-titre"> Votre nouveau mot de passe </h1>
-    </div>
-    <div class="container col-4 mt-5 mb-5 bloc-form">
-        {{ form_start(form) }}
-            <div class="row justify-content-md-center">
-                <label>Nouveau mot de passe</label>
-                    <div class="input-group flex-nowrap">
-                        <span class="input-group-text" id="addon-wrapping"><i class="bi bi-key"></i></span>
-                        {{ form_widget(form.password,{'attr':{'class':'form-control','placeholder':'Entrée votre mot de passe...','value':''}})}}
-                    </div>
-                <label>Confimer le nouveau mot de passe</label>
-                <div class="input-group flex-nowrap">
-                    <span class="input-group-text" id="addon-wrapping"><i class="bi bi-key"></i></span>
-                    <input placeholder="Confimer le mot de passe..." class="form-control" type="password" name="confirm_password" id="confirm_password"  onkeyup='check2();' required /> 
-                </div>
-                <div class="text-center" id='message'></div>
-                <button id="btnEnregistrer" class="mt-2 btn btn-success" type="submit" >Valider</button>
-            </div>
-        {{ form_end(form) }}
-    </div>
+	<h4 class="text-center mt-3">Changement de votre mot de passe</h4>
+	<div class="container col-4 mt-4 bloc-form">
+		{{ form_start(form) }}
+		<div class="row justify-content-md-center">
+			<div class="form-floating mb-3">
+				{{ form_widget(form.password,{'attr':{'id':'user_password','class':'form-control','placeholder':'Entrée votre mot de passe...','value':''}})}}
+				<label class="ms-1">Nouveau mot de passe</label>
+			</div>
+			<div class="form-floating">
+				<input placeholder="Confimer le mot de passe..." class="form-control" type="password" name="confirm_password" id="confirm_password" onkeyup='check2();' required/>
+				<label class="ms-1">Confimer le nouveau mot de passe</label>
+			</div>
+			<div class="text-center mt-2 mb-2" id='message'></div>
+			<button id="btnEnregistrer" class="mt-2 btn btn-success" type="submit" disabled>Valider</button>
+		</div>
+		{{ form_end(form) }}
+	</div>
+	<script type="text/javascript" src="{{ asset("js/inscription.js") }}"></script>
 {% endblock %}

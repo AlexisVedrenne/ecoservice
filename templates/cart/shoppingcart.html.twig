@@ -75,18 +75,6 @@
 										<h5>€
 											{{ total }}</h5>
 									</div>
-
-									<h5 class="text-uppercase mb-3">Mode de livraison</h5>
-
-									<div class="mb-4 pb-2">
-										<select class="select">
-											<option value="1">Livraison 10 minutes- €5.00</option>
-											<option value="2">Livraison 1 jour - €3.00</option>
-											<option value="3">Livraison 2 jours - €2.00</option>
-											<option selected value="4">Livraison 3 jours - Gratuit !</option>
-										</select>
-									</div>
-
 									<h5 class="text-uppercase mb-3">Avez-vous un code promotionnel ?</h5>
 
 									<div class="mb-5">
@@ -104,10 +92,11 @@
 											{{ total }}</h5>
 									</div>
 
-									<form action="" method="POST">
-										<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-label="Passer au paiement" data-currency="eur" data-key="pk_test_51KabbgBf0vZfGc8ScJVN6IvZKFqqjitig8gziF6j3DPveOEI5tKbeI1QyTxqdWZ4s66NLeVNrWWbyVJL2zFUm2fR007NfrHBLf" data-amount="{{ total * 100 }}" data-name="Eco Service" data-description="Payer votre commande" redirect.failure-reason="product/index.html.twig" data-zip-code="true" data-locale="auto"></script>
-									</form>
-
+									{% if total != 0 %}
+										<form action="" method="POST">
+											<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-label="Passer au paiement" data-currency="eur" data-key="pk_test_51KabbgBf0vZfGc8ScJVN6IvZKFqqjitig8gziF6j3DPveOEI5tKbeI1QyTxqdWZ4s66NLeVNrWWbyVJL2zFUm2fR007NfrHBLf" data-amount="{{ total * 100 }}" data-name="Eco Service" data-description="Payer votre commande" redirect.failure-reason="product/index.html.twig" data-zip-code="true" data-locale="auto"></script>
+										</form>
+									{% endif %}
 								</div>
 							</div>
 						</div>

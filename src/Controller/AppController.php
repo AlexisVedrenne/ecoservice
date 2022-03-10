@@ -27,11 +27,11 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/particular" ,name="particular")
+     * @Route("/particular",name="particular")
      */
-    public function homeParticular(ProductRepository $repo)
+    public function homeParticular($error = null, ProductRepository $repo)
     {
-        return $this->render('app/homeparticular.html.twig', ['products' => $repo->findAll()]);
+        return $this->render('app/homeparticular.html.twig', ['products' => $repo->findAll(), 'error' => $error]);
     }
 
     /**
@@ -80,16 +80,6 @@ class AppController extends AbstractController
     public function Aboutus(): Response
     {
         return $this->render('app/aboutus.html.twig', [
-            'controller_name' => 'AppController',
-        ]);
-    }
-
-    /**
-     * @Route("panier", name="panier")
-     */
-    public function ShoppingCart(): Response
-    {
-        return $this->render('app/shoppingcart.html.twig', [
             'controller_name' => 'AppController',
         ]);
     }
