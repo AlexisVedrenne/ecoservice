@@ -53,4 +53,11 @@ class ProductRepository extends ServiceEntityRepository
         $dql = "SELECT p FROM App\Entity\Product p";
         return $this->getEntityManager()->createQuery($dql)->setMaxResults($limit)->execute();
     }
+
+    public function Search($cherche)
+    {
+        $dql = $this->getEntityManager()->createQuery("SELECT p FROM App\Entity\Product p WHERE p.name LIKE :cherche");
+        $dql->setParameter('cherche', $cherche);
+        return $dql->execute();
+    }
 }

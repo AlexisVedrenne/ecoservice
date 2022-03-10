@@ -13,8 +13,6 @@ class ContactController extends AbstractController
 {
     /**
      * @Route("/contact", name="contact")
-     * @IsGranted("ROLE_USER")
-     * @IsGranted("ROLE_ADMIN")
      * $request: ce qui va permettre de récuperer les données provenant du formulaire
      * cette fonction permet de récuperer toutes les données que l'utilisateur a rentré dans le formulaire Contact
      */
