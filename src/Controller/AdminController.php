@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
+use App\Repository\QuoteRepository;
 use App\Repository\ServiceRepository;
 use App\Repository\UserRepository;
 use App\Services\FileUploader;
@@ -57,9 +58,9 @@ class AdminController extends AbstractController
      * @Route("/manager/quotes", name="gestion_devis")
      * @IsGranted("ROLE_COM")
      */
-    public function indexquotemanagement()
+    public function indexquotemanagement(QuoteRepository $repo)
     {
-        return $this->render('admin/quotesmanagement.html.twig');
+        return $this->render('admin/quotesmanagement.html.twig', ['quotes' => $repo->findAll()]);
     }
 
     /**
