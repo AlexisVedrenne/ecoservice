@@ -1,0 +1,34 @@
+{{ form_start(form,{'action': path('service_new'),'attr':{'id':'form_service'}}) }}
+
+<div class="form-floating mb-3">
+	{{ form_widget(form.name) }}
+	<label for="floatingInput">Nom du service</label>
+</div>
+<div class="col mb-3">
+	<label class="mb-2">Image du service</label>
+	{{ form_widget(form.image) }}
+</div>
+<div class="form-floating mb-3">
+	{{ form_widget(form.reference) }}
+	<label for="floatingInput">Référence du service</label>
+</div>
+<div class="form-floating mb-3">
+	{{ form_widget(form.des) }}
+	<label for="floatingInput">Description du service</label>
+</div>
+<div class="form-floating mb-3">
+	{{ form_widget(form.price) }}
+	<label for="floatingInput">Prix du service</label>
+</div>
+<div class="form-floating mb-3">
+	{{ form_widget(form.categoryService) }}
+	<label for="floatingInput">Catégorie du service</label>
+</div>
+<div class="col mb-3">
+	{{ form_widget(form.state)}}
+	<label>Disponible en stock</label>
+</div>
+<div class="d-flex justify-content-center">
+	<button class="btn btn-success">{{ button_label|default('Sauvegarder') }}</button>
+</div>
+{{ form_end(form) }}

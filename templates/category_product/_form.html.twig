@@ -1,0 +1,12 @@
+{{ form_start(form,{'action': path('category_product_new'),'attr':{'id':'form_cat'}}) }}
+<div class="col">
+	<div class="form-floating mb-3">
+		{{ form_widget(form.name) }}
+		<label for="floatingInput">Nom</label>
+	</div>
+</div>
+<hr>
+<div class="d-flex justify-content-center">
+	<button class="btn btn-success">{{ button_label|default('Ajouter') }}</button>
+</div>
+{{ form_end(form) }}

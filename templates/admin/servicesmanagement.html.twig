@@ -1,0 +1,155 @@
+{% extends "baseadmin.html.twig" %}
+{% block body %}
+	<div style="display: flex; justify-content:center; width: 100%">
+		<div class="container">
+			<div style="display: flex; justify-content: space-evenly; align-items: center;">
+				{% set actif = 0 %}
+				{% set inactif = 0 %}
+				{% for service in services %}
+					{% if service.state %}
+						{% set actif = actif + 1 %}
+					{% else %}
+						{% set inactif = inactif + 1 %}
+					{% endif %}
+				{% endfor %}
+				<div class="blockmanagement">
+					<div>Service(s) actif(s)</div>
+					{% if actif >= 1  %}
+						<h1 style="color:green;">{{ actif }}</h1>
+					{% else %}
+						<h1 style="color:red;">{{ actif }}</h1>
+					{% endif %}
+				</div>
+				<div class="blockmanagement">
+					<div>Service(s) en rupture</div>
+					{% if inactif <= 0  %}
+						<h1 style="color:green;">{{ inactif }}</h1>
+					{% else %}
+						<h1 style="color:red;">{{ inactif }}</h1>
+					{% endif %}
+				</div>
+			</div>
+			<!-- Button trigger modal -->
+			<div class="d-flex justify-content-center mb-3">
+				<button type="button" class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#mdNewService">
+					Ajouter un nouveau service
+				</button>
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mdNewCat">
+					Ajouter une catégorie de service
+				</button>
+			</div>
+			<div class="input-group mb-2 d-flex justify-content-start" style="width: 50%">
+				<input id="dtl" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Recherché un produit...">
+				<datalist id="datalistOptions">
+					{% for service in services %}
+						<option value="{{ service.reference }} {{ service.categoryService.name }} {{ service.name }}"></option>
+					{% endfor %}
+				</datalist>
+			</div>
+			<table class="table text-center">
+				<thead>
+					<tr id="none">
+						<th scope="col">Numéro</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Image</th>
+						<th scope="col">Désignation</th>
+						<th scope="col">Référence</th>
+						<th scope="col">Catégorie</th>
+						<th scope="col">Etat</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for service in services %}
+						<tr id="{{ service.reference }} {{ service.categoryService.name }} {{ service.name }}">
+							<th scope="row">{{ service.id }}</th>
+							<td>{{ service.name }}</td>
+							<td><img height="30" width="30" src="{{ asset('uploads/' ~ service.image) }}"></td>
+							<td>{{ service.des }}</td>
+							<td>{{ service.reference }}</td>
+							<td>{{ service.categoryService.name }}</td>
+							<td>
+								{% if service.state %}
+									<p style="color:green;">Actif</p>
+								{% else %}
+									<p style="color:red;">Inactif</p>
+								{% endif %}
+							</td>
+							<td>
+								<div class="modal fade" id="delProd-{{ service.id }}" tabindex="-1" aria-labelledby="delProd-{{ service.id }}Label" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="delProd-{{ service.id }}Label">Attention !</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												Etes vous sur de vouloir supprimer le service :
+												{{ service.name }}
+												?
+												<p class="text-muted mt-3">Référence duservice :
+													{{ service.reference }}</p>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+												<a href="{{ path('service_delete',{'id': service.id }) }}" type="button" class="btn btn-danger">Supprimer</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<a role="button" data-bs-toggle="modal" href="#editProd-{{ service.id }}" href="#"><img src="{{ asset('bootstrap/icon/pencil-square.svg') }}"></a>
+								<a role="button" data-bs-toggle="modal" href="#delProd-{{ service.id }}"><img src="{{ asset('bootstrap/icon/trash-fill.svg') }}"></a>
+								<div class="modal fade" id="editProd-{{ service.id }}" tabindex="-1" aria-labelledby="editProd-{{ service.id }}Label" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="editProd-{{ service.id }}Label">Edition d'un service</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">{{ render(controller('App\\Controller\\ServiceController::edit',{'id':service.id,'fileUploader':file})) }}</div>
+										</div>
+									</div>
+								</div>
+
+							</td>
+						</tr>
+					{% else %}
+						<td>
+							<p class="text-muted mt-3">Aucun service...</p>
+						</td>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="mdNewService" tabindex="-1" aria-labelledby="mdNewServiceLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="mdNewServiceLabel">Ajout d'un service</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					{{ render(controller('App\\Controller\\ServiceController::new',{'fileUploader':file})) }}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="mdNewCat" tabindex="-1" aria-labelledby="mdNewCatLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="mdNewCatLabel">Ajout d'une catégorie</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					{{ render(controller('App\\Controller\\CategoryServiceController::new')) }}
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="{{ asset('js/admin/search.js') }}"></script>
+</div>{% endblock %}

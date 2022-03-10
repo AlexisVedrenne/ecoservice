@@ -1,0 +1,34 @@
+{% extends "baseadmin.html.twig" %}
+{% block body %}
+	<div style="display: flex; justify-content:center; width: 100%">
+		<div class="container">
+			<div class="input-group mb-2 d-flex justify-content-start" style="width: 50%; margin-top:230px">
+				<input type="text" class="form-control" placeholder="Recherche..." aria-label="Recherche..." aria-describedby="button-addon2">
+				<button class="btn btn-secondary d-flex align-items-center" type="button" id="button-addon2"><img src="{{ asset('bootstrap/icon/search.svg') }}"></button>
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">numero</th>
+						<th scope="col">Nom du client</th>
+						<th scope="col">Nom du commercial</th>
+						<th scope="col">Statut</th>
+						<th scope="col">Date</th>
+						<th scope="col">TOTAL TTC</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>{% endblock %}

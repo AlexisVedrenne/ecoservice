@@ -1,0 +1,9 @@
+{% extends "baseadmin.html.twig" %}
+
+{% block body %}
+	{% if not app.user %}
+		<div class="container col-5 mt-5">
+			{{ render(controller('App\\Controller\\SecurityController::login')) }}
+		</div>
+	{% endif %}
+{% endblock %}

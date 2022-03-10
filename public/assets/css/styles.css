@@ -1,0 +1,211 @@
+a:link {
+  text-decoration: none;
+}
+
+body {
+  position: relative;
+  height: 100%;
+}
+.hero {
+  background-color: #00461d;
+  width: 100%;
+  height: 75%;
+  color: rgb(224, 223, 223);
+}
+.p {
+  font-size: 120%;
+}
+
+.card-img {
+  width: 30%;
+  height: 30%;
+}
+
+.footer {
+  background-color: #e7e7e7;
+  position: fixed;
+  bottom: 0 !important;
+  width: 100%;
+}
+
+.title {
+  font-size: 23px;
+  color: rgb(78, 78, 78);
+}
+
+.subtitle {
+  font-size: 17px;
+}
+
+.btn-outline-primary {
+  color: #00461d;
+  border-color: #00461d;
+}
+
+.btn-outline-primary:hover {
+  background-color: #00461d;
+  border-color: #015323;
+}
+
+.bg-primary {
+  background-color: #00461d !important;
+}
+
+.nave {
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+}
+
+.nav {
+  padding-top: 10px !important;
+  padding-bottom: 15px !important;
+}
+
+.acount-logo {
+  height: 40px;
+  width: 40px;
+}
+
+.acount-logo {
+  border-radius: 100%;
+}
+
+.acount-logo:hover {
+  transition: 0.3s;
+  height: 43px;
+  width: 43px;
+  border: 2px solid rgb(126, 126, 126);
+}
+
+.cady {
+  width: 40px;
+}
+
+.logo {
+  border-radius: 10% !important;
+  background-color: #fff !important;
+  margin-left: 10px;
+}
+
+.header {
+  background-color: #00461d !important;
+}
+
+.contents {
+  background-color: 323131;
+}
+
+.maintext {
+  text-align: center;
+  color: White;
+  margin-bottom: 2%;
+}
+
+#tripleBlock {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #fff;
+  width: 80%;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  padding: 40px;
+}
+
+#Ban {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #00461d;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  padding: 20px;
+}
+
+.blocks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blocks img {
+  max-width: 200px;
+}
+
+#greenButton {
+  position: absolute;
+  bottom: -20;
+  background-color: green;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 10px;
+}
+/*Sidebar*/
+
+#blockds {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.nav-link:hover {
+  transition: all 0.6s;
+  background-color: #00461d !important;
+}
+
+.classPerso {
+  background-color: #525252;
+}
+
+.blockmanagement {
+  border: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  height: 150px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+}
+.bg-grey {
+  background-color: #eae8e8;
+}
+.scale-hover {
+  position: relative;
+  -webkit-transition: all 200ms ease-in;
+  -webkit-transform: scale(1);
+  -ms-transition: all 200ms ease-in;
+  -ms-transform: scale(1);
+  -moz-transition: all 200ms ease-in;
+  -moz-transform: scale(1);
+  transition: all 200ms ease-in;
+  transform: scale(1);
+}
+.scale-hover:hover {
+  box-shadow: 0px 0px 150px #000000;
+  z-index: 2;
+  -webkit-transition: all 200ms ease-in;
+  -webkit-transform: scale(1.005);
+  -ms-transition: all 200ms ease-in;
+  -ms-transform: scale(1.005);
+  -moz-transition: all 200ms ease-in;
+  -moz-transform: scale(1.005);
+  transition: all 200ms ease-in;
+  transform: scale(1.005);
+}
+
+.fixe {
+  position: fixed;
+}
+.stripe-button-el span {
+  background: #5e366a !important;
+  background-image: none !important;
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+}

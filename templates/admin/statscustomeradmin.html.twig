@@ -1,0 +1,101 @@
+{% extends "baseadmin.html.twig" %}
+{% block body %}
+	{% set benef = 0 %}
+	{% for order in orders %}
+		{% if order.date|date('Y') == date()|date('Y') %}
+			{% set benef = benef + order.total %}
+		{% endif %}
+	{% endfor %}
+	<div class="container mt-3">
+		<h1 class="text-center mb-3">Statistiques relative aux clients</h1>
+		<div class="row">
+			<div class="col-md">
+				<h2 class="text-center">Nombre d'utilisateurs :
+					{{ users|length }}</h2>
+				<canvas id="statU" width="auto" height="auto"></canvas>
+			</div>
+			<div class="col-md">
+				<h2 class="text-center">Nombre de commandes total :
+					{{ orders|length }}</h2>
+				<canvas id="statO" width="auto" height="auto"></canvas>
+			</div>
+			<h2 class="text-center">Bénefice des ventes (produits) de cette année :
+				{{ benef }}€</h2>
+		</div>
+	</div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+	function r(max) {
+return Math.floor(Math.random() * max);
+}
+function rColor() {
+return 'rgb(' + r(255) + ',' + r(255) + ',' + r(255) + ')'
+}
+const ctxU = document.getElementById('statU').getContext('2d');
+
+let labels = [];
+let data = [];
+let bgColor = [];
+let bdColor = [];{% for stat in statUsers %}labels.push('{{ stat['dateCreate']|date('Y-m-d') }}');
+data.push('{{ stat['nb'] }}');{% endfor %}for (let i = 0; i < labels.length; i++) {
+bgColor.push(rColor());
+bdColor.push(rColor());
+};
+const uChart = new Chart(ctxU, {
+type: 'line',
+data: {
+labels: labels,
+datasets: [
+{
+label: 'Création de compte',
+data: data,
+backgroundColor: bgColor,
+borderColor: bdColor,
+borderWidth: 1
+}
+]
+},
+options: {
+scales: {
+y: {
+beginAtZero: true
+}
+}
+}
+});
+labels = [];
+data = [];
+bgColor = [];
+bdColor = [];{% for stat in statOrders %}labels.push('{{ stat['date']|date('Y-m') }}');
+data.push('{{ stat['nb'] }}');{% endfor %}for (let i = 0; i < labels.length; i++) {
+bgColor.push(rColor());
+bdColor.push(rColor());
+};
+const ctxO = document.getElementById('statO').getContext('2d');
+const oChart = new Chart(ctxO, {
+type: 'bar',
+data: {
+labels: labels,
+datasets: [
+{
+label: "Mois de vente",
+data: data,
+backgroundColor: bgColor,
+borderColor: bdColor,
+borderWidth: 1
+}
+]
+},
+options: {
+scales: {
+y: {
+beginAtZero: true
+}
+}
+}
+});
+</script>{% endblock %}

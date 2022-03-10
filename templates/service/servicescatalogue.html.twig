@@ -1,0 +1,51 @@
+{% include "basepro.html.twig" %}
+
+<div id="Ban">
+	<div class="maintext">
+		<h4>Nos services</h4>
+	</div>
+</div>
+
+<div class="row mt-5">
+					<div class="col">
+						<div id="carProduit" class="carousel slide" data-bs-ride="carousel">
+							<div class="carousel-indicators">
+								<button type="button" data-bs-target="#carProduit" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+								<button type="button" data-bs-target="#carProduit" data-bs-slide-to="1" aria-label="Slide 2"></button>
+								<button type="button" data-bs-target="#carProduit" data-bs-slide-to="2" aria-label="Slide 3"></button>
+							</div>
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<div class="container-fluid">
+										<div class="row">
+											{% for service in services %}
+											<div class="col car-img">
+											
+												<a class="link-dark" href="#">
+                                                <h2 class="text-center">{{service.des}} </h2>
+													<img src="https://mouillotins.fr/festival/wp-content/uploads/banniere-site-1.png" class="d-block w-100" alt="...">
+													<div class="text-center">
+														<h5>{{service.price}}</h5>
+														<p>{{service.state}}</p>
+														<p>{{service.reference}}</p>
+                                                        
+														<a type="button" href="{{path('service_show',{'id': service.id})}}" class="btn btn-success">Voir détail
+													</div>
+												</a>
+												
+											</div>
+											{% endfor %}
+											
+										</div>
+									</div>
+								</div>
+								
+							</div>
+							
+						</div>
+					</div>
+				</div>
+
+
+{% include "assets/footer.html.twig" %}
+

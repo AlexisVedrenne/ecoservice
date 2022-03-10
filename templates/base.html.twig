@@ -1,19 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			{% block title %}EcoService
+			{% endblock %}
+		</title>
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		{% block stylesheets %}
+			<link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
+			<link href="{{ asset('css/styles.css') }}" type="text/css" rel="stylesheet">
+		{% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-</html>
+	</head>
+	<header>
+		{% if app.user %}
+			{{ include('assets/headeruser.html.twig') }}
+		{% else %}
+			{{ include('assets/headerparticular.html.twig') }}
+		{% endif %}
+		<nav class="navbar navbar-dark bg-dark">
+			<div class="container-fluid row justify-content-md" style="color: white;">
+
+				<div class="col-3">
+					<button aria-controls="navbarToggleExternalContent" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+				</div>
+			</nav>
+			<div class="collapse" id="navbarToggleExternalContent">
+				<div class="bg-dark p-4">
+					<div class="row justify-content-center">
+						<div class="col">
+							<a class="text-center nav-link link-light" href="{{ path('product_index') }}">Produits</a>
+						</div>
+						<div class="col">
+							<a class="text-center nav-link link-light" href="{{ path('page_faq') }}">FAQ</a>
+						</div>
+						<div class="col">
+							<a class="text-center nav-link link-light" href="#">Contact</a>
+
+						</div>
+					</div>
+				</div>
+			</html>
+		</html>
+	</html>
+</html></header><body>
+{% block body %}{% endblock %}
+<br><br><br><br><br><br><br><br><br></body>{{ include('assets/footer.html.twig') }}</html>
