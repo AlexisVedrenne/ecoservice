@@ -19,7 +19,7 @@ class ContactController extends AbstractController
     public function index(Request $request): Response
     {
         $contact = new Contact();
-        $form = $this->createForm(ContactFormType::class, $contact);
+        $form = $this->createFormBui(ContactFormType::class, $contact);
         $form->handleRequest($request);
         $state = false;
         $msg='';
@@ -34,13 +34,15 @@ class ContactController extends AbstractController
             } 
             else {
                 
-                MailJetApi::envoie(
+                MailJetApi::send(
                     $request->request->get('mail'),
                     $request->request->get('name'),
                     $request->request->get('objet'),
                     $request->request->get('message'),
 
                 );
+                
+
                 $state = true;
                 $msg='Message bien envoyé';
             }

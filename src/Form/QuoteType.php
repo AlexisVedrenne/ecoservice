@@ -6,6 +6,7 @@ use App\Entity\Quote;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class QuoteType extends AbstractType
 {
@@ -17,7 +18,10 @@ class QuoteType extends AbstractType
             ->add('dateQuote')
             ->add('totalPrice')
             ->add('commercial')
-            ->add('service')
+            ->add('service',EntityType::class, [
+                'attr' => ['class' => 'form-control',
+                ]
+                ])
         ;
     }
 
@@ -25,6 +29,7 @@ class QuoteType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Quote::class,
+            
         ]);
     }
 }
