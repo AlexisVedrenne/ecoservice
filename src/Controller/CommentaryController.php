@@ -39,11 +39,13 @@ class CommentaryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $commentary->setProduct($repo->find($request->request->get('product')));
+            $commentary->setComment($request->get('comment'));
             $commentary->setParticulier($this->getUser());
             $entityManager->persist($commentary);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_commentary_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_commentary_new', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Merci pour votre commentaire');
         }
 
         return $this->renderForm('commentary/new.html.twig', [

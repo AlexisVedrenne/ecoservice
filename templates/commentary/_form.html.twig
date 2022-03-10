@@ -1,5 +1,6 @@
+<div class='container'>
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    
     <select name="product">
     {% for order in app.user.orders %}
         {% for product in order.product %}
@@ -8,6 +9,11 @@
         {% endfor %}
     {% endfor %}
     </select>
+    <div class="form-floating mb-3">
+    {{ form_widget(form.comment) }}
+    <label for="floatingInput">Commentaire</label>
+    </div>
     
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-success">{{ button_label|default('Ajouter un commentaire') }}</button>
 {{ form_end(form) }}
+</div>

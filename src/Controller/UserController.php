@@ -52,7 +52,7 @@ class UserController extends AbstractController
             $user->setEmail($username);
             $entityManager->flush();
             
-            echo('Vos informationq ont bien été modifiés');
+            $this->addFlash('success', 'Vos informations ont bien été modifiés');
             //return $this->renderForm('app/user.html.twig', [
             
             
