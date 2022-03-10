@@ -1,23 +1,23 @@
 {% extends "basepro.html.twig" %}
 {% block body %}
-<div id="Ban">
-	<div class="maintext">
-		<h4>{{service.name}}</h4>
+	<div id="Ban">
+		<div class="maintext">
+			<h4>{{service.name}}</h4>
+		</div>
 	</div>
-</div>
 
-<img src="{{ asset('uploads/' ~ service.image) }}"  class="rounded mx-auto d-block w-50 p-5" alt="...">
-<div class="text-center">
-<h5>Le prix du service : {{service.price}}€</h5>
-<h5>Catégorie du service : {{service.categoryservice.name}}</h5>
-<h5>Description du service</h5>
-<p>{{service.des}}</p>
-<button style="width: 30%" type="button" class="btn btn-success">Demander un devis</button>
-</div>
+	<img src="{{ asset('uploads/' ~ service.image) }}" class="rounded mx-auto d-block w-50 p-5" alt="...">
+	<div class="text-center">
+		<h5>Le prix du service :
+			{{service.price}}€</h5>
+		<h5>Catégorie du service :
+			{{service.categoryservice.name}}</h5>
+		<h5>Description du service</h5>
+		<p>{{service.des}}</p>
+		<button style="width: 30%" type="button" class="btn btn-success">Demander un devis</button>
+	</div>
 
-<br>
+	<br>
 
 
-
-{% include "assets/footer.html.twig" %}
 {% endblock %}
