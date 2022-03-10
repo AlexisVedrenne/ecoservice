@@ -42,6 +42,12 @@
 		</button>
 	</div>
 	<main class="container">
+		{% if app.request.get('error') %}
+			<div class="alert alert-danger mt-3 text-center">
+				<p>Le mot de passe est invalide</p>
+				<p>{{ app.request.get('error') }}</p>
+			</div>
+		{% endif %}
 		<section class="d-flex justify-content-center">
 			<div class="card mt-3 ms-5 scale-hover" style="width: 18rem;">
 				<div class="card-body">

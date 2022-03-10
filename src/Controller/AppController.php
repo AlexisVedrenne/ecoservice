@@ -27,11 +27,11 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/particular" ,name="particular")
+     * @Route("/particular",name="particular")
      */
-    public function homeParticular(ProductRepository $repo)
+    public function homeParticular($error = null, ProductRepository $repo)
     {
-        return $this->render('app/homeparticular.html.twig', ['products' => $repo->findAll()]);
+        return $this->render('app/homeparticular.html.twig', ['products' => $repo->findAll(), 'error' => $error]);
     }
 
     /**

@@ -12,7 +12,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Services\MailJetApi;
 use DateTime;
-
+use Exception;
 
 class RegistrationController extends AbstractController
 {
@@ -23,28 +23,35 @@ class RegistrationController extends AbstractController
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
+        try {
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setRoles(['ROLE_USER']);
-            $user->setDateCreate(new DateTime('NOW'));
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+            $form->handleRequest($request);
 
-            $entityManager->persist($user);
-            $entityManager->flush();
-            // do anything else you need here, like send an email
-            MailJetApi::envoie($user, 'Création de compte', 'Compte EcoService', 'Vous avez créer un compte');
-            return $this->redirectToRoute('index');
+            if ($form->isSubmitted() && $form->isValid()) {
+                // encode the plain password
+                $user->setRoles(['ROLE_USER']);
+                $user->setDateCreate(new DateTime('NOW'));
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+                // do anything else you need here, like send an email
+                MailJetApi::envoie($user, 'Création de compte', 'Compte EcoService', 'Vous avez créer un compte');
+                return $this->redirectToRoute('index');
+            }
+
+            return $this->render('registration/register.html.twig', [
+                'registrationForm' => $form->createView(), 'error' => null
+            ]);
+        } catch (Exception $e) {
+            return $this->render('registration/register.html.twig', [
+                'registrationForm' => $form->createView(), 'error' => $e->getMessage()
+            ]);
         }
-
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
     }
 }

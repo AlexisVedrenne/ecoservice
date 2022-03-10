@@ -1,9 +1,6 @@
 {% block body %}
 	<div class="container mt-1">
 		<form method="post" action="{{ path('app_login') }}">
-			{% if error %}
-				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-			{% endif %}
 			<h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
 			<div class="form-floating mb-3">
 				<input type="email" value="{{ last_username }}" name="email" id="inputEmail" placeholder="x" class="form-control" autocomplete="email" required autofocus>
