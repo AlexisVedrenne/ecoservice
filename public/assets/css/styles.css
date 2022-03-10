@@ -1,7 +1,9 @@
 a:link {
   text-decoration: none;
 }
-
+input {
+  margin: 10px 10px 10px 10px;
+}
 body {
   position: relative;
   height: 100%;

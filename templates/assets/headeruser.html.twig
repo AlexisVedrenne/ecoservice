@@ -11,15 +11,14 @@
 		<div class="collapse navbar-collapse" id="navbarText">
 			<div class="container">
 				<div class="d-flex justify-content-center align-items-center">
-					<div class="input-group">
-						<input type="text" class="form-control d-flex align-items-center" placeholder="Rechercher un produit..." aria-label="Rechercher un produit..." aria-describedby="button-addon2">
-						<button class="btn btn-secondary d-flex align-items-center" type="button" id="button-addon2"><img src="{{ asset('bootstrap/icon/search.svg') }}"></button>
+					<div class="col">
+						{{ render(controller('App\\Controller\\SearchController::searchBar')) }}
 					</div>
 					<ul class="nav navbar-nav ms-auto">
 						<div class="nav-item dropdown">
 							<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><img class="acount-logo" src="{{ asset('bootstrap/icon/person-circle.svg') }}"></a>
 							<div class="dropdown-menu dropdown-menu-end">
-								<a href="#" class="dropdown-item">Mon compte</a>
+								<a href="{{ path('account_user') }}" class="dropdown-item">Mon compte</a>
 								<div class="dropdown-divider"></div>
 								<a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
 							</div>

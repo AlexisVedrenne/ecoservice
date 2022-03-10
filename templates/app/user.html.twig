@@ -3,10 +3,37 @@
 {% block title %}Edit User{% endblock %}
 
 {% block body %}
+<div class="container">
+    <h1>Modifiez vos informations personnelles</h1>
     <form action="{{path('account_user')}}" method="POST">
-    <input type="text" value="{{app.user.firstname}}" name="firstname">
-    <input type="text" value="{{app.user.lastname}}" name="lastname">
-    <input type="text" value="{{app.user.username}}" name="username">
-    <button type="submit">Modifier</button>
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Prénom</label>
+        <input  value="{{app.user.firstname}}" name="firstname" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Votre prénom">
+        
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Nom</label>
+        <input  value="{{app.user.lastname}}" name="lastname" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Votre nom">
+        
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email</label>
+        <input  value="{{app.user.username}}" name="username" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Votre prénom">
+        
+    </div>
+    <br>
+    <button class="btn btn-success" type="submit">Modifier</button>
+    
     </form>
+    <br>
+    {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+</div>
 {% endblock %}

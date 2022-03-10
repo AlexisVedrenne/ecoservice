@@ -47,10 +47,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $lastName;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Quote::class, mappedBy="commercial")
-     */
-    private $quotes;
 
     /**
      * @ORM\OneToMany(targetEntity=Commentary::class, mappedBy="particulier")
@@ -195,27 +191,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->quotes;
     }
 
-    public function addQuote(Quote $quote): self
-    {
-        if (!$this->quotes->contains($quote)) {
-            $this->quotes[] = $quote;
-            $quote->setCommercial($this);
-        }
 
-        return $this;
-    }
 
-    public function removeQuote(Quote $quote): self
-    {
-        if ($this->quotes->removeElement($quote)) {
-            // set the owning side to null (unless already changed)
-            if ($quote->getCommercial() === $this) {
-                $quote->setCommercial(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Commentary[]

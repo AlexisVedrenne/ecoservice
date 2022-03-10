@@ -1,0 +1,70 @@
+{% extends "basepro.html.twig" %}
+{% block body %}
+	<div class="d-flex justify-content-center mt-3 mb-3">
+		<h3>Votre devis</h3>
+		<button id="btnPdf" class="ms-3 btn btn-success">Télécharger votre devis en PDF</button>
+	</div>
+	<div class="container" id="pdf">
+		<div class="row justify-content-center mb-5">
+			<img height="100" width="100" src="{{ asset('image/logoEcoService.svg') }}">
+		</div>
+		<div class="row">
+			<div class="col">
+				<p class="text-muted">{{ quote.dateQuote|date('Y-m-d') }}</p>
+				<h5>Numéro :
+					{{ quote.id }}</h5>
+			</div>
+		</div>
+		<div class="row mt-5">
+			<div class="col">
+				<h6>Information sur l'entreprise :</h6>
+				<h2>{{ quote.societe }}</h2>
+				<p>Adresse</p>
+				<p>Ville :
+					{{ quote.city }}</p>
+				<p>Email :
+					{{ quote.mail }}</p>
+			</div>
+			<div class="col text-end">
+				<h6>Information sur le client :</h6>
+				<h2>{{ quote.nameProfessional }}</h2>
+			</div>
+		</div>
+		<div class="row mt-3">
+			<h6>Service(s) demandé(s)</h6>
+			<table class="table table-striped text-center">
+				<thead>
+					<tr>
+						<th>Description</th>
+						<th>Référence</th>
+						<th>Prix Unitaire HT</th>
+						<th>TVA</th>
+						<th>Total HT</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% set total = 0 %}
+					{% for service in quote.service %}
+						<tr>
+							<td>{{ service.des }}</td>
+							<td>{{ service.reference }}</td>
+							<td>{{ service.price }}€</td>
+							<td>20 %</td>
+							{% set total = total + ((service.price * 0.2) + service.price )  %}
+							<td>{{ (service.price * 0.2) + service.price }}€</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</tbody>
+		</table>
+	</div>
+	<div class="row justify-content-center text-center mt-3">
+		<h6>Prix total :
+			{{ total }}€</h6>
+	</div>
+</div>
+<div id="pdfFin"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{{ asset('js/devis/pdf.js') }}"></script>{% endblock %}

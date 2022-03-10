@@ -1,17 +1,21 @@
-{% include "basepro.html.twig" %}
+{% extends "basepro.html.twig" %}
 
-<div id="Ban">
-	<div class="maintext">
-		<h4>{{service.name}}</h4>
+{% block body %}
+	<div class="container mt-3">
+		<h1>{{service.name}}</h1>
+		<div class="row">
+			<div class="col">
+
+
+				<img src="{{ asset('uploads/' ~ service.image) }}" width="auto" height="auto" class="rounded d-block w-50" alt="image service">
+			</div>
+			<div class="col">
+				<p>
+					{{service.des}}</p>
+			</div>
+		</div>
+		<div class="d-flex justify-content-center">
+			<a href="{{ path('app_quote') }}" class="btn btn-success">Faire un devis</a>
+		</div>
 	</div>
-</div>
-
-<img src="https://mouillotins.fr/festival/wp-content/uploads/banniere-site-1.png" class="rounded mx-auto d-block w-50 p-5" alt="...">
-
-<div id="blockds">
-	<p style="width: 60%"></p>
-	<button style="width: 30%" type="button" class="btn btn-success">Demander un devis</button>
-</div>
-
-
-{% include "assets/footer.html.twig" %}
+{% endblock %}

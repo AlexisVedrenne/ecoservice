@@ -1,34 +1,54 @@
 {% extends "baseadmin.html.twig" %}
 {% block body %}
-	<div style="display: flex; justify-content:center; width: 100%">
-		<div class="container">
-			<div class="input-group mb-2 d-flex justify-content-start" style="width: 50%; margin-top:230px">
-				<input type="text" class="form-control" placeholder="Recherche..." aria-label="Recherche..." aria-describedby="button-addon2">
-				<button class="btn btn-secondary d-flex align-items-center" type="button" id="button-addon2"><img src="{{ asset('bootstrap/icon/search.svg') }}"></button>
-			</div>
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col">numero</th>
-						<th scope="col">Nom du client</th>
-						<th scope="col">Nom du commercial</th>
-						<th scope="col">Statut</th>
-						<th scope="col">Date</th>
-						<th scope="col">TOTAL TTC</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
+
+	<div class="container mt-5">
+		<div class="input-group mb-2 d-flex justify-content-start" style="width: 50%">
+			<input id="dtl" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Recherché un produit...">
+			<datalist id="datalistOptions">
+				{% for quote in quotes %}
+					<option value="{{ quote.id }} {{ quote.nameProfessional }}"></option>
+				{% endfor %}
+			</datalist>
 		</div>
-	</div>
-</div>{% endblock %}
+		<table class="table text-center">
+			<thead>
+				<tr id="none">
+					<th scope="col">numero</th>
+					<th scope="col">Nom du client</th>
+					<th scope="col">Nom du commercial</th>
+					<th scope="col">Statut</th>
+					<th scope="col">Date</th>
+					<th scope="col">TOTAL TTC</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for quote in quotes %}
+					{% if quote.status != 'termine' %}
+						<tr>
+							<th scope="row">{{ quote.id }}</th>
+							<td>{{ quote.nameProfessional }}</td>
+							<td>
+								{% if quote.commercial %}
+									{{quote.commercial.lastName}}
+								{% else %}
+									Aucun
+								{% endif %}
+							</td>
+							<td>{{ quote.status }}</td>
+							<td>{{ quote.dateQuote|date('Y-m-s') }}</td>
+							<td>{{ quote.totalPrice }}€</td>
+							<td>
+								{% if quote.status == 'en cours' and quote.commercial.lastName == app.user.lastName %}
+									<a href="{{ path('admin_traitement_devis',{'id':quote.id}) }}">Traiter le devis</a>
+								{% elseif quote.status == 'new' %}
+									<a href="{{ path('admin_traitement_devis',{'id':quote.id}) }}">Traiter le devis</a>
+								{% endif %}
+							</td>
+						</tr>
+					{% endif %}
+				</td>
+			</tbody>
+		</tr>
+	{% endfor %}
+</tbody></td></tbody></table></div><script src="{{ asset('js/admin/search.js') }}"></script></div>{% endblock %}

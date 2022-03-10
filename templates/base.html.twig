@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 		<title>
 			{% block title %}EcoService
 			{% endblock %}
@@ -39,14 +40,16 @@
 							<a class="text-center nav-link link-light" href="{{ path('page_faq') }}">FAQ</a>
 						</div>
 						<div class="col">
-							<a class="text-center nav-link link-light" href="#">Contact</a>
+							<a class="text-center nav-link link-light" href="{{ path('contact') }}">Contact</a>
 
 						</div>
 					</div>
 				</div>
-			</html>
-		</html>
-	</html>
-</html></header><body>
-{% block body %}{% endblock %}
-<br><br><br><br><br><br><br><br><br></body>{{ include('assets/footer.html.twig') }}</html>
+			</div>
+		</nav>
+	</header>
+	<body>
+		{% block body %}{% endblock %}<br><br><br><br><br><br><br><br><br>
+	</body>
+	{{ include('assets/footer.html.twig') }}
+</html>

@@ -1,18 +1,27 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello ContactController!{% endblock %}
-
 {% block body %}
+	<br>
+	<div class="container">
+		<div class='card text-center'>
+			<div class="row" style="margin: 0 auto; width: 80%;">
+				<div class="col-sm" style="text-align:left">
+					<h1 style="color:#00461d ">Bonjour</h1>
+					<p style="font-size: 15px;">Nous sommes très accessibles et aimerions vous parler. N'hésitez pas à nous appeler, nous envoyer un email, nous tweeter ou simplement remplir le formulaire</p>
+					<br>
+					<div>
+						<a href='mailto:service@ficheweb.fr'><img src="{{ asset('bootstrap/icon/person-circle.svg') }}" alt=""></a>
+						service@ficheweb.fr<br><br>
+						<img src="{{ asset('bootstrap/icon/geo-alt-fill.svg') }}" alt="">
+						30 Rue de Turbigo, 75003 Paris,France<br><br>
+						<img src="{{ asset('bootstrap/icon/facebook.svg') }}" alt=""></i>
+					EcoService<br><br>
+					<img src="{{ asset('bootstrap/icon/instagram.svg') }}" alt="">
+					EcoService
+					<br><br>
 
-    {{ form_start(form) }}
+				</div>
 
-    {{ form_row(form.name) }}
-    {{ form_row(form.lastName) }}
-    {{ form_row(form.mail) }}
-    {{ form_row(form.message) }}
+				<<<<<<<HEAD</div><divclass="col-sm"><divclass="form"><h1>Envoyerunmessage</h1><formmethod="post"><divclass="input-groupmb-3"><spanclass="input-group-text"id="basic-addon1"><imgsrc="{{asset('bootstrap/icon/person-circle.svg')}}"alt=""></span><inputtype="text"class="form-control"placeholder="NomComplet"aria-label="Username"name="nom"></div><divclass="input-groupmb-3"><spanclass="input-group-text"id="basic-addon1"><imgsrc="{{asset('bootstrap/icon/envelope.svg')}}"alt=""></span><inputtype="mail"class="form-control"placeholder="Mail"aria-label="Username"name="mail"></div><divclass="input-groupmb-3"><spanclass="input-group-text"id="basic-addon1"><imgsrc="{{asset('bootstrap/icon/telephone.svg')}}"alt=""></span><inputtype="text"class="form-control"placeholder="Numérodetéléphone"aria-label="Username"name="tel"></div><divclass="input-groupmb-3"><spanclass="input-group-text"id="basic-addon1"><imgsrc="{{asset('bootstrap/icon/forward.svg')}}"alt=""></span><inputtype="text"class="form-control"placeholder="Objet"aria-label="Username"name="objet"></div><divclass="input-groupmb-3"><spanclass="input-group-text"id="basic-addon1"><imgsrc="{{asset('bootstrap/icon/chat.svg')}}"alt=""></span><textareaclass="form-control"aria-label="Withtextarea"placeholder="Message"name="msg"></textarea></div><inputtype="submit"value="Envoyerunmessage"name="ok"class="btnbtn-success"style='background:#00461d;border-color:#00461d;'></form><br></div></div></div></div></div>======={{form_start(form)}}{{form_row(form.mail)}}{{form_row(form.name)}}{{form_row(form.objet)}}{{form_row(form.message)}}{{form_widget(form)}}<buttontype="submit"class="classes">Envoyer</button>{{form_end(form)}}<div><p>{{message}}</p></div>>>
+				{% if {state} %}{% endif %}>>>>> prince
 
-    {{ form_widget(form) }}
-    <button type="submit" class="classes">Envoyer</button> 
-    {{ form_end(form) }}
-
-{% endblock %}
+			{% endblock %}

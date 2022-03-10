@@ -25,12 +25,12 @@ class Quote
     private $nameProfessional;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string",length=30)
      */
     private $status;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string",length=50)
      */
     private $dateQuote;
 
@@ -39,15 +39,41 @@ class Quote
      */
     private $totalPrice;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="quotes")
-     */
-    private $commercial;
 
     /**
      * @ORM\ManyToMany(targetEntity=Service::class, inversedBy="quotes")
      */
     private $service;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $mail;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $numero;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=5000)
+     */
+    private $des;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $societe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     */
+    private $commercial;
 
     public function __construct()
     {
@@ -71,24 +97,24 @@ class Quote
         return $this;
     }
 
-    public function getStatus(): ?bool
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function setStatus(bool $status): self
+    public function setStatus(string $status): self
     {
         $this->status = $status;
 
         return $this;
     }
 
-    public function getDateQuote(): ?\DateTimeInterface
+    public function getDateQuote(): String
     {
         return $this->dateQuote;
     }
 
-    public function setDateQuote(\DateTimeInterface $dateQuote): self
+    public function setDateQuote(string $dateQuote): self
     {
         $this->dateQuote = $dateQuote;
 
@@ -103,18 +129,6 @@ class Quote
     public function setTotalPrice(string $totalPrice): self
     {
         $this->totalPrice = $totalPrice;
-
-        return $this;
-    }
-
-    public function getCommercial(): ?User
-    {
-        return $this->commercial;
-    }
-
-    public function setCommercial(?User $commercial): self
-    {
-        $this->commercial = $commercial;
 
         return $this;
     }
@@ -139,6 +153,78 @@ class Quote
     public function removeService(Service $service): self
     {
         $this->service->removeElement($service);
+
+        return $this;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
+    public function getNumero(): ?string
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(string $numero): self
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getDes(): ?string
+    {
+        return $this->des;
+    }
+
+    public function setDes(string $des): self
+    {
+        $this->des = $des;
+
+        return $this;
+    }
+
+    public function getSociete(): ?string
+    {
+        return $this->societe;
+    }
+
+    public function setSociete(string $societe): self
+    {
+        $this->societe = $societe;
+
+        return $this;
+    }
+
+    public function getCommercial(): ?User
+    {
+        return $this->commercial;
+    }
+
+    public function setCommercial(?User $commercial): self
+    {
+        $this->commercial = $commercial;
 
         return $this;
     }

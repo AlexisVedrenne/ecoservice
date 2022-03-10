@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Quote;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use DateTime;
 
 /**
  * @method Quote|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +48,12 @@ class QuoteRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getQuoteCreateMonth()
+    {
+        $anneeActu = (new DateTime('NOW'))->format('Y');
+        $dql = "SELECT o.dateQuote , COUNT(o) as nb FROM App\Entity\Quote o WHERE o.dateQuote LIKE '%" . $anneeActu . "%' GROUP BY o.dateQuote";
+        $res = $this->getEntityManager()->createQuery($dql)->execute();
+        return $res;
+    }
 }
