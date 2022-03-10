@@ -25,7 +25,7 @@ class Quote
     private $nameProfessional;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string",length=30)
      */
     private $status;
 
@@ -41,6 +41,7 @@ class Quote
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="quotes")
+     * @ORM\Column(nullable=true)
      */
     private $commercial;
 
@@ -48,6 +49,31 @@ class Quote
      * @ORM\ManyToMany(targetEntity=Service::class, inversedBy="quotes")
      */
     private $service;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $mail;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $numero;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=5000)
+     */
+    private $des;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $societe;
 
     public function __construct()
     {
@@ -71,12 +97,12 @@ class Quote
         return $this;
     }
 
-    public function getStatus(): ?bool
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function setStatus(bool $status): self
+    public function setStatus(string $status): self
     {
         $this->status = $status;
 
@@ -139,6 +165,66 @@ class Quote
     public function removeService(Service $service): self
     {
         $this->service->removeElement($service);
+
+        return $this;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
+    public function getNumero(): ?string
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(string $numero): self
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getDes(): ?string
+    {
+        return $this->des;
+    }
+
+    public function setDes(string $des): self
+    {
+        $this->des = $des;
+
+        return $this;
+    }
+
+    public function getSociete(): ?string
+    {
+        return $this->societe;
+    }
+
+    public function setSociete(string $societe): self
+    {
+        $this->societe = $societe;
 
         return $this;
     }

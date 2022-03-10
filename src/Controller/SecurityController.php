@@ -19,6 +19,8 @@ class SecurityController extends AbstractController
             foreach ($user->getRoles() as $role) {
                 if ($role == 'ROLE_ADMIN') {
                     return $this->redirectToRoute('admin_stats_customer');
+                } else if ($role == 'ROLE_COM') {
+                    return $this->redirectToRoute('admin_gestion_devis');
                 }
             }
             return $this->redirectToRoute('index');

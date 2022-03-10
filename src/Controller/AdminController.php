@@ -55,7 +55,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/manager/quotes", name="gestion_devis")
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_COM")
      */
     public function indexquotemanagement()
     {

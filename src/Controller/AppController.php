@@ -19,6 +19,8 @@ class AppController extends AbstractController
             foreach ($user->getRoles() as $role) {
                 if ($role == 'ROLE_ADMIN') {
                     return $this->redirectToRoute('admin_stats_customer');
+                } else if ($role == 'ROLE_COM') {
+                    return $this->redirectToRoute('admin_gestion_devis');
                 }
             }
             return $this->redirectToRoute('particular');
@@ -41,11 +43,12 @@ class AppController extends AbstractController
      * 
      * @return int Retourne le code générer
      */
-    public static function codeGen($longueur){
-        $number= "0123456789";
+    public static function codeGen($longueur)
+    {
+        $number = "0123456789";
         return substr(str_shuffle(str_repeat($number, $longueur)), 0, $longueur);
     }
-    
+
     /**
      * @Route("/professionnal" ,name="professionnal")
      */
