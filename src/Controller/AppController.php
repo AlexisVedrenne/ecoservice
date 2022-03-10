@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ProductRepository;
+use App\Repository\ServiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -52,9 +53,11 @@ class AppController extends AbstractController
     /**
      * @Route("/professionnal" ,name="professionnal")
      */
-    public function homePro()
+    public function homePro(ServiceRepository $serviceRepository)
     {
-        return $this->render('app/homepro.html.twig');
+        return $this->render('app/homepro.html.twig' , [
+            'services' => $serviceRepository->findAll(),
+        ]);
     }
 
     /**
