@@ -25,14 +25,13 @@
 											<div class="col car-img">
 											
 												<a class="link-dark" href="#">
-                                                <h2 class="text-center">{{service.des}} </h2>
-													<img src="https://mouillotins.fr/festival/wp-content/uploads/banniere-site-1.png" class="d-block w-100" alt="...">
+                                                	<h2 class="text-center">{{service.name}} </h2>
+													<img src="{{ asset('uploads/' ~ service.image) }}" class="d-block w-100" alt="...">
 													<div class="text-center">
-														<h5>{{service.price}}</h5>
-														<p>{{service.state}}</p>
-														<p>{{service.reference}}</p>
+														<h5>Le prix du service : {{service.price}}</h5>
+														<p>{{service.des}}</p>
                                                         
-														<a type="button" href="{{path('service_show',{'id': service.id})}}" class="btn btn-success">Voir détail
+														<a type="button" href="{{path('service_show',{'id': service.id})}}" class="btn btn-success">Voir détail</a>
 													</div>
 												</a>
 												

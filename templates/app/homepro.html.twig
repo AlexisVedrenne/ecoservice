@@ -76,7 +76,7 @@
 					<img class="card-img-top" src="{{ asset('image/homepro/service3.png') }}" alt="Card image cap">
 				</div>
 				</div>
-				<div id="greenButton">Découvrez les services</div>
+				<a id="greenButton" href="{{path('service_index')}}">Découvrez les services</a>
 			</div>
 			<div class="maintext">
 				<h3>Nouveautés</h3>
@@ -95,65 +95,32 @@
 								<div class="carousel-item active">
 									<div class="container-fluid">
 										<div class="row">
+											{% for service in services %}
 											<div class="col car-img">
 												<a class="link-dark" href="#">
-													<img src="https://mouillotins.fr/festival/wp-content/uploads/banniere-site-1.png" class="d-block w-100" alt="...">
+													<img src="{{ asset('uploads/' ~ service.image) }}" class="d-block w-100" alt="">
 													<div class="text-center">
-														<h5>Produit 1 - 0.50€</h5>
-														<p>Un super produit !</p>
+														<h5>{{service.name}}</h5>
+														<p>{{service.des}}</p>
 													</div>
 												</a>
 											</div>
-											<div class="col car-img">
-												<a class="link-dark" href="#">
-													<img src="https://mouillotins.fr/festival/wp-content/uploads/banniere-site-1.png" class="d-block w-100" alt="...">
-													<div class="text-center">
-														<h5>Produit 2 - 32.99€</h5>
-														<p>Un super produit 2 !</p>
-													</div>
-												</a>
-											</div>
+											{% endfor %}
+											
 										</div>
 									</div>
 								</div>
-								<div class="carousel-item">
-									<div class="container-fluid">
-										<div class="row">
-											<div class="col car-img">
-												<a class="link-dark" href="#">
-													<img src="https://mouillotins.fr/festival/wp-content/uploads/banniere-site-1.png" class="d-block w-100" alt="...">
-													<div class="text-center">
-														<h5>Produit 3 - 50.99€</h5>
-														<p>Un super produit 3 !</p>
-													</div>
-												</a>
-											</div>
-											<div class="col car-img">
-												<a class="link-dark" href="#">
-													<img src="https://mouillotins.fr/festival/wp-content/uploads/banniere-site-1.png" class="d-block w-100" alt="...">
-													<div class="text-center">
-														<h5>Produit 4 - 99.99€</h5>
-														<p>Un super produit 4 !</p>
-													</div>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
+								
 							</div>
-							<button class="carousel-control-prev" type="button" data-bs-target="#carProduit" data-bs-slide="prev">
-								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								<span class="visually-hidden">Previous</span>
-							</button>
-							<button class="carousel-control-next" type="button" data-bs-target="#carProduit" data-bs-slide="next">
-								<span class="carousel-control-next-icon" aria-hidden="true"></span>
-								<span class="visually-hidden">Next</span>
-							</button>
 						</div>
+					
 					</div>
 				</div>
 			</div>
-		</div>
+	</div>
+</div>
+</div>
+
 		{% include "assets/footer.html.twig" %}
 		{% endblock %}
 		
