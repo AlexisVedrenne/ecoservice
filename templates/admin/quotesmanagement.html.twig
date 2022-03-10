@@ -19,26 +19,36 @@
 					<th scope="col">Statut</th>
 					<th scope="col">Date</th>
 					<th scope="col">TOTAL TTC</th>
+					<th scope="col">Action</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for quote in quotes %}
-					<tr>
-						<th scope="row">{{ quote.id }}</th>
-						<td>{{ quote.nameProfessional }}</td>
-						<td>
-							{% if quote.commercial %}
-								{{quote.commercial.lastName}}
-							{% else %}
-								Acun
-							{% endif %}
-						</td>
-						<td>{{ quote.status }}</td>
-						<td>{{ quote.dateQuote|date('Y-m-s') }}</td>
-						<td>{{ quote.totalPrice }}€</td>
-					</tr>
-				{% endfor %}
+					{% if quote.status != 'termine' %}
+						<tr>
+							<th scope="row">{{ quote.id }}</th>
+							<td>{{ quote.nameProfessional }}</td>
+							<td>
+								{% if quote.commercial %}
+									{{quote.commercial.lastName}}
+								{% else %}
+									Aucun
+								{% endif %}
+							</td>
+							<td>{{ quote.status }}</td>
+							<td>{{ quote.dateQuote|date('Y-m-s') }}</td>
+							<td>{{ quote.totalPrice }}€</td>
+							<td>
+								{% if quote.status == 'en cours' and quote.commercial.lastName == app.user.lastName %}
+									<a href="{{ path('admin_traitement_devis',{'id':quote.id}) }}">Traiter le devis</a>
+								{% elseif quote.status == 'new' %}
+									<a href="{{ path('admin_traitement_devis',{'id':quote.id}) }}">Traiter le devis</a>
+								{% endif %}
+							</td>
+						</tr>
+					{% endif %}
+				</td>
 			</tbody>
-		</td>
-	</tbody>
-</table></div><script src="{{ asset('js/admin/search.js') }}"></script></div>{% endblock %}
+		</tr>
+	{% endfor %}
+</tbody></td></tbody></table></div><script src="{{ asset('js/admin/search.js') }}"></script></div>{% endblock %}

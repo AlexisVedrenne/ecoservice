@@ -39,11 +39,6 @@ class Quote
      */
     private $totalPrice;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="quotes")
-     * @ORM\Column(nullable=true)
-     */
-    private $commercial;
 
     /**
      * @ORM\ManyToMany(targetEntity=Service::class, inversedBy="quotes")
@@ -74,6 +69,11 @@ class Quote
      * @ORM\Column(type="string", length=50)
      */
     private $societe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     */
+    private $commercial;
 
     public function __construct()
     {
@@ -129,18 +129,6 @@ class Quote
     public function setTotalPrice(string $totalPrice): self
     {
         $this->totalPrice = $totalPrice;
-
-        return $this;
-    }
-
-    public function getCommercial(): ?User
-    {
-        return $this->commercial;
-    }
-
-    public function setCommercial(?User $commercial): self
-    {
-        $this->commercial = $commercial;
 
         return $this;
     }
@@ -225,6 +213,18 @@ class Quote
     public function setSociete(string $societe): self
     {
         $this->societe = $societe;
+
+        return $this;
+    }
+
+    public function getCommercial(): ?User
+    {
+        return $this->commercial;
+    }
+
+    public function setCommercial(?User $commercial): self
+    {
+        $this->commercial = $commercial;
 
         return $this;
     }
