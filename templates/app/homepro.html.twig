@@ -1,4 +1,7 @@
-{% include "basepro.html.twig" %}
+{% extends "basepro.html.twig" %}
+{% block title %}Bienvenue sur EcoService
+{% endblock %}
+{% block body %}
 <div
 	class="contents">
 	<!-- Carousel -->
@@ -152,4 +155,6 @@
 			</div>
 		</div>
 		{% include "assets/footer.html.twig" %}
+		{% endblock %}
+		
 		

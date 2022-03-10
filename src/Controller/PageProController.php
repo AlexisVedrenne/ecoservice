@@ -23,7 +23,7 @@ class PageProController extends AbstractController
      */
     public function indexcatalogue(): Response
     {
-        return $this->render('app/servicescatalogue.html.twig', [
+        return $this->render('service/servicescatalogue.html.twig', [
             'controller_name' => 'PageProController',
         ]);
     }
