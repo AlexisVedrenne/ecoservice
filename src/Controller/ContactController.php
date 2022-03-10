@@ -2,32 +2,37 @@
 
 namespace App\Controller;
 
+use App\Services\MailJetApi;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Contact;
-use App\Form\ContactFormType;
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class ContactController extends AbstractController
 {
     /**
      * @Route("/contact", name="contact")
+     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_ADMIN")
+     * $request: ce qui va permettre de récuperer les données provenant du formulaire
+     * cette fonction permet de récuperer toutes les données que l'utilisateur a rentré dans le formulaire Contact
      */
-    public function index(Request $request): Response
+    public function contact(Request $request): Response
     {
-        $contact = new Contact();
-        $form = $this->createForm(ContactFormType::class, $contact);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if (($request->request->get('mail') == null)) {
+            return $this->render('contact/index.html.twig');
+        } else {
+            MailJetApi::envoieContact(
+                $request->request->get('mail'),
+                $request->request->get('nom'),
+                $request->request->get('tel'),
+                $request->request->get('objet'),
+                $request->request->get('msg'),
 
-            $contact = $form->getData();
-            return $this->redirectToRoute('contact', ['succesMessage' => 'Message bien envoyé']);
+            );
+            return $this->redirectToRoute("contact");
         }
-        return $this->render('contact/index.html.twig', [
-            'form' => $form->createView()
-        ]);
     }
 }

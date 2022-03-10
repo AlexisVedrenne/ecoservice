@@ -17,6 +17,43 @@ class MailJetApi
         return new Client('0843d33c52ad141defeeff5a94eb0081', '71bb0e7dddb6eec924f71afc00cad193', true, ['version' => 'v3.1']);
     }
 
+    static public function envoieContact(string $mail, string $nom, string $tel, string $objet, string $msg)
+  {
+
+    $body = [
+      'Messages' => [
+        [
+          'From' => [
+            'Email' => "service@ficheweb.fr",
+            'Name' => "Service Fiche Web"
+          ],
+          'To' => [
+            [
+              'Email' => "service@ficheweb.fr",
+              'Name' => "Service Fiche Web"
+            ]
+          ],
+          'Subject' => "Nouveau message",
+          'TextPart' => "",
+
+          'HTMLPart' => "<h1>Bonjour  vous venez de recevoir un nouveau message de la part de " . $nom . "</h1>
+          <h3>Ses données personelles</h3>
+          <h5>Email: " . $mail . " </h5>
+          <h5>Tel: " . $tel . "</h5>
+          <h5>Nom Complet:" . $nom . " </h5>
+          <h3>Le message</h3>
+          <h5>Objet: " . $objet . " </h5>
+          <p>Le message: " . $msg . " </p>
+          <h6>Veuillez ne pas répondre à ce mail générer automatiquement</h6>",
+          'CustomID' => "AppGettingStartedTest",
+
+        ]
+      ]
+    ];
+    $response = MailJetApi::getClient()->post(Resources::$Email, ['body' => $body]);
+    return $response->success();
+  }
+
     static public function envoie(User $user, string $objet, string $titre, string $message)
     {
 
