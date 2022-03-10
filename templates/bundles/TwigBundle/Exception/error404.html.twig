@@ -1,13 +1,12 @@
-{% include "baseerror.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>ERREUR 404....</h1>
-            <div class="card-body d-flex justify-content-center" style="border-radius: 30px;">
-                <img src="{{ asset('image/error/error404.png') }}" class="card-img" alt="...">
-            </div> 
-     <div class="col text-center">                         
-    <p>
-       <button type="button" class="btn btn-success">Retourner sur l'accueil</button>
-    </p>
-    </div>
+	<h1 class="text-center">ERREUR 404....</h1>
+	<p class="text-center">Il semblerait que cette page d'existe pas !</p>
+	<div class="card-body d-flex justify-content-center" style="border-radius: 30px;">
+		<img src="{{ asset('image/error/error404.png') }}" class="card-img" alt="...">
+	</div>
+	<div class="col d-flex justify-content-center">
+		<a href="{{ path('particular') }}" class="btn btn-success">Retourner sur l'accueil</a>
+	</div>
 {% endblock %}
