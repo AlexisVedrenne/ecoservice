@@ -22,10 +22,6 @@ class Contact
      */
     private $name;
 
-    /**
-     * @ORM\Column(type="string", length=30)
-     */
-    private $lastName;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -36,6 +32,11 @@ class Contact
      * @ORM\Column(type="text")
      */
     private $message;
+
+    /**
+     * @ORM\Column(type="string", length=25)
+     */
+    private $objet;
 
     public function getId(): ?int
     {
@@ -50,18 +51,6 @@ class Contact
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getLastName(): ?string
-    {
-        return $this->lastName;
-    }
-
-    public function setLastName(string $lastName): self
-    {
-        $this->lastName = $lastName;
 
         return $this;
     }
@@ -86,6 +75,18 @@ class Contact
     public function setMessage(string $message): self
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getObjet(): ?string
+    {
+        return $this->objet;
+    }
+
+    public function setObjet(string $objet): self
+    {
+        $this->objet = $objet;
 
         return $this;
     }

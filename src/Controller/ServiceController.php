@@ -11,6 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Quote;
+use App\Form\ServiceFormType;
+
 
 /**
  * @Route("/service")
@@ -100,5 +103,25 @@ class ServiceController extends AbstractController
         $entityManager->flush();
         unlink('assets/uploads/' . $service->getImage());
         return $this->redirectToRoute('admin_gestion_services', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/form", name="service_form")
+     */
+    public function form(Request $request): Response
+    {
+        $quote =[];
+        $form = $this ->createForm(ServiceFormType::class,$quote );
+        $form->handleRequest($request);
+
+        if( $form->isSubmitted() && $form->isValid() ) {
+            
+            // TO DO capture and transform the data into a PDF file.
+        }
+
+        return $this->render('service/service_form.html.twig', [
+            'service' => $form->createView(),
+        ]);
+
     }
 }

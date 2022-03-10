@@ -53,11 +53,9 @@ class AppController extends AbstractController
     /**
      * @Route("/professionnal" ,name="professionnal")
      */
-    public function homePro(ServiceRepository $serviceRepository)
+    public function homePro(ServiceRepository $service)
     {
-        return $this->render('app/homepro.html.twig' , [
-            'services' => $serviceRepository->findAll(),
-        ]);
+        return $this->render('app/homepro.html.twig', ['services' => $service->findAll()]);
     }
 
     /**

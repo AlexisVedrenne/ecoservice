@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	ServiceFormController!
+{% endblock %}
+
+
+{% block body %}
+
+	{{ form_start(form) }}
+
+	{{ form_row(form.mail) }}
+	{{ form_row(form.name) }}
+	{{ form_row(form.objet) }}
+
+	{{ form_row(form.message) }}
+
+	{{ form_widget(form) }}
+	<button type="submit" class="classes">Envoyer</button>
+	{{ form_end(form) }}
+
+{% endblock %}

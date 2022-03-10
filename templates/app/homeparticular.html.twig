@@ -86,7 +86,7 @@
 					<div class="carousel-inner">
 						<div class="carousel-item active" data-bs-interval="10000">
 							<div class="d-flex justify-content-center mb-3 mt-2">
-								{% if products[0].images %}
+								{% if products %}
 									<img style="heigth:30%;width:30%" src="{{ asset('uploads/' ~ products[0].images[0]) }}" class="d-block" alt="...">
 								{% else %}
 									<img style="heigth:30%;width:30%" src="{{ asset('image/imgnofound.png') }}" class="d-block" alt="...">

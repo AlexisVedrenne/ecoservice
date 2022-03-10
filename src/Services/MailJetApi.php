@@ -6,7 +6,7 @@ namespace App\Services;
 use \Mailjet\Resources;
 use \Mailjet\Client;
 use App\Entity\User;
-use App\Service\MailJetAp;
+use App\Service\Mailjet;
 
 
 class MailJetApi
@@ -55,6 +55,7 @@ class MailJetApi
   }
 
     static public function envoie(User $user, string $objet, string $titre, string $message)
+    static public function envoie(User $user,string $name, string $objet, string $message,string $titre)
     {
 
         $body = [
@@ -67,7 +68,8 @@ class MailJetApi
                     'To' => [
                         [
                             'Email' => $user->getEmail(),
-                            'Name' => $user->getLastName() . ' ' . $user->getFirstName()
+                            'Name' => $user->getLastName() . ' ' . $user->getFirstName()    
+                            
                         ]
                     ],
                     'Subject' => $objet,
@@ -88,6 +90,49 @@ class MailJetApi
         ];
         $response = MailJetApi::getClient()->post(Resources::$Email, ['body' => $body]);
         return $response->success();
+
+    }
+
+    // Send a contact email 
+    static public function send(string $mail,string $name, string $objet, string $message)
+    {
+
+        $body = [
+            'Messages' => [
+                [
+                    'From' => [
+                        
+                        'Email' => 'service@ficheweb.fr',
+                            'Name' => 'Service EcoService'
+                    ],
+                    'To' => [
+                        [
+                            'Email' => $mail,
+                            'Name' => $name 
+                            
+                            
+                        ]
+                    ],
+                    'Subject' => $objet,
+                    'TextPart' => '',
+                    'HTMLPart' => "
+                <body>
+        
+    
+                <h5>Notre chèr(e) " . $name . "</h5>
+                <p class='p'>
+                        " . $message . "
+                </p>
+
+                <h6>Merci de votre compréhension.</h6>
+                 </body>",
+
+                ]
+            ]
+        ];
+
+        $reponse = MailJetApi::getClient()->post(Ressources::$Email,['body'=>$body]);
+        return $reponse->succes();
     }
     static public function mdpOublier(string $mail, int $code)
   {
