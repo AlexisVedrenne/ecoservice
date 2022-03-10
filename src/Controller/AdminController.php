@@ -33,9 +33,9 @@ class AdminController extends AbstractController
      * @Route("/stats/services", name="stats_services")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function statsservices(ServiceRepository $repo)
+    public function statsservices(ServiceRepository $repo, QuoteRepository $repoQuote)
     {
-        return $this->render('admin/statsservicesadmin.html.twig', ['services' => $repo->findAll()]);
+        return $this->render('admin/statsservicesadmin.html.twig', ['services' => $repo->findAll(), 'quotes' => $repoQuote->findAll(), 'statsQuote' => $repoQuote->getQuoteCreateMonth()]);
     }
 
     /**

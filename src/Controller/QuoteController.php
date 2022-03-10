@@ -27,7 +27,7 @@ class QuoteController extends AbstractController
             foreach ($quote->getService() as $service) {
                 $total = $total + ($service->getPrice() * 0.2) + $service->getPrice();
             }
-            $quote->setDateQuote(new DateTime('NOW'));
+            $quote->setDateQuote((new DateTime('NOW'))->format('Y-m'));
             $quote->setTotalPrice($total);
             $quote->setStatus('new');
             $manager->persist($quote);
