@@ -52,4 +52,34 @@ class MailJetApi
         $response = MailJetApi::getClient()->post(Resources::$Email, ['body' => $body]);
         return $response->success();
     }
+    static public function mdpOublier(string $mail, int $code)
+  {
+    $body = [
+      'Messages' => [
+        [
+          'From' => [
+            'Email' => "service@ficheweb.fr",
+            'Name' => "Service Eco Service "
+          ],
+          'To' => [
+            [
+              'Email' => $mail,
+              'Name' => $mail
+            ]
+          ],
+          'Subject' => "[FicheWeb Suppot] Mot de passe oublier",
+          'TextPart' => "Support",
+          'HTMLPart' => "<h1>Demande de nouveau mot de passe</h1>
+          <p>Si vous n'etes pas à l'origne de cette demande ignorer ce mail.<br> Voici votre code générer automatiquement<br>
+            <h1>" . $code . "</h1>
+          </p>
+          <h4>L'équipe FicheWeb</h4>
+          <h6>Veuillez ne pas répondre à ce mail générer automatiquement</h6>",
+          'CustomID' => "AppGettingStartedTest"
+        ]
+      ]
+    ];
+    $response = MailJetApi::getClient()->post(Resources::$Email, ['body' => $body]);
+    return $response->success();
+  }
 }

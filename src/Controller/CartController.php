@@ -62,6 +62,12 @@ class CartController extends AbstractController
                 $order->addProduct($panier->produit);
                 $order->setQuantity($order->getQuantity() + $panier->quantite);
             }
+             if ($this->getUser() ){
+                $order->setParticulier($this->getUser());
+             };
+		        
+	         
+            $order->setParticulier($this->getUser());
             $order->setTotal($total);
             $order->setDate((new DateTime('NOW'))->format('Y-m'));
             $entityManager->persist($order);

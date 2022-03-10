@@ -35,6 +35,18 @@ class AppController extends AbstractController
     }
 
     /**
+     * $longueur : Cette variable représente la longeur du code que l'on veut générer
+     * 
+     * Cette fonction permet de génerer un code de façon aléatoire
+     * 
+     * @return int Retourne le code générer
+     */
+    public static function codeGen($longueur){
+        $number= "0123456789";
+        return substr(str_shuffle(str_repeat($number, $longueur)), 0, $longueur);
+    }
+    
+    /**
      * @Route("/professionnal" ,name="professionnal")
      */
     public function homePro()

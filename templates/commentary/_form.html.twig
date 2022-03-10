@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <select name="product">
+    {% for order in app.user.orders %}
+        {% for product in order.product %}
+        
+        <option value="{{ product.id }}">{{ product.name }}</option>
+        {% endfor %}
+    {% endfor %}
+    </select>
+    
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
