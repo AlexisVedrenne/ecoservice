@@ -1,11 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Commentary{% endblock %}
+{% block title %}Ajouter un commentaire{% endblock %}
 
 {% block body %}
-    <h1>Create new Commentary</h1>
+    <div class='container' >
+    
+    <div class='container'>
+    <h1>Ajouter un commentaire</h1>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
 
-    {{ include('commentary/_form.html.twig') }}
+        {{ form_start(form) }}
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Choissez le produit</label>
+                <select class='form-control' name="product">
+                    {% for order in app.user.orders %}
+                        {% for product in order.product %}
+                    
+                            <option value="{{ product.id }}">{{ product.name }}</option>
+                        {% endfor %}
+                    {% endfor %}
+                </select>
+            </div>
 
-    <a href="{{ path('app_commentary_index') }}">back to list</a>
+            <div class="form-group" >
+            
+            <label for="exampleFormControlTextarea1">Votre commentaire</label>
+            <textarea placeholder="Votre commentaire" class="form-control"name="comment" id="" cols="30" rows="10"></textarea>
+            </div>
+            <br>
+            <button class="btn btn-success">{{ button_label|default('Ajouter un commentaire') }}</button>
+        {{ form_end(form) }}
+        </div>
+    
+    
+    
+    </div>
 {% endblock %}

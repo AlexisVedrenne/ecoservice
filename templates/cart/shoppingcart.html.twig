@@ -14,7 +14,7 @@
 											<a href="{{ path('cart_delete_all') }}" role="button" class="btn btn-outline-danger">Vider le panier</a>
 											<h6 class="mb-0 text-muted">
 												<strong>{{ dataPanier|length }}</strong>
-												articles</h6>
+												article(s)</h6>
 										</div>
 
 										{% for article in dataPanier %}
@@ -93,8 +93,15 @@
 									</div>
 
 									{% if total != 0 %}
+										<div class="form-check">
+  											<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+											<label class="form-check-label" for="flexCheckDefault">
+												En soumettant ce formulaire je confirme avoir lu et accepté <a href={{path("mention_legales")}}>les conditions générales de vente </a> d'Eco Service 
+											</label>
+										</div>
 										<form action="" method="POST">
 											<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-label="Passer au paiement" data-currency="eur" data-key="pk_test_51KabbgBf0vZfGc8ScJVN6IvZKFqqjitig8gziF6j3DPveOEI5tKbeI1QyTxqdWZ4s66NLeVNrWWbyVJL2zFUm2fR007NfrHBLf" data-amount="{{ total * 100 }}" data-name="Eco Service" data-description="Payer votre commande" redirect.failure-reason="product/index.html.twig" data-zip-code="true" data-locale="auto"></script>
+											
 										</form>
 									{% endif %}
 								</div>
