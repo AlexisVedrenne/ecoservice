@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Commentary;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\CategoryProductRepository;
+use App\Repository\CommentaryRepository;
 use App\Repository\ProductRepository;
 use App\Services\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 /**
  * @Route("/product")
@@ -63,10 +66,10 @@ class ProductController extends AbstractController
     /**
      * @Route("/show/{id}", name="product_show", methods={"GET"})
      */
-    public function show(Product $product): Response
+    public function show(Product $product, CommentaryRepository $commentaryRepository): Response
     {
         return $this->render('product/show.html.twig', [
-            'product' => $product,
+            'product' => $product,'commentarys' => $commentaryRepository->findBy(array('product' => $product)),
         ]);
     }
 

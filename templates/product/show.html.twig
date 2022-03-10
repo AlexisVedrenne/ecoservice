@@ -74,8 +74,12 @@
 			<div class="col">
 				<div class="card">
 					<div class="card-body">
-						<h6>Commentaires</h6>
-						<p class="text-muted">Aucun commentaires...</p>
+					<h6>Commentaires</h6>
+					{% for commentary in commentarys %}
+						<h6>{{commentary.particulier.firstname}}</h6>
+						<p>{{commentary.comment}}</p>
+						
+					{% endfor %}
 					</div>
 				</div>
 			</div>
