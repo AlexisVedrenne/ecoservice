@@ -13,12 +13,12 @@
 
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 			<div class="d-flex justify-content-center">
-				<button class="btn btn-primary" type="submit">
+				<button class="btn btn-primary me-2" type="submit">
 					Se connecter
 				</button>
+				<a class="mt-1" href="{{ path('mdp_demande') }}">Mot de passe oublié ?</a>
 			</div>
-			<a href="mdp/motDePasseOublier">Mot de passe oublié ?</a>
-			
+
 		</form>
 	</div>
 {% endblock %}
