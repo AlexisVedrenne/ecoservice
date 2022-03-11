@@ -67,7 +67,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->quotes = new ArrayCollection();
         $this->commentaries = new ArrayCollection();
         $this->orders = new ArrayCollection();
     }
@@ -182,15 +181,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    /**
-     * @return Collection|Quote[]
-     */
-    public function getQuotes(): Collection
-    {
-        return $this->quotes;
-    }
-
 
 
 
