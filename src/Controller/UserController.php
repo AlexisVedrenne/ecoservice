@@ -16,6 +16,7 @@ class UserController extends AbstractController
 {
     /**
      * @Route("/homeuser", name="home_user")
+     * @IsGranted("ROLE_USER")
      */
     public function index(): Response
     {
@@ -27,6 +28,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/accountuser", name="account_user")
+     * @IsGranted("ROLE_USER")
      */
     public function accountuser(): Response
     {
@@ -37,6 +39,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/editUser", name="edit_user", methods={"GET", "POST"})
+     * @IsGranted("ROLE_USER")
      *
      */
     public function edit(Request $request, ManagerRegistry $doctrine): Response
