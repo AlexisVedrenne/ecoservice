@@ -61,7 +61,7 @@ class Quote
     private $city;
 
     /**
-     * @ORM\Column(type="string", length=5000)
+     * @ORM\Column(type="string", length=10000)
      */
     private $des;
 

@@ -25,7 +25,7 @@ class Service
     private $image;
 
     /**
-     * @ORM\Column(type="string", length=1000)
+     * @ORM\Column(type="string", length=10000)
      */
     private $des;
 
@@ -56,7 +56,7 @@ class Service
     private $quotes;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=1000)
      */
     private $name;
 

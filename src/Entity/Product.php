@@ -21,7 +21,7 @@ class Product
 
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=10000)
      */
     private $des;
 
@@ -61,7 +61,7 @@ class Product
     private $orders;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=1000)
      */
     private $name;
 
