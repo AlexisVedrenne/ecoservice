@@ -43,9 +43,10 @@ class CommentaryController extends AbstractController
             $commentary->setParticulier($this->getUser());
             $entityManager->persist($commentary);
             $entityManager->flush();
-
-            return $this->redirectToRoute('app_commentary_new', [], Response::HTTP_SEE_OTHER);
+            
             $this->addFlash('success', 'Merci pour votre commentaire');
+            return $this->redirectToRoute('app_commentary_new', [], Response::HTTP_SEE_OTHER);
+            
         }
 
         return $this->renderForm('commentary/new.html.twig', [
