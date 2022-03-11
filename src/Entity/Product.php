@@ -61,7 +61,7 @@ class Product
     private $orders;
 
     /**
-     * @ORM\Column(type="string", length=1000)
+     * @ORM\Column(type="string", length=10000)
      */
     private $name;
 
