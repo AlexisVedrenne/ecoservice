@@ -2,54 +2,46 @@
 {% block title %}Bienvenue sur EcoService
 {% endblock %}
 {% block body %}
-
-	<div id="Ban">
-		<div class="serviceDescription">
+	<div class="container-fluid" style="background-color:#525252">
+		<div id="Ban">
 			<h4>Nos services</h4>
 		</div>
-	</div>
-
-	<div class="row mt-5">
-		<div class="col">
-			<div id="carProduit" class="carousel slide" data-bs-ride="carousel">
-				<div class="carousel-indicators">
-					<button type="button" data-bs-target="#carProduit" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-					<button type="button" data-bs-target="#carProduit" data-bs-slide-to="1" aria-label="Slide 2"></button>
-					<button type="button" data-bs-target="#carProduit" data-bs-slide-to="2" aria-label="Slide 3"></button>
+		<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+			<div style="color:black;" class="carousel-inner">
+				<div class="carousel-item active">
+					<div class="d-flex justify-content-center mb-3 mt-2">
+						<a href="{{ path('service_show',{'id':services[0].id}) }}"><img style="heigth:auto;width:auto" src="{{ asset('uploads/' ~ services[0].image) }}" class="d-block" alt="..."></a>
+					</div>
+					<div class="carousel-caption d-none d-md-block">
+						<h5>{{services[0].name }}</h5>
+						<p>{{ services.des[0]|length > 100 ? services.des[0]|slice(0, 100) ~ '...' : services.des[0] }}</p>
+					</div>
 				</div>
-				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<div class="container-fluid">
-							<div class="row">
-								{% for service in services %}
-									<div class="col car-img">
-										<a class="link-dark" href={{path('service_show',{'id':service.id} )}}>
-											<h2 class="text-center">{{service.name}}</h2>
-											<img src="{{ asset('uploads/' ~ service.image) }}" class="d-block w-100" alt="...">
-											<div class="text-center">
-												<h5>Le prix du service :
-													{{service.price}}</h5>
-												<p>{{service.des}}</p>
-												<a type="button" href="{{path('service_show',{'id': service.id})}}" class="btn btn-outline-primary">Voir détail</a>
-											</div>
-										</a>
-									</div>
-								{% endfor %}
-
-							</div>
+				{% for service in services|slice(1) %}
+					<div style="color:black;" class="carousel-item">
+						<div class="d-flex justify-content-center mb-3 mt-2">
+							<a href="{{ path('service_show',{'id':service.id}) }}"><img style="heigth:auto;width:auto" src="{{ asset('uploads/' ~ service.image) }}" class="d-block" alt="..."></a>
+						</div>
+						<div class="carousel-caption d-none d-md-block">
+							<h5>{{ service.name }}</h5>
+							<p>{{ service.des|length > 100 ? service.des|slice(0, 100) ~ '...' : service.des }}</p>
 						</div>
 					</div>
-
-				</div>
+				{% endfor %}
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
 			</div>
-			<button class="carousel-control-prev" type="button" data-bs-target="#carProduit" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button" data-bs-target="#carProduit" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
 		</div>
 	</div>
-</div></div></div></div>{% include "assets/footer.html.twig" %}{% endblock %}
+{% endblock %}

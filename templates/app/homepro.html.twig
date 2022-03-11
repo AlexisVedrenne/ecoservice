@@ -16,11 +16,11 @@
 			</div>
 
 			<!-- The slideshow/carousel -->
-			<div id="carouselExampleCaptions" class="carousel carousel-dark slide" data-bs-ride="carousel">
+			<div id="carousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
 				<div class="carousel-indicators">
-					<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-					<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-					<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+					<button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+					<button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+					<button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
 				</div>
 				<div class="carousel-inner">
 					<div class="carousel-item active">
@@ -45,11 +45,11 @@
 						</div>
 					</div>
 				</div>
-				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+				<button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
 					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 					<span class="visually-hidden">Précédent</span>
 				</button>
-				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+				<button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
 					<span class="carousel-control-next-icon" aria-hidden="true"></span>
 					<span class="visually-hidden">Suivant</span>
 				</button>
@@ -57,77 +57,77 @@
 
 			<div class="maintext">
 				<h5>Vous avez une demande spécifique ?</h5>
-				<h5>Réponse en 24 heures !<h5></div>
-					<div id="tripleBlock">
-						<div class="card mt-3 ms-5 scale-hover" style="width: 18rem;">
-							<div class="blocks">
-								<h5>Evacuation terre</h5>
-								<img class="card-img-top" src="{{ asset('image/homepro/service1.png') }}" alt="Card image cap">
+				<h5>Réponse en 24 heures !<h5>
+						<div id="tripleBlock">
+							<div class="card mt-3 ms-5 scale-hover" style="width: 18rem;">
+								<div class="blocks">
+									<h5>Evacuation terre</h5>
+									<img class="card-img-top" src="{{ asset('image/homepro/service1.png') }}" alt="Card image cap">
+								</div>
 							</div>
-						</div>
-						<div class="card mt-3 ms-5 scale-hover" style="width: 18rem;">
-							<div class="blocks">
-								<h5>Déchets dangereux</h5>
-								<img class="card-img-top" src="{{ asset('image/homepro/service2.png') }}" alt="Card image cap">
+							<div class="card mt-3 ms-5 scale-hover" style="width: 18rem;">
+								<div class="blocks">
+									<h5>Déchets dangereux</h5>
+									<img class="card-img-top" src="{{ asset('image/homepro/service2.png') }}" alt="Card image cap">
+								</div>
 							</div>
-						</div>
-						<div class="card mt-3 ms-5 scale-hover" style="width: 18rem;">
-							<div class="blocks">
-								<h5>Amiante</h5>
-								<img class="card-img-top" src="{{ asset('image/homepro/service3.png') }}" alt="Card image cap">
+							<div class="card mt-3 ms-5 scale-hover" style="width: 18rem;">
+								<div class="blocks">
+									<h5>Amiante</h5>
+									<img class="card-img-top" src="{{ asset('image/homepro/service3.png') }}" alt="Card image cap">
+								</div>
 							</div>
+							<a href="{{ path('service_index') }}" id="greenButton">Découvrez les services</a>
 						</div>
-						<a href="{{ path('service_index') }}" id="greenButton">Découvrez les services</a>
-					</div>
-					<div class="maintext">
-						<h3>Nouveautés</h3>
-					</div>
+						<div class="maintext">
+							<h3>Nouveautés</h3>
+						</div>
 
-					<div id="tripleBlock">
 
-						<div class="row mt-5">
-							<div class="col">
-								<div id="carProduit" class="carousel slide" data-bs-ride="carousel">
-									<div class="carousel-indicators">
-										<button type="button" data-bs-target="#carProduit" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-										<button type="button" data-bs-target="#carProduit" data-bs-slide-to="1" aria-label="Slide 2"></button>
-										<button type="button" data-bs-target="#carProduit" data-bs-slide-to="2" aria-label="Slide 3"></button>
-									</div>
-
-									<div class="carousel-inner">
-										{% for service in services %}
-											<div class="carousel-item active ">
-												<div class="container-fluid">
-													<div class="row">
-														<div class="col car-img">
-															<a class="link-dark" href={{path('service_show',{'id':service.id} )}}>
-																<img style="heigth:30%;width:30%" src="{{ asset('uploads/' ~ service.image) }}" height="450px" class="d-block w-100" alt="...">
-																<div class="text-center">
-																	<h5>{{service.des}}-{{service.price}}
-																		€</h5>
-																	<p>{{service.des}}</p>
-																</div>
-															</a>
-														</div>
-
-													</div>
-												</div>
-											</div>
+						<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+							<div class="carousel-indicators">
+								<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+								<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+								<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+							</div>
+							<div style="color:black;" class="carousel-inner">
+								<div class="carousel-item active">
+									<a href="{{ path('service_show',{'id':services[0].id}) }}">
+										<div class="d-flex justify-content-center mb-3 mt-2">
+											<img style="heigth:30%;width:30%" src="{{ asset('uploads/' ~ services[0].image) }}" class="d-block" alt="...">
 										</div>
+									</a>
+									<div class="carousel-caption d-none d-md-block">
+										<h5>{{services[0].name }}</h5>
+										<p>{{ services.des[0]|length > 100 ? services.des[0]|slice(0, 100) ~ '...' : services.des[0] }}</p>
 									</div>
 								</div>
-								<buttonclass="carousel-control-prev"type="button"data-bs-target="#carProduit"data-bs-slide="prev">
-									<spanclass="carousel-control-prev-icon"aria-hidden="true"></span>
-									<spanclass="visually-hidden">Previous</span>
+								{% for service in services|slice(1,3) %}
+									<div style="color:black;" class="carousel-item">
+										<a href="{{ path('service_show',{'id':service.id}) }}">
+											<div class="d-flex justify-content-center mb-3 mt-2">
+												<img style="heigth:30%;width:30%" src="{{ asset('uploads/' ~ service.image) }}" class="d-block" alt="...">
+											</div>
+										</a>
+										<div class="carousel-caption d-none d-md-block">
+											<h5>{{ service.name }}</h5>
+											<p>{{ service.des|length > 100 ? service.des|slice(0, 100) ~ '...' : service.des }}</p>
+										</div>
+									</div>
+								{% endfor %}
+								<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Previous</span>
 								</button>
-								<buttonclass="carousel-control-next"type="button"data-bs-target="#carProduit"data-bs-slide="next">
-									<spanclass="carousel-control-next-icon"aria-hidden="true"></span>
-									<spanclass="visually-hidden">Next</span>
+								<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Next</span>
 								</button>
-							{% endfor %}
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	{% endblock %}
+	</div>
+{% endblock %}
