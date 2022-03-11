@@ -12,12 +12,12 @@ use App\Service\Mailjet;
 class MailJetApi
 {
 
-    static private function getClient()
-    {
-        return new Client('0843d33c52ad141defeeff5a94eb0081', '71bb0e7dddb6eec924f71afc00cad193', true, ['version' => 'v3.1']);
-    }
+  static private function getClient()
+  {
+    return new Client('0843d33c52ad141defeeff5a94eb0081', '71bb0e7dddb6eec924f71afc00cad193', true, ['version' => 'v3.1']);
+  }
 
-    static public function envoieContact(string $mail, string $nom, string $tel, string $objet, string $msg)
+  static public function envoieContact(string $mail, string $nom, string $tel, string $objet, string $msg)
   {
 
     $body = [
@@ -54,27 +54,26 @@ class MailJetApi
     return $response->success();
   }
 
+  static public function envoie(User $user, string $objet, string $titre, string $message)
+  {
 
-    static public function envoie(User $user,string $name, string $objet, string $message,string $titre)
-    {
+    $body = [
+      'Messages' => [
+        [
+          'From' => [
+            'Email' => 'service@ficheweb.fr',
+            'Name' => 'Service EcoService'
+          ],
+          'To' => [
+            [
+              'Email' => $user->getEmail(),
+              'Name' => $user->getLastName() . ' ' . $user->getFirstName()
 
-        $body = [
-            'Messages' => [
-                [
-                    'From' => [
-                        'Email' => 'service@ficheweb.fr',
-                        'Name' => 'Service EcoService'
-                    ],
-                    'To' => [
-                        [
-                            'Email' => $user->getEmail(),
-                            'Name' => $user->getLastName() . ' ' . $user->getFirstName()    
-                            
-                        ]
-                    ],
-                    'Subject' => $objet,
-                    'TextPart' => '',
-                    'HTMLPart' => "
+            ]
+          ],
+          'Subject' => $objet,
+          'TextPart' => '',
+          'HTMLPart' => "
                 <body>
         
                 <h1 class='text-center mt-3 mb-3'>" . $titre . "</h1>
@@ -85,37 +84,36 @@ class MailJetApi
         <h6>Merci de votre compréhension.</h6>
         </body>",
 
-                ]
+        ]
+      ]
+    ];
+    $response = MailJetApi::getClient()->post(Resources::$Email, ['body' => $body]);
+    return $response->success();
+  }
+
+  // Send a contact email 
+  static public function send(string $mail, string $name, string $objet, string $message)
+  {
+
+    $body = [
+      'Messages' => [
+        [
+          'From' => [
+
+            'Email' => 'service@ficheweb.fr',
+            'Name' => 'Service EcoService'
+          ],
+          'To' => [
+            [
+              'Email' => $mail,
+              'Name' => $name
+
+
             ]
-        ];
-        $response = MailJetApi::getClient()->post(Resources::$Email, ['body' => $body]);
-        return $response->success();
-
-    }
-
-    // Send a contact email 
-    static public function send(string $mail,string $name, string $objet, string $message)
-    {
-
-        $body = [
-            'Messages' => [
-                [
-                    'From' => [
-                        
-                        'Email' => 'service@ficheweb.fr',
-                            'Name' => 'Service EcoService'
-                    ],
-                    'To' => [
-                        [
-                            'Email' => $mail,
-                            'Name' => $name 
-                            
-                            
-                        ]
-                    ],
-                    'Subject' => $objet,
-                    'TextPart' => '',
-                    'HTMLPart' => "
+          ],
+          'Subject' => $objet,
+          'TextPart' => '',
+          'HTMLPart' => "
                 <body>
         
     
@@ -127,14 +125,14 @@ class MailJetApi
                 <h6>Merci de votre compréhension.</h6>
                  </body>",
 
-                ]
-            ]
-        ];
+        ]
+      ]
+    ];
 
-        $reponse = MailJetApi::getClient()->post(Ressources::$Email,['body'=>$body]);
-        return $reponse->succes();
-    }
-    static public function mdpOublier(string $mail, int $code)
+    $reponse = MailJetApi::getClient()->post(Ressources::$Email, ['body' => $body]);
+    return $reponse->succes();
+  }
+  static public function mdpOublier(string $mail, int $code)
   {
     $body = [
       'Messages' => [
