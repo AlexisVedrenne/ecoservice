@@ -36,31 +36,29 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/editUser", name="account_user", methods={"GET", "POST"})
+     * @Route("/editUser", name="edit_user", methods={"GET", "POST"})
      *
      */
-    public function edit( Request $request, ManagerRegistry $doctrine): Response
+    public function edit(Request $request, ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
         $user = $this->getUser();
         if ($request->isMethod('POST')) {
-            $firstname=$request->get('firstname');
-            $lastname=$request->get('lastname');
-            $username=$request->get('username');
+            $firstname = $request->get('firstname');
+            $lastname = $request->get('lastname');
+            $username = $request->get('username');
             $user->setFirstName($firstname);
             $user->setLastName($lastname);
             $user->setEmail($username);
             $entityManager->flush();
-            
+
             $this->addFlash('success', 'Vos informations ont bien été modifiés');
             //return $this->renderForm('app/user.html.twig', [
-            
-            
+
+
 
             //return $this->redirectToRoute('home_user', [], Response::HTTP_SEE_OTHER);
         }
-        return $this->renderForm('app/user.html.twig', [
-            
-        ]);
+        return $this->renderForm('app/user.html.twig', []);
     }
 }
