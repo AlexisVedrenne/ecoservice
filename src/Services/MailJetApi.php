@@ -54,7 +54,7 @@ class MailJetApi
     return $response->success();
   }
 
-    static public function envoie(User $user, string $objet, string $titre, string $message)
+
     static public function envoie(User $user,string $name, string $objet, string $message,string $titre)
     {
 

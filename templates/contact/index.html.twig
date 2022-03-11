@@ -21,7 +21,39 @@
 
 				</div>
 
-				<<<<<<<HEAD</div><divclass="col-sm"><divclass="form"><h1>Envoyerunmessage</h1><formmethod="post"><divclass="input-groupmb-3"><spanclass="input-group-text"id="basic-addon1"><imgsrc="{{asset('bootstrap/icon/person-circle.svg')}}"alt=""></span><inputtype="text"class="form-control"placeholder="NomComplet"aria-label="Username"name="nom"></div><divclass="input-groupmb-3"><spanclass="input-group-text"id="basic-addon1"><imgsrc="{{asset('bootstrap/icon/envelope.svg')}}"alt=""></span><inputtype="mail"class="form-control"placeholder="Mail"aria-label="Username"name="mail"></div><divclass="input-groupmb-3"><spanclass="input-group-text"id="basic-addon1"><imgsrc="{{asset('bootstrap/icon/telephone.svg')}}"alt=""></span><inputtype="text"class="form-control"placeholder="Numérodetéléphone"aria-label="Username"name="tel"></div><divclass="input-groupmb-3"><spanclass="input-group-text"id="basic-addon1"><imgsrc="{{asset('bootstrap/icon/forward.svg')}}"alt=""></span><inputtype="text"class="form-control"placeholder="Objet"aria-label="Username"name="objet"></div><divclass="input-groupmb-3"><spanclass="input-group-text"id="basic-addon1"><imgsrc="{{asset('bootstrap/icon/chat.svg')}}"alt=""></span><textareaclass="form-control"aria-label="Withtextarea"placeholder="Message"name="msg"></textarea></div><inputtype="submit"value="Envoyerunmessage"name="ok"class="btnbtn-success"style='background:#00461d;border-color:#00461d;'></form><br></div></div></div></div></div>======={{form_start(form)}}{{form_row(form.mail)}}{{form_row(form.name)}}{{form_row(form.objet)}}{{form_row(form.message)}}{{form_widget(form)}}<buttontype="submit"class="classes">Envoyer</button>{{form_end(form)}}<div><p>{{message}}</p></div>>>
-				{% if {state} %}{% endif %}>>>>> prince
+			</div>
+			<div class="col-sm">
 
-			{% endblock %}
+				<div class="form">
+					<form method="POST">
+
+						<div class="input-groupmb-3">
+							<span class="input-group-text" id="basic-addon1">
+								<img src="{{asset('bootstrap/icon/person-circle.svg')}}" alt=""></span>
+							<input type="text" class="form-control" placeholder="NomComplet" aria-label="Username" name="nom"></div>
+						<div class="input-groupmb-3">
+							<span class="input-group-text" id="basic-addon1">
+								<img src="{{asset('bootstrap/icon/envelope.svg')}}" alt=""></span>
+							<input type="mail" class="form-control" placeholder="Mail" aria-label="Username" name="mail"></div>
+						<div class="input-groupmb-3">
+							<span class="input-group-text" id="basic-addon1">
+								<img src="{{asset('bootstrap/icon/telephone.svg')}}" alt=""></span>
+							<input type="text" class="form-control" placeholder="Numérodetéléphone" aria-label="Username" name="tel"></div>
+						<div class="input-groupmb-3">
+							<span class="input-group-text" id="basic-addon1">
+								<img src="{{asset('bootstrap/icon/forward.svg')}}" alt=""></span>
+							<input type="text" class="form-control" placeholder="Objet" aria-label="Username" name="objet"></div>
+						<div class="input-groupmb-3">
+							<span class="input-group-text" id="basic-addon1">
+								<img src="{{asset('bootstrap/icon/chat.svg')}}" alt=""></span>
+							<textarea class="form-control" aria-label="Withtextarea" placeholder="Message" name="msg"></textarea>
+						</div>
+						<div></br>
+						<input type="submit" value="Envoyer" name="ok" class="btnbtn-success" style='background:#00461d;border-color:#00461d;'>
+					</div>
+				</form>
+				<br>
+			</div>
+		</div>
+	</div>
+</div>{% endblock %}
