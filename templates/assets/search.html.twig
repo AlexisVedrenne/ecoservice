@@ -1,0 +1,10 @@
+{{ form_start(formSearch)}}
+<div class="row">
+	<div class="col">
+		<div class="d-flex justify-content-center">
+			{{ form_widget(formSearch.cherche,{'attr':{'placeholder':'Rechercher un produit...','class':'form-control'}}) }}
+			{{ form_widget(formSearch.Rechercher,{'attr':{'class':'btn btn-primary'}}) }}
+		</div>
+	</div>
+</div>
+{{ form_end(formSearch) }}
