@@ -52,7 +52,7 @@
 										<p>
 											<price class="h5">{{ product.price }}</price>€
 										</p>
-										<p class="card-text">{{ product.des }}</p>
+										<p class="card-text">{{ product.des|length > 100 ? product.des|slice(0, 100) ~ '...' : product.des }}</p>
 										<div class="row align-items-center">
 											<div class="col">
 												{% if product.state %}

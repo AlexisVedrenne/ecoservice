@@ -27,14 +27,13 @@
 														<img class="img-fluid rounded-3" src="{{ asset('image/imgnofound.png') }}">
 													{% endif %}
 												</div>
-												<div class="col-md-3 col-lg-3 col-xl-3">
+												<div class="col-md-3 col-lg col-xl">
 													<h6 class="text-muted">{{ article.produit.name }}</h6>
 												</div>
-												<div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+												<div class="col-md-6 col-xl-3 col-xl-2 d-flex">
 													<a href="{{ path('cart_remove',{'id':article.produit.id}) }}" class="btn btn-link px-2">
 														<img src="{{ asset('bootstrap/icon/dash.svg') }}"></img>
 												</a>
-
 												<input id="form1" min="0" name="quantity" value="{{ article.quantite }}" type="number" class="form-control form-control-sm text-center" readonly/>
 
 												<a href="{{ path('cart_add',{'id':article.produit.id}) }}" class="btn btn-link px-2">
