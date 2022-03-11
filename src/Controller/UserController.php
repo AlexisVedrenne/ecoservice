@@ -51,13 +51,8 @@ class UserController extends AbstractController
             $user->setLastName($lastname);
             $user->setEmail($username);
             $entityManager->flush();
-            
             $this->addFlash('success', 'Vos informations ont bien été modifiés');
-            //return $this->renderForm('app/user.html.twig', [
             
-            
-
-            //return $this->redirectToRoute('home_user', [], Response::HTTP_SEE_OTHER);
         }
         return $this->renderForm('app/user.html.twig', [
             
