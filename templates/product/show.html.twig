@@ -31,7 +31,8 @@
 										<h4>{{ product.name }}</h4>
 									</div>
 									<div class="col">
-										<p class="text-end">50 avis</p>
+										<p class="text-end">{{ product.commentary|length }}
+											avis</p>
 									</div>
 									<p class="text-end">Recyclable à
 										{{ product.recyclingIndex }}%</p>
@@ -74,12 +75,12 @@
 			<div class="col">
 				<div class="card">
 					<div class="card-body">
-					<h6>Commentaires</h6>
-					{% for commentary in commentarys %}
-						<h6>{{commentary.particulier.firstname}}</h6>
-						<p>{{commentary.comment}}</p>
-						
-					{% endfor %}
+						<h6>Commentaires</h6>
+						{% for commentary in commentarys %}
+							<h6>{{commentary.particulier.firstname}}</h6>
+							<p>{{commentary.comment}}</p>
+
+						{% endfor %}
 					</div>
 				</div>
 			</div>

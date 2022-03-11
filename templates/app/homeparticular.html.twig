@@ -96,7 +96,7 @@
 								<h5>{{ products[0].name }}
 									-
 									{{ products[0].price }}€</h5>
-								<p>{{ products[0].des }}</p>
+								<p>{{ product.des[0]|length > 100 ? product.des[0]|slice(0, 100) ~ '...' : product.des[0] }}</p>
 							</div>
 						</div>
 						{% for product in products|slice(1,3) %}
@@ -112,7 +112,7 @@
 									<h5>{{ product.name }}
 										-
 										{{ product.price }}€</h5>
-									<p>{{ product.des }}</p>
+									<p>{{ product.des|length > 100 ? product.des|slice(0, 100) ~ '...' : product.des }}</p>
 								</div>
 							</div>
 						{% endfor %}

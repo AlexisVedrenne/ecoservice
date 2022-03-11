@@ -25,7 +25,7 @@ body {
 
 .footer {
   background-color: #e7e7e7;
-  position: fixed;
+  position: absolute;
   bottom: 0 !important;
   width: 100%;
 }
