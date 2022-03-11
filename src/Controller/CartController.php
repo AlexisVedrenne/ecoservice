@@ -12,6 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use DateTime;
+use Exception;
+
 
 /**
  * @Route("/cart", name="cart_")
@@ -23,13 +25,17 @@ class CartController extends AbstractController
      */
     public function index(SessionInterface $session, ProductRepository $productRepository, Request $request, EntityManagerInterface $entityManager)
     {
+       //récuperer les infos qui sont sur ma session panier
+       //on récupere le panier actuel sinon si c'est vide je l'initialise avec un tableau vide
         $panier = $session->get("panier", []);
         //on fabrique les données
         $dataPanier = [];
+        //le prix total des produits 
         $total = 0;
-
+        $erreur=false;
+        // on récupere l'id du produit et la quantité
         foreach ($panier as $id => $quantite) {
-            $product = $productRepository->find($id);
+            $product = $productRepository->find($id); //je récupere toutes les infos d'un produit
             $tempObj = [
                 "produit" => $product,
                 "quantite" => $quantite
@@ -42,7 +48,9 @@ class CartController extends AbstractController
 
         if ($request->isMethod('POST')) {
 
+            try{
 
+            
             $token = $request->request->get('stripeToken');
             \Stripe\Stripe::setApiKey("sk_test_51KabbgBf0vZfGc8SGE7gCsIGarhN0cXyCydjTCCZHNO3YbyFyGg9We8v6FRkaPpUUzT5brfSzYdio5SNQSEJhjn400qXPy0NXW");
             \Stripe\Charge::create(array(
@@ -66,7 +74,7 @@ class CartController extends AbstractController
                 $order->setParticulier($this->getUser());
              };
 		        
-	         
+	        
             $order->setParticulier($this->getUser());
             $order->setTotal($total);
             $order->setDate((new DateTime('NOW'))->format('Y-m'));
@@ -74,8 +82,15 @@ class CartController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'Commande validé');
             return $this->render('payment/success.html.twig', compact("dataPanier", "total"));
+            }catch(Exception $e){
+                $this->addFlash('danger', 'Paiement refusé par votre banque');
+                return $this->render('cart/shoppingcart.html.twig', compact("dataPanier", "total", "erreur"));
+            }
+
+
+
         }
-        return $this->render('cart/shoppingcart.html.twig', compact("dataPanier", "total"));
+        return $this->render('cart/shoppingcart.html.twig', compact("dataPanier", "total","erreur"));
     }
 
     /**
