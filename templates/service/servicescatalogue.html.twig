@@ -30,7 +30,7 @@
 												<h5>Le prix du service :
 													{{service.price}}</h5>
 												<p>{{service.des}}</p>
-												<a type="button" href="{{path('service_show',{'id': service.id})}}" class="btn btn-success">Voir détail</a>
+												<a type="button" href="{{path('service_show',{'id': service.id})}}" class="btn btn-outline-primary">Voir détail</a>
 											</div>
 										</a>
 									</div>
@@ -52,5 +52,4 @@
 			</button>
 		</div>
 	</div>
-</div></div></div></div>{% include "assets/footer.html.twig" %}
-{% endblock %}
+</div></div></div></div>{% include "assets/footer.html.twig" %}{% endblock %}

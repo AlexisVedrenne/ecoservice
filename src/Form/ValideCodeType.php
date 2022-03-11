@@ -12,12 +12,11 @@ class ValideCodeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            
+
             ->add('code')
-            ->add('confirmer',SubmitType::class,[
-                'attr' => ['class' => 'btn btn-success'],
-            ])
-        ;
+            ->add('confirmer', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-outline-success'],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
