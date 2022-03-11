@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 
@@ -43,9 +44,8 @@ class UserController extends AbstractController
      * @IsGranted("ROLE_USER")
      *
      */
-    public function edit(Request $request, ManagerRegistry $doctrine): Response
+    public function edit(Request $request, EntityManagerInterface $manager): Response
     {
-        $entityManager = $doctrine->getManager();
         $user = $this->getUser();
         if ($request->isMethod('POST')) {
             $firstname = $request->get('firstname');
@@ -54,7 +54,8 @@ class UserController extends AbstractController
             $user->setFirstName($firstname);
             $user->setLastName($lastname);
             $user->setEmail($username);
-            $entityManager->flush();
+            $manager->persist($user);
+            $manager->flush();
 
             $this->addFlash('success', 'Vos informations ont bien été modifiés');
             //return $this->renderForm('app/user.html.twig', [
