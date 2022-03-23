@@ -80,7 +80,6 @@ class CartController extends AbstractController
             $order->setDate((new DateTime('NOW'))->format('Y-m'));
             $entityManager->persist($order);
             $entityManager->flush();
-            $this->addFlash('success', 'Commande validé');
             return $this->render('payment/success.html.twig', compact("dataPanier", "total"));
             }catch(Exception $e){
                 $this->addFlash('danger', 'Paiement refusé par votre banque');
