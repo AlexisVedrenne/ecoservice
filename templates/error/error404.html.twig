@@ -1,0 +1,13 @@
+{% include "baseerror.html.twig" %}
+
+{% block body %}
+    <h1>ERREUR 404....</h1>
+            <div class="card-body d-flex justify-content-center" style="border-radius: 30px;">
+                <img src="{{ asset('image/error/error404.png') }}" class="card-img" alt="...">
+            </div> 
+     <div class="col text-center">                         
+    <p>
+       <button type="button" class="btn btn-success">Retourner sur l'accueil</button>
+    </p>
+    </div>
+{% endblock %}
